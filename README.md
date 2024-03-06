@@ -1,4 +1,4 @@
-#  `synthslant` - Synthetic slanting of glyphs
+#  SynthSlant &ndash; Synthetic slanting of glyphs
 
 Package `synthslant` slants short pieces of text to the right or to
 the left.
