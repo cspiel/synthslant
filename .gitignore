@@ -12,6 +12,7 @@
 *.idx
 *.ilg
 *.ind
+*.ist
 *.loe
 *.lof
 *.log
@@ -24,5 +25,7 @@
 *.sty
 *.toc
 
-compare-with-the-gimp.png
-synthslant-gauge.tex
+/compare-with-the-gimp.png
+/synthslant-gauge.pdf
+/synthslant-gauge.tex
+/synthslant.pdf
