@@ -131,7 +131,6 @@ spell-check:
 
 .PHONY: update-docs
 update-docs: pdf
-	test -d docs
 	cp -f synthslant.pdf synthslant-gauge.pdf docs
 
 
@@ -142,8 +141,8 @@ all:    Make everything there is to make.  This is the .DEFAULT_GOAL.
 
 clean:  Remove some products.
 
-cpio:   Create a cpio(1) archive of the project source files whose
-        name is time-stamped.
+cpio:   In the parent directory create a cpio(1) archive of the
+        project source files whose name is time-stamped.
 
 doc:    Build "synthslant.pdf" the Syntslant documentation.
 
@@ -160,8 +159,8 @@ pdf:    Build doc: and gauge:.
 sty:    Only extract "synthslant.sty" from "synthslant.dtx".  This
         operation requires LaTeX (-> $(LATEX)) and nothing else.
 
-tar:    Create a tar(1) file of the project source files whose name is
-        time-stamped.
+tar:    In the parent directory create a tar(1) file of the project
+        source files whose name is time-stamped.
 
 tool-check: Check whether some of the required tools to build the
         project are available.
