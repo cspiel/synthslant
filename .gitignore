@@ -1,4 +1,6 @@
+\#*#
 *~
+.#*
 
 *.aux
 *.base64
@@ -9,6 +11,7 @@
 *.glo
 *.gls
 *.hd
+*.html
 *.idx
 *.ilg
 *.ind
