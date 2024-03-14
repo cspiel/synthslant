@@ -1,6 +1,6 @@
 #  SynthSlant &ndash; Synthetic slanting of glyphs
 
-Package `synthslant` slants short pieces of text to the right or to the left.
+LaTeX package `synthslant` slants short pieces of text to the right or to the left.
 
 
 ##  Installation
