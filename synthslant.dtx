@@ -40,7 +40,16 @@
 \usepackage{hypdoc}
 \usepackage{hyphenat}
 \usepackage{mathtools}
-\iffalse\usepackage[shrink=10, stretch=10]{microtype}\else\newcommand*{\textls}[2][]{#2}\fi
+\iftrue
+  \usepackage[letterspace=0, shrink=10, stretch=10, tracking=true]{microtype}
+  \DeclareMicrotypeSet[tracking]{italics}
+                      {encoding=*, font={SourceSerifPro-LF/m/it/*}}
+  \UseMicrotypeSet[tracking]{italics}
+  \SetTracking[context=synthnegslant, no ligatures={f}, spacing={10*,,}]
+              {encoding=*, shape=it}{10}
+\else
+  \newcommand*{\textls}[2][]{#2}
+\fi
 \usepackage{needspace}
 \usepackage{ragged2e}
 \usepackage{setspace}
@@ -59,17 +68,23 @@
 \setstretch{1.02083}% \baselineskip: 12.25pt
 
 
-\newcommand*{\textnumerator}[1]{{\fontfamily{SourceSerifPro-Numr}\selectfont #1}}
-\newcommand*{\textdenominator}[1]{{\fontfamily{SourceSerifPro-Dnom}\selectfont #1}}
-\newcommand*{\textsuperior}[1]{{\fontfamily{SourceSerifPro-Sup}\selectfont #1}}
+\makeatletter
+\def\@get@fontclan#1-#2\relax{#1}
+\newcommand*{\fontclan}{\expandafter\@get@fontclan\f@family\relax}
+\makeatother
+
+\newcommand*{\textdenominator}[1]{{\fontfamily{\fontclan-Dnom}\selectfont #1}}
+\newcommand*{\textinferior}[1]{{\fontfamily{\fontclan-Inf}\selectfont #1}}
+\newcommand*{\textnumerator}[1]{{\fontfamily{\fontclan-Numr}\selectfont #1}}
+\newcommand*{\textsuperior}[1]{{\fontfamily{\fontclan-Sup}\selectfont #1}}
 
 \newcommand*{\nativetextfraction}[2]
             {\mbox{\textnumerator{#1}\textfractionsolidus\textdenominator{#2}}}
 
 \makeatletter
-\renewcommand*{\@makefnmark}{\hbox{\normalfont\textsuperior{\@thefnmark}}}
+\renewcommand*{\@makefnmark}{\hbox{\sf\textsuperior{\@thefnmark}}}
 \newenvironment*{tabfigures}
-                {\edef\rmdefault{SourceSerifPro-T\sourceserifpro@figurestyle}\rm}
+                {\edef\rmdefault{\fontclan-T\sourceserifpro@figurestyle}\rm}
                 {}
 
 \newcommand*{\texteb}[1]{{\def\bfseries@sf{eb}\textbf{#1}}}
@@ -182,6 +197,7 @@
 
 
 \let\footnoterule=\relax% suppress footnote rule
+\interfootnotelinepenalty=10000
 
 \makeatletter
 \renewcommand*{\@makefntext}[1]
@@ -621,8 +637,50 @@ end
 %  Similar transformations can be achieved by other means.  I elaborate on one of the
 %  alternatives in \cref{sec:alternative} on \cpageref{sec:alternative}.
 %  Package~\packagename{synthslant} however focuses on ease of use and strict locality of the
-%  glyph manipulation.  Whether the results of \packagename{synthslant} are aesthetically
-%  pleasing is up to the \TeX{}ni\-cian and also to the reader's taste in art.
+%  glyph manipulation.
+%
+%
+%  \subsection{Appeal for Artificially Slanted Type}\label{sec:appleal-for-artificially-slanted}
+%
+%  Artificially slanted type have a bad reputation.  Whenever there is an order to round up the
+%  usual font suspects synthetically slanted, bolded\footnote{Package~\packagename{amsbsy}
+%  defines a \doublequotes{Poor Man's Bold} macro~\cs{pmb} that works by
+%  \singlequotes{overprinting}.  The authors of \packagename{amsbsy} recommend to prefer
+%  package~\packagename{bm} for bold mathematical symbols, though.}, and condensed type along
+%  with artificial small-caps swiftly are stuffed into the black Maria.\footnote{See for example
+%  Ref.~\citenum{strizver:2014}, p.~97, but compare p.~142 and also
+%  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  I can retrace this
+%  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
+%  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
+%  problems are somewhat minor and I wonder how far one could get with an
+%  \propername{OpenType}~font that supports a \code{size}~axis\index{font>axis>size=\code{size}}
+%  as well as an \code{opsz}~axis\index{font>axis>opsz=\code{opsz}} in the necessary ranges to
+%  construct convincing small-caps out of the multiple-master font.
+%
+%  In my view artificial slanting keeps much of the font's character intact.  In fact one
+%  accusation of synthetically slanted type is that is creates less contrast than a proper
+%  italic~\cite[p.~141]{strizver:2014} to which I object that less contrast can in fact be
+%  enough contrast in a particular setting.  Moreover, small contrast with respect to the main
+%  type is a problem of second order.  It does not devalue the shape \foreignphrase{per se} as
+%  is true for artificial bold and condensed fonts.
+%
+%  What seems to have gotten lost in the discussion is the shapes of true italics that were
+%  designed alongside with the roman type.  If we have an unbiased look at it --~for example at
+%  the title~page of this manual~-- the italic versions of the upright characters are so
+%  markedly different that I would like to ask whether they match the upright shape in a strict
+%  sense.  For the double-storey~\sample{a} becomes single-storey, the start of the loop
+%  of~\sample{g} moves from the far left into the middle.  Alongside, the aspect ratio of both
+%  of the counters change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font
+%  pairing.  We can make sense of the seeming contradiction by recognizing that the italics
+%  shape is not simply slanted, but creates tension in respect to the upright type by a variety
+%  of additional design features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once
+%  again:
+%
+%  \begin{quote}
+%    The most popular typefaces are the easiest to read; their popularity has made them
+%    disappear from conscious cognition.  It becomes impossible to tell if they are easy to read
+%    because they are commonly used, or if they are commonly used because they are easy to read.
+%  \end{quote}
 %
 %
 %  \subsection{Some History}\label{sec:history}
@@ -635,12 +693,22 @@ end
 %  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} closely follows on their
 %  steps.
 %
+%  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.
+%  \foreignphrase{Eureka!}  In particular the oldest (and once upon a time the only) font family
+%  shipping with \TeX, \href{https://tug.org/FontCatalogue/cmrfonts.html}{Computer Modern
+%  Roman}\index{font>Computer Modern Roman} --~nowadays member of the \acronym{CM}-Super
+%  family~-- is available in a deluge of almost thirty shapes.  It covers not just slanted roman
+%  or slanted smallcaps but also slanted typewriter and somewhat surprisingly upright italics.
+%  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
+%  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
+%  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
+%
 %  \begin{wraptable}{r}{.382\textwidth}
 %    \renewcommand*{\floatcaptionwidth}{\textwidth}
 %    \small
 %    \centering
 %    \caption[Variable fonts with slant-axis]
-%            {Some variable fonts with a slant axis.}
+%            {Some variable fonts with a slant axis (\code{slnt}).}
 %    \label{tab:open-type-slant-feature}
 %
 %    \begin{tabular}{@{}l@{}}
@@ -658,15 +726,21 @@ end
 %    \end{tabular}
 %  \end{wraptable}
 %
-%  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.
-%  Eureka!  In particular the oldest (and once upon a time the only) font family shipping with
-%  \TeX, \href{https://tug.org/FontCatalogue/cmrfonts.html}{Computer Modern
-%  Roman}\index{font>Computer Modern Roman} --~nowadays member of the \acronym{CM}-Super
-%  family~-- is available in a deluge of almost thirty shapes.  It covers not just slanted roman
-%  or slanted smallcaps but also slanted typewriter and somewhat surprisingly upright italics.
-%  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
-%  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
-%  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
+%  Refer to \cref{tab:open-type-slant-feature} on the right for a brief list of variable
+%  fonts\footnote{See also the \LaTeX~Font Catalogue for
+%  \href{https://tug.org/FontCatalogue/opentypefonts.html}%
+%       {Fonts with \propername{OpenType} or \propername{TrueType}~Support}
+%  and search \href{https://fonts.google.com/}{Google Fonts} for families of
+%  \href{https://fonts.google.com/variablefonts?vfaxis=slnt}{variable fonts with a
+%  \code{slnt}-axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
+%  \href{https://v-fonts.com/}{Variable Fonts}.}  that offer a slant-axis\footnote{The
+%  registered axis is called \code{slnt} and it is not to be confused with the
+%  \code{ital}~axis.}\index{font>axis>slant=\code{slant}}\index{font>axis>ital=\code{ital}} that
+%  can be controlled with \packagename{fontspec}'s\index{package>\packagename{fontspec}}
+%  \code{Slant}\footnote{Since \packagename{fontspec} version~2.9a as of 2024/2/13.}~key and
+%  \cref{tab:slanted-series-fonts} for a rather incomplete list of fonts that are shipped with
+%  slanted shapes.  For these fonts \packagename{synthslant} is largely superfluous unless
+%  e.\,g.~they also come with an italics shape that is to be typeset upright.
 %
 %  \begin{table}
 %    \small
@@ -689,9 +763,9 @@ end
 %      Droid Serif\index{font>Droid Serif}  \\
 %      Erewhon\index{font>Erewhon}  \\
 %      Extended Charter\index{font>Extended Charter}  \\
-%      \acronym{GFS} Artemisia\index{font>\acronym{GFS} Artemisia}  \\
-%      \acronym{GFS} Bodoni\index{font>\acronym{GFS} Bodoni} \\
-%      \acronym{GFS} Didot\index{font>\acronym{GFS} Didot}  \\
+%      \acronym{GFS} Artemisia\index{font>GFS Artemisia=\acronym{GFS} Artemisia}  \\
+%      \acronym{GFS} Bodoni\index{font>GFS Bodoni=\acronym{GFS} Bodoni} \\
+%      \acronym{GFS} Didot\index{font>GFSDidot=\acronym{GFS} Didot}  \\
 %      \\
 %      \bottomrule
 %    \end{tabular}
@@ -705,10 +779,10 @@ end
 %      Cuprum\index{font>Cuprum}  \\
 %      Fira Sans\index{font>Fira Sans}  \\
 %      Gandhi Sans\index{font>Gandhi Sans}  \\
-%      \acronym{Inria} Sans\index{font>\acronym{Inria} Sans}  \\
+%      \acronym{Inria} Sans\index{font>Inria Sans=\acronym{Inria} Sans}  \\
 %      Lato\index{font>Lato}\itshapemark  \\
 %      Montserrat\index{font>Montserrat}  \\
-%      \acronym{PT} Sans\index{font>\acronym{PT} Sans}  \\
+%      \acronym{PT} Sans\index{font>PT Sans=\acronym{PT} Sans}  \\
 %      Source Sans Pro\index{font>Source Sans Pro}  \\
 %      \bottomrule
 %    \end{tabular}
@@ -718,38 +792,23 @@ end
 %    \end{tablenotes}
 %  \end{table}
 %
-%  Refer to \cref{tab:open-type-slant-feature} on the right for a brief list of variable
-%  fonts\footnote{See also the \LaTeX~Font Catalogue for
-%  \href{https://tug.org/FontCatalogue/opentypefonts.html}%
-%       {Fonts with \propername{OpenType} or \propername{TrueType}~Support}
-%  and search \href{https://fonts.google.com/}{Google Fonts} for families of
-%  \href{https://fonts.google.com/variablefonts?vfaxis=slnt}{variable fonts with a
-%  \code{slnt}-axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
-%  \href{https://v-fonts.com/}{Variable Fonts}.}  that offer a slant-axis\footnote{The
-%  registered axis is called \code{slnt} and it is not to be confused with the
-%  \code{ital}~axis.}\index{axis>slant}\index{axis>ital} that can be controlled with
-%  \packagename{fontspec}'s\index{package>\packagename{fontspec}} \code{Slant}\footnote{Since
-%  \packagename{fontspec} version~2.9a as of 2024/2/13.}~key and \cref{tab:slanted-series-fonts}
-%  for an incomplete list of fonts that are shipped with slanted shapes.  For these fonts
-%  \packagename{synthslant} is largely superfluous unless e.\,g.~they also come with an italics
-%  shape that is to be typeset upright.
-%
-%  It seems that the original idea of automatically shearing text in of \LaTeX{} to simulate a
-%  slanted font goes back to \propername{David Carlisle} who suggested to use the
-%  \acronym{PDF}-primitive \cs{pdfliteral} for shearing in an answer at
-%  \code{tex.stack\-exchange}~\cite{tex-stackexchange-2013-12-7}.  Shortly thereafter
-%  \propername{Bruno Le Floch} pointed to the primitive \cs{pdfsetmatrix} available with (in
-%  2013) more recent \pdfTeX~versions~\cite{pdftex}.\footnote{The user-level manipulation of the
-%  transformation matrix has been part of the \acronym{PDF}-standard since its initial
-%  publication in 1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
+%  It seems that the original idea of automatically shearing text in \LaTeX{} to simulate a
+%  slanted shape goes back to \propername{David Carlisle} who suggested to use the
+%  \pdfTeX-primitive \cs{pdfliteral} for shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly
+%  thereafter \propername{Bruno Le Floch} pointed to another \pdfTeX-primitive, namely
+%  \cs{pdfsetmatrix}, available with (in 2013) more recent
+%  \pdfTeX~versions~\cite{pdftex}.\footnote{The user-level manipulation of the transformation
+%  matrix has been part of the \acronym{PDF}-standard since its initial publication in
+%  1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
 %  (\singlequotes{concat}~-- concatenate matrix to current transformation matrix).~\visualpar{}
 %  The primitive~\cs{pdfliteral} was implemented already in the first release of \pdfTeX{}
 %  in~1998~\cite{baskerville-pdftex-8-1:1998} and the primitive~\cs{pdfsetmatrix} joined 2007 in
-%  \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}  A slight variant of his code is used in this
-%  package for the \acronym{PDF}- and
+%  \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}  With the help of the latter affine
+%  transformations of arbitrary content can be coded directly by setting the transformation
+%  matrix.  A slight variant of his code is used in this package for the \acronym{PDF}- and
 %  \packagename{l3draw}\index{package>\packagename{l3draw}}-slant~engines.  The implementations
 %  for \pstrickslogo, \tikzlogo{}, and \packagename{fontspec}\packagename{fontspec} are trivial
-%  as they use slant~functions supplied by the respective packages.
+%  as they build upon shear~functions supplied by the respective packages.
 %
 %
 %  \subsection{Shear Transformation, Slant, and Angle}\label{sec:shear-transformation}
@@ -849,7 +908,7 @@ beginfig(1);
        withpen pencircle scaled narrow_width;
 
   label.llft(btex \(\numberset{E}^2\) etex, offset[0]);
-  label.llft(btex \(x\) etex, (1.25u, 0) + offset[0] + (0, -1));
+  label.llft(btex \(x\) etex, (1.25u, 0) + offset[0] + (0, -2));
   label.lft(btex \(y\) etex, (0, u) + offset[0]);
 
   draw original_rectangle[1] + offset[0] --
@@ -868,7 +927,7 @@ beginfig(1);
        withpen pencircle scaled narrow_width;
 
   label.llft(btex \(\numberset{E}^2\) etex, offset[1]);
-  label.llft(btex \(x\) etex, (1.25u, 0) + offset[1] + (0, -1));
+  label.llft(btex \(x\) etex, (1.25u, 0) + offset[1] + (0, -2));
   label.lft(btex \(y\) etex, (0, u) + offset[1]);
 
   draw slanted_rectangle[1] + offset[1] --
@@ -915,11 +974,13 @@ end
 %  \cref{equ:shear-transformation} and avoid converting back and forth to the
 %  \index{shear>angle}shear angle~\(\alpha\).\footnote{At least one slant engine currently
 %  requires such a conversion, namely~\pstrickslogo.  The math is hidden from the user, though.}
-%  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)}, \mbox{\(\sin
-%  11.5\degree \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\footnote{For small
+%  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)}, \mbox{\(\sin 11.5\degree
+%  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\footnote{For small
 %  angles~\(\lvert\alpha\rvert\) measured in radians the sine is approximately linear: \(\sin
 %  \alpha \approx \alpha\).}  For real-life serif fonts \meta{slant} is in the range of~\(.1\)
-%  to~\(.35\) and a value of~\(.2\) seems to be quite common.  See \Cref{tab:slant-values} on
+%  to~\(.45\) and a value of~\(.2\) seems to be quite common.  My \filesystem{pdftex.map} lists
+%  negative \meta{slant} values in the range~\(-.4\) to~\(-.05\) and positive \meta{slant}
+%  values in the range~\(.14\) up to~\(.45\).  See \Cref{tab:slant-values} on
 %  \cpageref{tab:slant-values} for some actual values of serif fonts in \LaTeX.
 %
 %
@@ -931,7 +992,7 @@ end
 %  \begin{enumerate}
 %  \item\label{it:no-italics}
 %    In the unfortunate situation when a serif font comes without italics such as
-%    \singlequotes{\acronym{URW}~Antiqua}\index{font>\acronym{URW}~Antiqua},
+%    \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW} Antiqua},
 %    \packagename{syntslant} can generate a slanted serif.
 %
 %    The user is relatively free in choosing the \meta{slant}, for there are not italics whose
@@ -954,7 +1015,7 @@ end
 %
 %  \item\label{it:generate-sole-obliques}
 %    If a sans-serif font comes without an oblique shape as, e.\,g.,
-%    \singlequotes{\acronym{URW}~Grotesk},\index{font>\acronym{URW}~Grotesk}
+%    \singlequotes{\acronym{URW}~Grotesk},\index{font>URW Grotesk=\acronym{URW} Grotesk}
 %    \packagename{syntslant} can generate an oblique sans-serif.
 %
 %  \item\label{it:generate-extra-obliques}
@@ -1016,9 +1077,9 @@ end
 %    base for the slanting engine.\footnote{This option requires \filesystem{l3draw.sty.}}
 %
 %    \begin{caution}
-%      This engine is still experimental and produces low-quality output!  Moreover, the
-%      \singlequotes{draw} layer of \LaTeXIII{} itself is still experimental.  See
-%      \cref{sec:limitations} on \cpageref{sec:limitations} for details.
+%      This engine is experimental and the \singlequotes{draw} layer of \LaTeXIII{} itself is
+%      still experimental, too.  See \cref{sec:limitations} on \cpageref{sec:limitations} for
+%      details.
 %    \end{caution}
 %
 %  \item[|negslant=|\meta{slant}]\label{item:negslant}\index{package option>negslant}
@@ -1110,10 +1171,10 @@ end
 %            \toprule
 %            Font Name  &  Slant  \\
 %            \midrule
-%            \acronym{ADF} Accanthis\index{font>\acronym{ADF} Accanthis}        &  .26  \\
-%            \acronym{ADF} Baskervald\index{font>\acronym{ADF} Baskervald}      &  .32  \\
-%            \acronym{ADF} Berenis\index{font>\acronym{ADF} Berenis}            &  .2  \\
-%            \acronym{ADF} Venturis\index{font>\acronym{ADF} Venturis}          &  .2  \\
+%            \acronym{ADF} Accanthis\index{font>ADF Accanthis=\acronym{ADF} Accanthis}  &  .26  \\
+%            \acronym{ADF} Baskervald\index{font>ADF Baskervald=\acronym{ADF} Baskervald}  &  .32  \\
+%            \acronym{ADF} Berenis\index{font>ADF Berenis=\acronym{ADF} Berenis}  &  .2  \\
+%            \acronym{ADF} Venturis\index{font>ADF Venturis=\acronym{ADF} Venturis}  &  .2  \\
 %            Alegreya\index{font>Alegreya}                                      &  .2  \\
 %            Arvo\index{font>Arvo}                                              &  .2  \\
 %            BaskervilleF\index{font>BaskervilleF}                              &  .2  \\
@@ -1133,15 +1194,15 @@ end
 %            Font Name  &  Slant  \\
 %            \midrule
 %            Day Roman\index{font>Day Roman}                                    &  .2  \\
-%            \acronym{EB} Garamond\index{font>\acronym{EB} Garamond}            &  .3  \\
+%            \acronym{EB} Garamond\index{font>EB Garamond=\acronym{EB} Garamond}  &  .3  \\
 %            etbb\index{font>etbb}                                              &  .2  \\
 %            fbb\index{font>fbb}                                                &  .2  \\
 %            Garamond Expert\index{font>Garamond Expert}                        &  .2  \\
 %            Gandhi Serif\index{font>Gandhi Serif}                              &  .2  \\
 %            Gentium\index{font>Gentium}                                        &  .2  \\
 %            Ibarra Real Nova\index{font>Ibarra Real Nova}                      &  .2  \\
-%            \acronym{IBM} Plex Serif\index{font>\acronym{IBM} Plex Serif}      &  .24  \\
-%            \acronym{Inria} Serif\index{font>\acronym{Inria} Serif}            &  .2  \\
+%            \acronym{IBM} Plex Serif\index{font>IBM Plex Serif=\acronym{IBM} Plex Serif}  &  .24  \\
+%            \acronym{Inria} Serif\index{font>Inria Serif=\acronym{Inria} Serif}  &  .2  \\
 %            Libertinus Serif\index{font>Libertinus Serif}                      &  .2  \\
 %            Libre Baskerville\index{font>Libre Baskerville}                    &  .3  \\
 %            Libre Caslon\index{font>Libre Caslon}                              &  .38  \\
@@ -1157,17 +1218,17 @@ end
 %            Merriweather\index{font>Merriweather}                              &  .14  \\
 %            MLModern\index{font>MLModern}                                      &  .23  \\
 %            Noto Serif\index{font>Noto Serif}                                  &  .22  \\
-%            \acronym{PT} Serif\index{font>\acronym{PT} Serif}                  &  .2  \\
+%            \acronym{PT} Serif\index{font>PT Serif=\acronym{PT} Serif}         &  .2  \\
 %            Roboto Slab\index{font>Roboto Slab}                                &  .2  \\
 %            Quattrocento\index{font>Quattrocento}                              &  .2  \\
 %            Source Serif Pro\index{font>Source Serif Pro}                      &  .18  \\
 %            Spectral\index{font>Spectral}                                      &  .18  \\
-%            \acronym{STIX}\index{font>\acronym{STIX}}                          &  .2  \\
-%            \TeX{} Gyre Pagella\index{font>\TeX{} Gyre Pagella}                &  .16  \\
-%            \acronym{TX} Fonts Serif\index{font>\acronym{TX} Fonts Serif}      &  .2  \\
-%            \acronym{URW} Antiqua\index{font>\acronym{URW} Antiqua}            &  .2  \\
-%            \acronym{URW} Nimbus Roman\index{font>\acronym{URW} Nimbus Roman}  &  .2  \\
-%            Utopia\index{font>}                                                &  .2  \\
+%            \acronym{STIX}\index{font>STIX=\acronym{STIX}}                     &  .2  \\
+%            \TeX{} Gyre Pagella\index{font>TeX Gyre Pagella=\TeX{} Gyre Pagella}  &  .16  \\
+%            \acronym{TX} Fonts Serif\index{font>TX Fonts Serif=\acronym{TX} Fonts Serif}  &  .2  \\
+%            \acronym{URW} Antiqua\index{font>URW Antiqua=\acronym{URW} Antiqua}  &  .2  \\
+%            \acronym{URW} Nimbus Roman\index{font>URW Nimbus Roman=\acronym{URW} Nimbus Roman}  &  .2  \\
+%            Utopia\index{font>Utopia}                                          &  .2  \\
 %                                                                               &  \\
 %            \bottomrule
 %          \end{tabular}
@@ -1773,20 +1834,34 @@ end
 %              \biburl{https://ctan.org/pkg/microtype}.
 %
 %      \bibitem{schroeder:2007}
-%              \bibauthor{Schr\"oder, Martin},
+%              \bibauthor{Schr\"oder, Martin}.
 %              \bibtitle{pdftex 1.40}.
 %              2007,
 %              \biburl{https://tug.org/mail-archives/pdftex/2007-January/006910.html}.
 %
+%     \bibitem{stamm:2020}
+%              \bibauthor{Stamm, Philipp}.
+%              \bibtitle{Schrifttypen -- Verstehen Kombinieren:
+%                        Schriftmischung als Reiz in der Typografie}.
+%              Birkhäuser, Basel,
+%              2020.
+%
+%      \bibitem{strizver:2014}
+%              \bibauthor{Strizver, Ilene}.
+%              \bibtitle{Type rules!: the designer's guide to professional typography},
+%              4\textsuperior{th}~ed.
+%              John Wiley~\& Sons, Hoboken/NJ,
+%              2014.
+%
 %      \bibitem{baskerville-pdftex-8-1:1998}
-%              \bibauthor{Th\`anh, Han The},
-%              \bibtitle{The \pdfTeX{} user manual},
+%              \bibauthor{Th\`anh, Han The}.
+%              \bibtitle{The \pdfTeX{} user manual}.
 %              Baskerville, 8(1), 9--14 (1998),
 %              \biburl{http://uk-tug-archive.tug.org/wp-installed-content/uploads/2008/12/81.pdf}.
 %
 %      \bibitem{pdftex}
-%              \bibauthor{Th\`anh, Han The}~et~al.,
-%              \bibtitle{\pdfTeX},
+%              \bibauthor{Th\`anh, Han The} et al.
+%              \bibtitle{\pdfTeX}.
 %              2023,
 %              \biburl{http://mirrors.ctan.org/systems/doc/pdftex/manual/pdftex-a.pdf}.
 %      \end{thebibliography}
