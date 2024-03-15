@@ -1,5 +1,4 @@
-# Synthslant Documentation
+### Package Documentation
 
-
-- Synthslant documentation: [PDF](https://cspiel.github.io/synthslant/synthslant.pdf)
-- Synthslant test and demonstration: [PDF](https://cspiel.github.io/synthslant/synthslant-gauge.pdf)
+- `synthslant` documentation: [synthslant.pdf](https://cspiel.github.io/synthslant/synthslant.pdf)
+- `synthslant` test and demonstration: [synthslant-gauge.pdf](https://cspiel.github.io/synthslant/synthslant-gauge.pdf)
