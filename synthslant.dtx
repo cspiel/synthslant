@@ -62,8 +62,8 @@
 
 
 \usepackage[default, lining, proportional, regular, semibold]{sourceserifpro}
-\usepackage[lining, proportional, semibold]{sourcesanspro}
-\usepackage[semibold]{sourcecodepro}
+\usepackage[lining, proportional, regular, semibold]{sourcesanspro}
+\usepackage[lining, regular]{sourcecodepro}
 \usepackage[xcharter]{newtxmath}
 \setstretch{1.02083}% \baselineskip: 12.25pt
 
@@ -87,7 +87,18 @@
                 {\edef\rmdefault{\fontclan-T\sourceserifpro@figurestyle}\rm}
                 {}
 
-\newcommand*{\texteb}[1]{{\def\bfseries@sf{eb}\textbf{#1}}}
+\newcommand*{\elseries}{\def\mdseries@rm{el}\def\mdseries@sf{el}\def\mdseries@tt{el}}
+\newcommand*{\textel}[1]{{\elseries\textmd{#1}}}
+\newcommand*{\lseries}{\def\mdseries@rm{l}\def\mdseries@sf{l}\def\mdseries@tt{l}}
+\newcommand*{\textl}[1]{{\lseries\textmd{#1}}}
+%%--\newcommand*{\mdseries}{\def\mdseries@rm{m}\def\mdseries@sf{m}\def\mdseries@tt{m}}
+%%--\newcommand*{\textmd}[1]{{\mdseries\textmd{#1}}}
+\newcommand*{\sbseries}{\def\bfseries@rm{sb}\def\bfseries@sf{sb}\def\bfseries@tt{sb}}
+\newcommand*{\textsb}[1]{{\sbseries\textbf{#1}}}
+\newcommand*{\bseries}{\def\bfseries@rm{b}\def\bfseries@sf{b}\def\bfseries@tt{b}}
+\newcommand*{\textb}[1]{{\bseries\textbf{#1}}}
+\newcommand*{\ebseries}{\def\bfseries@rm{k}\def\bfseries@sf{eb}\def\bfseries@tt{k}}
+\newcommand*{\texteb}[1]{{\ebseries\textbf{#1}}}
 \makeatother
 
 
@@ -1445,7 +1456,7 @@ end
 %  \end{codeexample}
 %
 %  \begin{note}
-%    The tracking context~\code{synthnetslant} is \emph{not} defined by
+%    The tracking context~\code{synthnegslant} is \emph{not} defined by
 %    \packagename{synthslant}.  And \packagename{microtype} ignores undefined contexts.
 %  \end{note}
 %
@@ -1894,7 +1905,7 @@ end
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{synthslant}[2024/03/07  v0.1  Synthetically Slant glyphs]
+\ProvidesPackage{synthslant}[2024/03/16  v0.1  Synthetically Slant glyphs]
 
 \RequirePackage{iftex}
 \RequirePackage{xkeyval}

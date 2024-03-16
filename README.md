@@ -48,7 +48,8 @@ See Section 2 of the package documentation for available options.
 
 ##  Documentation
 
-The pre-built package documentation can be found in the subdirectory *docs*.
+The package documentation can be found
+[online](https://cspiel.github.io/synthslant/).
 
 
 ##  Credits
