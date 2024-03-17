@@ -19,7 +19,7 @@ DVIPS := dvips
 DVIPS_FLAGS := -d1 # debug \special{}
 
 
-LATEX := pdflatex
+LATEX := /usr/bin/env max_print_line=2147483647 pdflatex
 LATEX_FLAGS := -file-line-error -halt-on-error -interaction=nonstopmode
 LATEX_RERUN_TRIGGER := '^Package rerunfilecheck Warning: File [^ ]* has changed'
 LATEX_WARNING := '^LaTeX (|[A-Za-z0-9_]* )Warning:'
