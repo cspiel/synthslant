@@ -24,6 +24,7 @@
 \RecordChanges
 
 
+\PassOptionsToClass{a4paper}{article}
 \PassOptionsToPackage{hyperfootnotes=false}{hyperref}
 \PassOptionsToPackage{charter, scale=1.06}{newtxmath}
 \PassOptionsToPackage{dvipsnames}{xcolor}
@@ -65,7 +66,7 @@
 \usepackage[lining, proportional, regular, semibold]{sourcesanspro}
 \usepackage[lining, regular]{sourcecodepro}
 \usepackage[xcharter]{newtxmath}
-\setstretch{1.02083}% \baselineskip: 12.25pt
+\setstretch{1.04166}% \baselineskip: 12.5pt
 
 
 \makeatletter
@@ -262,7 +263,7 @@
 \newcommand*{\citenum}[1]{\@nameuse{b@#1}}
 \makeatother
 
-\newcommand*{\code}[1]{\texttt{#1}}
+\def\code#1{\texttt{#1}}
 
 \newrobustcmd*{\command}[1]{\mbox{\textbf{#1}}}
 
@@ -331,9 +332,13 @@
 
 \newcommand*{\singlequotes}[1]{\mbox{\guilsinglright #1\guilsinglleft}}
 
+\definecolor{customred1}{rgb}{.890, .282, .282}%-- https://paletton.com/
+\definecolor{customred2}{rgb}{.831, .110, .110}
+\definecolor{customred3}{rgb}{.686, .043, .043}
+\definecolor{customred4}{rgb}{.569, .000, .000}
+\definecolor{customred5}{rgb}{.420, .000, .000}
 \newcommand*{\specialsectionheading}[1]{\textcolor{\markercolor}{\textit{\textbf{#1}}}}
-\definecolor{medieval-red}{rgb}{.45, .15, .1}
-\newcommand*{\markercolor}{medieval-red}%-- alternatives w/dvipsnames: BrickRed, Mahogany, Maroon, Sepia
+\newcommand*{\markercolor}{customred4}
 \newcommand*{\specialsectionmarker}{\color{\markercolor}\filledsquare{5pt}}
 \newcommand*{\specialsectionbegin}
             {\llap{\raisebox{1pt}{\specialsectionmarker}%
@@ -453,7 +458,7 @@
                  \end{maxipage}}
 
 
-\hyphenation{
+\hyphenation{% https://hyphenateit.com/en-us
 }
 
 
@@ -696,8 +701,8 @@ end
 %
 %  \subsection{Some History}\label{sec:history}
 %
-%  Italics accompanying a roman font date back to one of the earliest print shops, that of
-%  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
+%  Italics accompanying a roman font date back to one of the earliest print shops, namely that
+%  of \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
 %  1500\:A.\,C\@.  Artificially slanted, also known as \singlequotes{oblique}, versions of
 %  upright fonts appear in the twentieth century, when type designers and foundries start to
 %  save time and money by automatically constructing a slanted version of a given roman
@@ -719,7 +724,7 @@ end
 %    \small
 %    \centering
 %    \caption[Variable fonts with slant-axis]
-%            {Some variable fonts with a slant axis (\code{slnt}).}
+%            {A short list of some variable fonts with a slant axis (\code{slnt}).}
 %    \label{tab:open-type-slant-feature}
 %
 %    \begin{tabular}{@{}l@{}}
@@ -1493,15 +1498,21 @@ end
 %  If a synthetically slanted piece of text needs to match to an existing italics or oblique
 %  font the question arises how to determine the slant angle~\(\alpha\) or~\meta{slant}.
 %
+%  \begin{note}
+%    The slant angles of different glyphs in the same font may slightly differ from each other.
+%    We look for a representative \meta{slant}, a kind of average that achieves a visual match
+%    with the italics or obliques of the font family.
+%  \end{note}
+%
 %
 %  \subsection{Direct Measurement}\label{sec:direct-meansurement}
 %
 %  Measure the angle of some reference glyphs with a graphics program.
 %
-%  \begin{enumerate}
+%  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item Prepare a page with some sample glyphs of the font shape to be matched.
 %
-%  \item Render it as PostScript or as~\acronym{PDF}.
+%  \item Render it as PostScript or in~\acronym{PDF}.
 %
 %  \item Load the file at a resolution of 1200\,dpi or higher into your favourite graphics
 %    editor that supports measuring angles.
@@ -1526,7 +1537,7 @@ end
 %
 %  Compare some reference glyphs with a differently slanted versions.
 %
-%  \begin{enumerate}
+%  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item In file~\filesystem{synthslant-gauge.tex} which comes with the
 %    \packagename{synthslant}~package insert the code to load your font-of-interest.
 %
@@ -1575,7 +1586,7 @@ end
 %
 %  Page~2, Sec.~3.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native al
 %  well as synthesized ones.  Here, the slanted glyphs as well as the upright italics should
-%  blend well with the native italics/obliques and the normal font respectively.
+%  blend well with the native italics/obliques and the normal font, respectively.
 %
 %  Page~3, Sec.~3.2 and following sub-sections, examines the coupling of
 %  \packagename{synthslant} with the \TeX-system and some of its extensions.  If a slant engine
@@ -1780,7 +1791,6 @@ end
 %    \clearpage
 %    \phantomsection
 %    \resetfancyhead
-%    \addcontentsline{toc}{section}{Changes}
 %    \PrintChanges
 %
 %    \clearpage
@@ -1880,8 +1890,6 @@ end
 %
 %
 %    \clearpage
-%    \phantomsection
-%    \addcontentsline{toc}{section}{Index}
 %    \begin{RaggedRight}
 %      \setcounter{IndexColumns}{2}
 %      \setlength{\columnsep}{30pt}
@@ -4647,10 +4655,9 @@ KJ8AAAAASUVORK5CYII=
 %
 %  \iffalse
 %<*gauge>
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage{booktabs}
-\usepackage[legalpaper]{geometry}% we need a tall first page to hold all 30 font samples
 \usepackage[tracking=alltext, letterspace=0, verbose]{microtype}
 \usepackage{multicol}
 \usepackage{parskip}
@@ -4748,6 +4755,11 @@ KJ8AAAAASUVORK5CYII=
 \makeatother
 
 
+\addtolength{\textheight}{\headheight}
+\addtolength{\textheight}{\headsep}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+
 \setlength{\overfullrule}{3pt}
 
 
@@ -4772,8 +4784,6 @@ Font name: \fontname\font.
     \cs{normalfont}  &  {\normalfont\fontsample}  &  {\normalfont\FontSample}  &  {\normalfont\FONTSAMPLE}  \\
     Italics  &
     \cs{itshape}  &  {\itshape\fontsample}  &  {\itshape\FontSample}  &  {\itshape\FONTSAMPLE}  \\
-    Slanted  &
-    \cs{slshape}  &  {\slshape\fontsample}  &  {\slshape\FontSample}  &  {\slshape\FONTSAMPLE}  \\
     \bottomrule
   \end{tabular}
 \end{center}
