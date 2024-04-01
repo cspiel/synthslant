@@ -267,7 +267,8 @@ synthslant.pdf:  \
     synthslant.dtx  \
     compare-with-the-gimp.png  \
     shear-transform.mps  \
-    title.mps
+    title.mps  \
+    | synthslant.sty
 
 synthslant.dvi:  \
     synthslant.dtx  \
