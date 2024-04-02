@@ -18,7 +18,7 @@
 
 \tracingonline=0
 
-\OnlyDescription
+%--\OnlyDescription
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -74,6 +74,11 @@
 \newcommand*{\fontclan}{\expandafter\@get@fontclan\f@family\relax}
 \makeatother
 
+\newcommand*{\proportionalliningfigures}{\fontfamily{\fontclan-LF}\selectfont}
+\newcommand*{\proportionaloldstylefigures}{\fontfamily{\fontclan-OsF}\selectfont}
+\newcommand*{\tabularliningfigures}{\fontfamily{\fontclan-TLF}\selectfont}
+\newcommand*{\tabularoldstylefigures}{\fontfamily{\fontclan-TOsF}\selectfont}
+
 \newcommand*{\textdenominator}[1]{{\fontfamily{\fontclan-Dnom}\selectfont #1}}
 \newcommand*{\textinferior}[1]{{\fontfamily{\fontclan-Inf}\selectfont #1}}
 \newcommand*{\textnumerator}[1]{{\fontfamily{\fontclan-Numr}\selectfont #1}}
@@ -85,8 +90,8 @@
 \makeatletter
 \renewcommand*{\@makefnmark}{\hbox{\sf\textsuperior{\@thefnmark}}}
 \newenvironment*{tabfigures}
-                {\edef\rmdefault{\fontclan-T\sourceserifpro@figurestyle}\rm}
-                {}
+                {\edef\rmdefault{\fontclan-T\sourceserifpro@figurestyle}\rm\ignorespaces}
+                {\ignorespacesafterend}
 
 \newcommand*{\elseries}{\def\mdseries@rm{el}\def\mdseries@sf{el}\def\mdseries@tt{el}}
 \newcommand*{\textel}[1]{{\elseries\textmd{#1}}}
@@ -271,7 +276,7 @@
 
 \newcommand*{\doublequotes}[1]{\guillemetright\kern-.03333em #1\guillemetleft}
 
-\newcommand*{\dumpmacro}[1]{\texttt{\detokenize\expandafter{#1}\unskip}}
+\newcommand*{\dumpmacro}[1]{\texttt{\detokenize\expandafter{#1}}}
 
 \newcommand*{\filesystem}[1]{\mbox{\textit{#1\/}}}
 
@@ -329,6 +334,12 @@
              \mbox{\raisebox{\dimexpr -.15em - \dp0}{\tiny$\llcorner$}%
                    \kern-.15em\copy0\kern-.15em
                    \raisebox{\ifdim\ht0>.7em\dimexpr\ht0 - .1em\else .45em\fi}{\tiny$\urcorner$}}}
+
+\newcommand*{\sinceversion}[1]{% modeled after \NewIn of "doc.dtx"
+  \leavevmode
+  \marginpar{\hfill\textcolor{\markercolor}{\sf\proportionaloldstylefigures\scshape #1}}%
+  \ignorespaces
+}
 
 \newcommand*{\singlequotes}[1]{\mbox{\guilsinglright #1\guilsinglleft}}
 
@@ -606,9 +617,9 @@ end
 %    \footnotesize
 %    \noindent
 %    This package is copyright \textcopyright~2024 Ch.~L.~Spiel.  It may be distributed and/or
-%    modified under the conditions of the \LaTeX{} Project Public License, either version~1.3c
-%    of this license or (at your option) any later version.  This work has the \acronym{LPPL}
-%    maintenance status \doublequotes{author-maintained}.\par
+%    modified under the conditions of the \LaTeX{} Project Public License \acronym{(LPPL)},
+%    either version~1.3c of this license or --~at your option~-- any later version.  This work
+%    has the \acronym{LPPL} maintenance status \doublequotes{author-maintained}.\par
 %  \endgroup
 %
 %
@@ -1007,18 +1018,19 @@ end
 %
 %  \begin{enumerate}
 %  \item\label{it:no-italics}
-%    In the unfortunate situation when a serif font comes without italics such as
-%    \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW} Antiqua},
-%    \packagename{syntslant} can generate a slanted serif.
+%    Generate a slanted serif in the unfortunate situation when a serif font comes without
+%    italics such as \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW}
+%    Antiqua}.
 %
-%    The user is relatively free in choosing the \meta{slant}, for there are not italics whose
-%    angle has to be matched.  The package's default of~.2 should be a good starting point.
+%    Here the user is relatively free in choosing the \meta{slant}, for there are no italics
+%    whose angle must be matched.  The \packagename{synthslant}'s default of~.2 should be a good
+%    starting point.
 %
 %  \item\label{it:upright-italics}
-%    A serif font with an italics shape can be augmented by generating upright italics.
+%    Augment a serif font that features an italics shape with upright italics.
 %
-%    In many cases it is desirable not to remove all forward-leaningness but
-%    retain~1\textdegree{} to~2\textdegree{} of residual slant angle.
+%    In nearly all cases it is desirable not to remove all forward-slant but
+%    retain~1\textdegree{} to~2\textdegree{} of residual angle.
 %
 %  \item\label{it:correct-italics-angle}
 %    An italics shape that has an excessive slant angle, as
@@ -1030,14 +1042,13 @@ end
 %    be warranted.
 %
 %  \item\label{it:generate-sole-obliques}
-%    If a sans-serif font comes without an oblique shape as, e.\,g.,
-%    \singlequotes{\acronym{URW}~Grotesk},\index{font>URW Grotesk=\acronym{URW} Grotesk}
-%    \packagename{syntslant} can generate an oblique sans-serif.
+%    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
+%    e.\,g., \singlequotes{\acronym{URW}~Grotesk},\index{font>URW Grotesk=\acronym{URW}
+%    Grotesk}.
 %
 %  \item\label{it:generate-extra-obliques}
-%    For sans-serif fonts with designed, this is \emph{true} obliques as
-%    e.\,g.~\singlequotes{Open Sans},\index{font>Open Sans} \packagename{syntslant} can supply a
-%    slanted sans-serif shape.
+%    Supply a slanted sans-serif shape for sans-serif fonts with designed, this is \emph{true}
+%    obliques as e.\,g.~\singlequotes{Open Sans},\index{font>Open Sans}.
 %
 %  \item\label{it:slant-typewriter}
 %    Fixed-width --~also called \singlequotes{typewriter} or \singlequotes{teletype}~-- fonts
@@ -1045,11 +1056,15 @@ end
 %    get an oblique shape.
 %
 %  \item\label{it:slanted-small-caps}
-%    Small caps without accompanying italics can be slanted, too.
+%    Small caps (without accompanying italics) can be slanted, too.
 %
 %  \item\label{it:slant-in-math-mode}
-%    As \packagename{synthslant} works in \TeX's math-mode, too, it is possible to give
+%    As \packagename{synthslant} also works in \TeX's math-mode, it is possible to give
 %    math-italics even more of a heeling.
+%
+%  \item\label{it:slant-big-math-operators}
+%    Big mathematical operators like the sigma can be slanted and others, like the integral
+%    sign, can have their inclination adjusted.
 %  \end{enumerate}
 %
 %  It is possible to obtain slants that run against the reading direction, so called
@@ -1164,7 +1179,7 @@ end
 %  To change the slant value to \(.24\) say
 %
 %  \begin{codeexample}
-%    \cs{renecommand}*\{\cs{synthslant}\}\{.24\}
+%    \cs{renewcommand}*\{\cs{synthslant}\}\{.24\}
 %  \end{codeexample}
 %
 %  \Cref{tab:slant-values} summarizes some suggested slant values for selected fonts.
@@ -1353,7 +1368,7 @@ end
 %
 %  In math mode just un-slant \meta{text} with the slant value stored in \cs{synthnegslant}.
 %
-%  \begin{usecase}
+%  \begin{example}
 %    To set apart operators in an algebra like, e.\,g., the radical, we could use upright
 %    italics
 %
@@ -1372,7 +1387,7 @@ end
 %    \noindent
 %    where we have assumed that \packagename{amsmath} has been loaded to bring
 %    \cs{DeclareMathOperator} into scope.
-%  \end{usecase}
+%  \end{example}
 %
 %
 %  \subsection{Advanced Interface}\label{sec:advanced-interface}
@@ -1389,7 +1404,23 @@ end
 %  \hyperref[syn:synthnegslant]{\cs{synthnegslant}} enter its expansion!  No corrections or
 %  \TeX-mode adjustments are made.
 %
-%  \medskip
+%  \begin{example}
+%    Generate a substitute for a missing solidus character:
+%
+%    \begin{codeexample}
+%      12\=\kill
+%      \cs{renewcommand*}\{\cs{textfractionsolidus}\}[1]  \\
+%          \>\{\=\cs{kern}-.125em  \\
+%          \>  \>\cs{raisebox}\=\{.125em\}  \\
+%          \>  \>             \>\{\=\cs{smaller}  \\
+%          \>  \>             \>  \>\cs{synthslantbox}\{.3\}\{\cs{char}`/\}\}\%  \\
+%          \>  \>\cs{kern.1em}\}
+%    \end{codeexample}
+%
+%    \noindent
+%    where the \cs{smaller} macro is from the
+%    \packagename{relsize}~package~\cite{package:relsize}.
+%  \end{example}
 %
 %  The following two environments are responsible for setting up everything before the actual
 %  slant or un-slant code runs and what happens after the slant-engine finishes.  They can be
@@ -1787,17 +1818,24 @@ end
 %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %
-%  \StopEventually{
+%  \MaybeStop{
 %    \clearpage
 %    \phantomsection
 %    \resetfancyhead
+%    \addcontentsline{toc}{section}{Change History}
 %    \PrintChanges
 %
 %    \clearpage
 %    \phantomsection
-%    \addcontentsline{toc}{section}{Bibliography}
+%    \addcontentsline{toc}{section}{References}
 %    \begin{RaggedRight}
 %      \begin{thebibliography}{88}
+%      \bibitem{package:relsize}
+%          \bibauthor{Arseneau, Donald}.
+%          \bibtitle{The \textsf{relsize} package}.
+%          2013,
+%          \biburl{https://ctan.org/pkg/relsize}.
+%
 %      \bibitem{adobe-pdf-1.0}
 %             \bibauthor{Bienz, Tim} and \bibauthor{Richard Cohn}.
 %             \bibtitle{Portable Document Format Reference Manual}.
@@ -1894,6 +1932,8 @@ end
 %      \setcounter{IndexColumns}{2}
 %      \setlength{\columnsep}{30pt}
 %      \label{sec:index}
+%      \phantomsection
+%      \addcontentsline{toc}{section}{Index}
 %      \PrintIndex
 %    \end{RaggedRight}
 %  }
