@@ -1084,26 +1084,34 @@ end
 %  options allow to predefine the forward and backward slant angles as well as the selection of
 %  a particular slanting engine.
 %
+%  \begingroup
+%  \newcommand*{\indexpackageoption}[1]
+%              {\index{package option>#1=\code{#1}}\index{#1=\code{#1}~(option)}\ignorespaces}
 %  \begin{description}
 %        [before={\let\oldmakelabel=\makelabel
 %                 \renewcommand{\makelabel}[1]
 %                              {\oldmakelabel{\termparbox{##1}}\phantomsection}},
+%         font=\normalfont,
 %         style=nextline]
-%  \item[|auto|]\label{item:auto}\index{package option>auto}
+%  \item[|auto|]\label{item:auto}
+%    \indexpackageoption{auto}
 %    Let the package choose a slant engine.  This is the default.
 %
 %    For \pdfLaTeX{} package \packagename{synthslant} selects the \acronym{PDF}-engine, for
 %    \LuaLaTeX{} the \packagename{fontspec}-engine, and in all other cases the
 %    \packagename{l3draw}-layer handles the shear transformation.
 %
-%  \item[|disable|]\label{item:disable}\index{package option>disable}
+%  \item[|disable|]\label{item:disable}
+%    \indexpackageoption{disable}
 %    Disable slanting completely.
 %
-%  \item[|fontspec|]\label{item:fontspec}\index{package option>fontspec}
+%  \item[|fontspec|]\label{item:fontspec}
+%    \indexpackageoption{fontspec}
 %    Use \packagename{fontspec}\index{package>\packagename{fontspec}} as slanting
 %    back-end.\footnote{Requires \filesystem{fontspec.sty.}}
 %
-%  \item[|l3draw|]\label{item:l3draw}\index{package option>l3draw}
+%  \item[|l3draw|]\label{item:l3draw}
+%    \indexpackageoption{l3draw}
 %    Select the \singlequotes{draw} layer\index{package>\packagename{l3draw}} of \LaTeXIII{} as
 %    base for the slanting engine.\footnote{This option requires \filesystem{l3draw.sty.}}
 %
@@ -1113,19 +1121,23 @@ end
 %      details.
 %    \end{caution}
 %
-%  \item[|negslant=|\meta{slant}]\label{item:negslant}\index{package option>negslant}
+%  \item[|negslant=|\meta{slant}]\label{item:negslant}
+%    \indexpackageoption{negslant}
 %    Set the default value for \hyperref[syn:synthnegslant]{\cs{synthnegslant}} \emph{only.}
 %    Note that for this option \meta{slant} is a non-positive value.
 %
-%  \item[|PDF|, |pdf|]\label{item:pdf}\index{package option>pdf}
+%  \item[|PDF|, |pdf|]\label{item:pdf}
+%    \indexpackageoption{pdf}
 %    Select the \acronym{PDF}-slant engine.  This requires the document is translated with
 %    \pdfLaTeX{} or a compatible program.
 %
-%  \item[|posslant=|\meta{slant}]\label{item:posslant}\index{package option>posslant}
+%  \item[|posslant=|\meta{slant}]\label{item:posslant}
+%    \indexpackageoption{posslant}
 %    Set the default value for \hyperref[syn:synthslant]{\cs{synthslant}} \emph{only.}  Note
 %    that for this option \meta{slant} is a nonnegative value.
 %
-%  \item[|PS|, |ps|]\label{item:postscript}\index{package option>ps}
+%  \item[|PS|, |ps|]\label{item:postscript}
+%    \index{ps}
 %    Use \pstrickslogo\index{package>\packagename{pstricks}} to delegate slanting to the
 %    PostScript\index{PostScript} interpreter.  Obviously requires \pstrickslogo\footnote{The
 %    package actually required is \filesystem{pst-3d.sty.}} and \acronym{DVI}-to-PostScript
@@ -1136,14 +1148,16 @@ end
 %      \cref{sec:limitations} on \cpageref{sec:limitations} for details.
 %    \end{caution}
 %
-%  \item[|slant=|\meta{slant}]\label{item:slant}\index{package option>slant}
+%  \item[|slant=|\meta{slant}]\label{item:slant}
+%    \indexpackageoption{slant}
 %    Set the default values for both \hyperref[syn:synthslant]{\cs{synthslant}} and
 %    \hyperref[syn:synthnegslant]{\cs{synthnegslant}}, where \cs{synthslant} becomes
 %    \meta{slant} and \cs{synthnegslant} becomes \(-\meta{slant}\).
 %
 %    If omitted \packagename{synthslant} assumes \(.2\) and \(-.2\), respectively.
 %
-%  \item[|TikZ|, |tikz|]\label{item:tikz}\index{package option>tikz}
+%  \item[|TikZ|, |tikz|]\label{item:tikz}
+%    \indexpackageoption{tikz}
 %    Use \packagename{TikZ}\index{package>\packagename{TikZ}} for slanting.\footnote{Requires
 %    \filesystem{tikz.sty.}}
 %
@@ -1152,6 +1166,7 @@ end
 %      \cref{sec:limitations} on \cpageref{sec:limitations} for details.
 %    \end{caution}
 %  \end{description}
+%  \endgroup
 %
 %
 %  \clearpage
@@ -1296,7 +1311,7 @@ end
 %  provisions to re-enable at least some breakability.
 %
 %  \begin{enumerate}
-%  \item Spaces introduce breakpoint,\index{breakpoint (space)} e.\,g.
+%  \item Spaces introduce breakpoint,\index{breakpoint at space} e.\,g.
 %    \begin{codeexample}
 %      \cs{textsynthslant}\{topological dual space\}
 %    \end{codeexample}
