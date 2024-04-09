@@ -253,14 +253,14 @@
 \newcommand*{\bottomstrut}{\rule[-.5em]{0pt}{0pt}}
 
 \newenvironment*{codeexample}
-                {\vspace{.5\smallskipamount}%
+                {\vspace{.5\smallskipamount}
                  \par
                  \centering
-                 \begin{minipage}{\linewidth}%
-                 \tt
+                 \begin{minipage}{\linewidth}
+                 \ttfamily
                  \begin{tabbing}}
-                {\end{tabbing}%
-                 \end{minipage}%
+                {\end{tabbing}
+                 \end{minipage}
                  \par
                  \vspace{.5\smallskipamount}}
 
@@ -367,52 +367,68 @@
              \fi}
 \newtoggle{printspecialsectionmarker}
 \NewDocumentEnvironment{specialsection}{m m}
-                       {\needspace{4\baselineskip}%
+                       {\Needspace{4\baselineskip}%
                         \toggletrue{printspecialsectionmarker}%
-                        \list{%--\specialsectionbegin
-                              \specialsectionheading{#1\ifblank{#2}{}{\textup{\space---\space#2}}}}%
-                             {%--\leftmargin=25pt
-                              %--\itemindent=0pt
-                              %--\parindent=15pt
-                              %--\labelwidth=20pt
-                              %--\labelsep=5pt
-                              \leftmargin=15pt
-                              \labelwidth=10pt
-                              \topsep=\medskipamount}%
+                        \begin{list}
+                              {\specialsectionheading{#1\ifblank{#2}{}{\textup{\space---\space#2}}}}
+                              {\itemindent=0pt
+                               \labelwidth=10pt
+                               \leftmargin=15pt
+                               \listparindent=15pt
+                               \parsep=0pt
+                               \topsep=\medskipamount}
                         \newcommand*{\specialsectionendhere}
                                     {\specialsectionend
-                                     \global\togglefalse{printspecialsectionmarker}}%
-                        \item\relax
+                                     \global\togglefalse{printspecialsectionmarker}}
+                        \item
                         \nointerlineskip
-                        \leavevmode\par}
+                        \leavevmode\par
+                        \noindent}
                        {\iftoggle{printspecialsectionmarker}{\specialsectionend}{\relax}%
-                        \endlist}
+                        \end{list}}
 
-    \newenvironment*{caution}[1][]{\specialsection{Caution}{#1}}{\endspecialsection}
-    \newenvironment*{example}[1][]{\specialsection{Example}{#1}}{\endspecialsection}
+    \newenvironment*{caution}[1][]{\begin{specialsection}{Caution}{#1}}{\end{specialsection}}
+    \newenvironment*{example}[1][]{\begin{specialsection}{Example}{#1}}{\end{specialsection}}
     \newenvironment*{futuredirection}[1][]
-                    {\specialsection{Anticipated Changes \& Possible Extensions}{#1}\small}
-                    {\endspecialsection}
-    \newenvironment*{important}[1][]{\specialsection{Important}{#1}}{\endspecialsection}
-    \newenvironment*{note}[1][]{\specialsection{Note}{#1}}{\endspecialsection}
-    \newenvironment*{notes}[1][]{\specialsection{Notes}{#1}}{\endspecialsection}
-    \newenvironment*{tip}[1][]{\specialsection{Tip}{#1}}{\endspecialsection}
-    \newenvironment*{tips}[1][]{\specialsection{Tips}{#1}}{\endspecialsection}
-    \newenvironment*{usecase}[1][]{\specialsection{Use Case}{#1}\small}{\endspecialsection}
-    \newenvironment*{usecases}[1][]{\specialsection{Use Cases}{#1}\small}{\endspecialsection}
+                    {\begin{specialsection}{Anticipated Changes \& Possible Extensions}{#1}\small}
+                    {\end{specialsection}}
+    \newenvironment*{important}[1][]{\begin{specialsection}{Important}{#1}}{\end{specialsection}}
+    \newenvironment*{note}[1][]{\begin{specialsection}{Note}{#1}}{\end{specialsection}}
+    \newenvironment*{notes}[1][]{\begin{specialsection}{Notes}{#1}}{\end{specialsection}}
+    \newenvironment*{tip}[1][]{\begin{specialsection}{Tip}{#1}}{\end{specialsection}}
+    \newenvironment*{tips}[1][]{\begin{specialsection}{Tips}{#1}}{\end{specialsection}}
+    \newenvironment*{usecase}[1][]{\begin{specialsection}{Use Case}{#1}\small}{\end{specialsection}}
+    \newenvironment*{usecases}[1][]{\begin{specialsection}{Use Cases}{#1}\small}{\end{specialsection}}
 
-\newcommand*{\specialcodesectionheading}[1]{\textsf{\texteb{\textit{#1}}}}
+\newcommand*{\specialcodesectionheading}[1]{\textcolor{\markercolor}{\textbf{\textit{#1}}}}
 \newenvironment*{specialcodesection}[1]
-                {\needspace{3\baselineskip}%
-                 \noindent
-                 \specialcodesectionheading{#1}%
-                 \list{}{\topsep=0pt}%
-                 \item\relax
-                 \sf}%
-                {\endlist}
-    \newenvironment*{anticipatedchange}{\specialcodesection{Anticipated Change}}{\endspecialsection}
-    \newenvironment*{implementationnote}{\specialcodesection{Implementation Note}}{\endspecialsection}
-    \newenvironment*{knownbug}{\specialcodesection{Known Bug}}{\endspecialsection}
+                {\Needspace{4\baselineskip}%
+                 \begin{tcolorbox}[colback=white, colframe=\markercolor,
+                                   bottomrule=0pt, leftrule=5pt, rightrule=0pt, toprule=0pt]
+                 \sffamily
+                 \begin{list}
+                       {\specialcodesectionheading{#1}}
+                       {\itemindent=0pt
+                        \labelwidth=20pt
+                        \leftmargin=25pt
+                        \listparindent=15pt
+                        \parsep=0pt
+                        \topsep=\medskipamount}
+                 \item
+                 \nointerlineskip
+                 \leavevmode\par
+                 \noindent}
+                {\end{list}
+                 \end{tcolorbox}}
+    \newenvironment*{anticipatedchange}
+                    {\begin{specialcodesection}{Anticipated Change}}
+                    {\end{specialcodesection}}
+    \newenvironment*{implementationnote}
+                    {\begin{specialcodesection}{Implementation Note}}
+                    {\end{specialcodesection}}
+    \newenvironment*{knownbug}
+                    {\begin{specialcodesection}{Known Bug}}
+                    {\end{specialcodesection}}
 
 \newenvironment*{suspendshortverb}
                 {\DeleteShortVerb{\|}}
@@ -459,13 +475,13 @@
 \newcommand*{\visualpar}{\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
 
 \newenvironment*{widecodeexample}
-                {\begin{maxipage}%
+                {\begin{maxipage}
                  \flushright
-                 \begin{minipage}{\textwidth}%
-                 \tt
+                 \begin{minipage}{\textwidth}
+                 \ttfamily
                  \begin{tabbing}}
-                {\end{tabbing}%
-                 \end{minipage}%
+                {\end{tabbing}
+                 \end{minipage}
                  \end{maxipage}}
 
 
