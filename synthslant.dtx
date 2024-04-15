@@ -1038,15 +1038,15 @@ end
 %    italics such as \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW}
 %    Antiqua}.
 %
-%    Here the user is relatively free in choosing the \meta{slant}, for there are no italics
-%    whose angle must be matched.  The \packagename{synthslant}'s default of~.2 should be a good
-%    starting point.
+%    Here, the user is relatively free to choose a \meta{slant}, for there are no italics whose
+%    angle must be matched.  \packagename{Synthslant}'s default of~.2 should be a good starting
+%    point.
 %
 %  \item\label{it:upright-italics}
 %    Augment a serif font that features an italics shape with upright italics.
 %
-%    In nearly all cases it is desirable not to remove all forward-slant but
-%    retain~1\textdegree{} to~2\textdegree{} of residual angle.
+%    In nearly all cases it is desirable not to remove all forward-slant of the italics but
+%    retain some 1\textdegree{} to~2\textdegree{} of residual angle.
 %
 %  \item\label{it:correct-italics-angle}
 %    An italics shape that has an excessive slant angle, as
@@ -1059,12 +1059,11 @@ end
 %
 %  \item\label{it:generate-sole-obliques}
 %    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
-%    e.\,g., \singlequotes{\acronym{URW}~Grotesk},\index{font>URW Grotesk=\acronym{URW}
-%    Grotesk}.
+%    e.\,g., \singlequotes{\acronym{URW}~Grotesk}.\index{font>URW Grotesk=\acronym{URW} Grotesk}
 %
 %  \item\label{it:generate-extra-obliques}
 %    Supply a slanted sans-serif shape for sans-serif fonts with designed, this is \emph{true}
-%    obliques as e.\,g.~\singlequotes{Open Sans},\index{font>Open Sans}.
+%    obliques as e.\,g.~\singlequotes{Open Sans}.\index{font>Open Sans}
 %
 %  \item\label{it:slant-typewriter}
 %    Fixed-width --~also called \singlequotes{typewriter} or \singlequotes{teletype}~-- fonts
@@ -1072,11 +1071,16 @@ end
 %    get an oblique shape.
 %
 %  \item\label{it:slanted-small-caps}
-%    Small caps (without accompanying italics) can be slanted, too.
+%    Small caps without accompanying italics can be slanted, too.
 %
 %  \item\label{it:slant-in-math-mode}
 %    As \packagename{synthslant} also works in \TeX's math-mode, it is possible to give
 %    math-italics even more of a heeling.
+%
+%  \item\label{it:correct-math-script}
+%    If the slant of the math script font is at odds with the slant of the usual math italics,
+%    it may be possible to apply \packagename{synthslant} on the script symbols for matching
+%    angles.
 %
 %  \item\label{it:slant-big-math-operators}
 %    Big mathematical operators like the sigma can be slanted and others, like the integral
