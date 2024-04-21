@@ -111,16 +111,21 @@
 \usepackage{cleveref}
 
 
+\expandafter\GetFileInfo\expandafter{\jobname.sty}
+\def\aspdfdate#1/#2/#3\relax{D:#1#2#3}
+\edef\pdffiledate{\expandafter\aspdfdate\filedate\relax}
+
 \hypersetup{
   citecolor = blue,
   colorlinks = true,
   linkcolor = blue,
   linktocpage = false,
   pdfauthor={Dr. Christoph L. Spiel},
+  pdfcreationdate={\pdffiledate},
   pdfkeywords={LaTeX, font, italic, oblique, slant, upright},
   pdflang=en-US,
   pdfsubject={Synthetic generation of slanted glyphs in LaTeX},
-  pdftitle={Package synthslant},
+  pdftitle={Package synthslant \fileversion},
   raiselinks = false,
   urlcolor = [rgb]{0, 0, .5}% = navy
 }
@@ -548,8 +553,6 @@ quote             '!'
 %
 %
 %  \pagenumbering{roman}
-%
-%  \expandafter\GetFileInfo\expandafter{\jobname.sty}
 %
 %  \title{\synthslantlogo{} -- Synthetically Slanted Glyphs}
 %  \author{Ch.~L.~Spiel\footnote{\quarterspace\texttt{cspiel@users.sourceforge.org}}}
