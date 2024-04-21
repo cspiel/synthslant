@@ -1144,20 +1144,22 @@ end
 %      details.
 %    \end{caution}
 %
-%  \item[|negslant=|\meta{slant}]\label{item:negslant}
+%  \item[|negslant=|\meta{slant-expr}]\label{item:negslant}
 %    \indexpackageoption{negslant}
 %    Set the default value for \hyperref[syn:synthnegslant]{\cs{synthnegslant}} \emph{only.}
-%    Note that for this option \meta{slant} is a non-positive value.
+%    The argument \meta{slant-expr} is a floating-point expression.  Note that for this option
+%    \meta{slant-expr} must evaluate to a non-positive value.
 %
 %  \item[|PDF|, |pdf|]\label{item:pdf}
 %    \indexpackageoption{pdf}
 %    Select the \acronym{PDF}-slant engine.  This requires the document is translated with
 %    \pdfLaTeX{} or a compatible program.
 %
-%  \item[|posslant=|\meta{slant}]\label{item:posslant}
+%  \item[|posslant=|\meta{slant-expr}]\label{item:posslant}
 %    \indexpackageoption{posslant}
-%    Set the default value for \hyperref[syn:synthslant]{\cs{synthslant}} \emph{only.}  Note
-%    that for this option \meta{slant} is a nonnegative value.
+%    Set the default value for \hyperref[syn:synthslant]{\cs{synthslant}} \emph{only.}  The
+%    argument \meta{slant-expr} is a floating-point expression.  Note that for this option
+%    \meta{slant-expr} must evaluate to a non-negative value.
 %
 %  \item[|PS|, |ps|]\label{item:postscript}
 %    \index{ps}
@@ -1171,11 +1173,13 @@ end
 %      \cref{sec:limitations} on \cpageref{sec:limitations} for details.
 %    \end{caution}
 %
-%  \item[|slant=|\meta{slant}]\label{item:slant}
+%  \item[|slant=|\meta{slant-expr}]\label{item:slant}
 %    \indexpackageoption{slant}
 %    Set the default values for both \hyperref[syn:synthslant]{\cs{synthslant}} and
-%    \hyperref[syn:synthnegslant]{\cs{synthnegslant}}, where \cs{synthslant} becomes
-%    \meta{slant} and \cs{synthnegslant} becomes \(-\meta{slant}\).
+%    \hyperref[syn:synthnegslant]{\cs{synthnegslant}}, this is, behave as if the two package
+%    options \(\code{posslant} = \meta{slant-expr}\) and \(\code{negslant} =
+%    -(\meta{slant-expr})\) have been given.  The argument \meta{slant-expr} is a floating-point
+%    expression.
 %
 %    If omitted \packagename{synthslant} assumes \(.2\) and \(-.2\), respectively.
 %
@@ -1190,6 +1194,12 @@ end
 %    \end{caution}
 %  \end{description}
 %  \endgroup
+%
+%  The package options \code{slant}, \code{posslant}, and \code{negslant} all accept
+%  floating-point \emph{expressions} as their arguments not just plain floating-point literals.
+%  See Ref.~\citenum{latex3-interfaces}, Ch.~29, \doublequotes{The \textsf{l3fp}~module~--
+%  Floating points} for a description of the floating-point expression syntax and the available
+%  functions.
 %
 %
 %  \clearpage
@@ -1208,7 +1218,7 @@ end
 %
 %  \DescribeMacro{\synthslant}
 %  Control the slant applied by \hyperref[syn:textsynthslant]{\cs{textsynthslant}}.
-%  This value is nonnegative.
+%  This value is non-negative.
 %
 %  \begin{synopsis}\label{syn:synthslant}
 %    \cs{synthslant}
@@ -1906,6 +1916,12 @@ end
 %              2023,
 %              \biburl{https://www.latex-project.org/help/documentation/fntguide.pdf}.
 %
+%      \bibitem{latex3-interfaces}
+%              \bibauthor{\LaTeXIII{} Project,}
+%              \bibtitle{The \LaTeXIII{} Interfaces}.
+%              2024,
+%              \biburl{https://texdoc.org/serve/interface3/0}.
+%
 %      \bibitem{latex-unofficial-refman}
 %              \bibauthor{latexref.xyz}.
 %              \bibtitle{\LaTeXe: An unofficial reference manual}.
@@ -1991,7 +2007,8 @@ end
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{synthslant}[2024/03/16  v0.1  Synthetically Slant glyphs]
+\ProvidesPackage{synthslant}
+                [2024/03/16  v0.1  Synthetically Slant glyphs]
 
 \RequirePackage{iftex}
 \RequirePackage{xkeyval}
@@ -2043,10 +2060,10 @@ end
 %
 %    \begin{macrocode}
 \DeclareOptionX{slant}{%
-  \def\synthslant{#1}%
-  \def\synthnegslant{-#1}}
-\DeclareOptionX{negslant}{\def\synthnegslant{#1}}
-\DeclareOptionX{posslant}{\def\synthslant{#1}}
+  \xdef\synthslant{\fpeval{#1}}%
+  \xdef\synthnegslant{\fpeval{-(#1)}}}
+\DeclareOptionX{negslant}{\xdef\synthnegslant{\fpeval{#1}}}
+\DeclareOptionX{posslant}{\xdef\synthslant{\fpeval{#1}}}
 
 %    \end{macrocode}
 %
@@ -2057,7 +2074,6 @@ end
 \DeclareOptionX{PDF}{\def\synthslant@engine{0}}
 \DeclareOptionX{pdf}{\def\synthslant@engine{0}}
 \DeclareOptionX{l3draw}{\def\synthslant@engine{1}}
-\DeclareOptionX{l3draw}{\def\synthslant@engine{1}}
 \DeclareOptionX{ps}{\def\synthslant@engine{2}}
 \DeclareOptionX{PS}{\def\synthslant@engine{2}}
 \DeclareOptionX{tikz}{\def\synthslant@engine{3}}
@@ -2066,6 +2082,33 @@ end
 \DeclareOptionX{disable}{\def\synthslant@engine{10000}}
 
 \ProcessOptionsX\relax
+
+%    \end{macrocode}
+%
+%  Require sane parameter values.
+%
+%    \begin{macrocode}
+\ExplSyntaxOn
+\fp_compare:nNnTF {\synthslant} < {.0}
+  {\PackageError{synthslant}{\string\synthslant\space <\space 0}
+                {Pass\space a\space value\space that\space is\space non-negative.}}
+  {}
+\fp_compare:nNnTF {\synthnegslant} > {.0}
+  {\PackageError{synthslant}{\string\synthnegslant\space >\space 0}
+                {Pass\space a\space value\space that\space is\space non-positive.}}
+  {}
+\ExplSyntaxOff
+
+%    \end{macrocode}
+%
+%  Announce the positive and negative slant values now that we are sure they are ok.  This may
+%  be useful information if the user passed a (complicated) floating-point expression and wants
+%  to know how \LaTeX{} did evaluate it.
+%
+%    \begin{macrocode}
+\PackageInfo{synthslant}{\string\synthslant=\synthslant}
+\PackageInfo{synthslant}{\string\synthnegslant=\synthnegslant}
+
 
 %    \end{macrocode}
 %
@@ -2202,7 +2245,7 @@ end
 %   the box-height times~\meta{slant}.
 %
 %    \begin{macrocode}
-      \fp_compare:nTF {#1 >= .0}
+      \fp_compare:nNnTF {#1} >= {.0}
         {
           \box_set_wd:Nn \l_tmpa_box {\l_tmpa_dim - #1\l_tmpb_dim}
         }
@@ -2240,7 +2283,6 @@ end
 
   \RequirePackage{pst-3d}% \pstilt
 
-  \ExplSyntaxOn
 %    \end{macrocode}
 %
 %  Package~\packagename{pstricks} offers \cs{pstilt} and \cs{psTilt} both with typographically
@@ -2249,14 +2291,12 @@ end
 %  \begin{macro}{\synthslant@pstricks@shear@box}
 %    \begin{macrocode}
   \newcommand*{\synthslant@pstricks@shear@box}[2]{%
-    \pstilt{\fp_eval:n {57.2958 * acos(#1)}}{#2}%
+    \pstilt{\fpeval{57.2958 * acos(#1)}}{#2}%
   }
 
 %    \end{macrocode}
 %  \end{macro}
 %    \begin{macrocode}
-  \ExplSyntaxOff
-
   \let\synthslant@shear@box=\synthslant@pstricks@shear@box
 %    \end{macrocode}
 %
@@ -4748,7 +4788,7 @@ KJ8AAAAASUVORK5CYII=
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[]{synthslant}% auto/disable; fontspec/l3draw/pdf/ps/tikz
-%--\usepackage[fontspec, posslant = .16, negslant = .14]{synthslant}
+%--\usepackage[fontspec, posslant = .16, negslant = -.14]{synthslant}
 
 %%
 %%  All LaTeX Variants
@@ -4763,17 +4803,24 @@ KJ8AAAAASUVORK5CYII=
 %%
 %%  Requires e.g. LuaLaTeX
 %%
-%--\usepackage{CharisSIL}% say: `make LATEX=lualatex gauge'
+%%--\usepackage{CharisSIL}% say: `make LATEX=lualatex gauge'
 
 %%
-%%  Preload a reasonable font (triple?) if we work with fontspec.
-%%  Requires e.g. LuaLaTeX.
+%%  Preload a reasonable font (triple?) if we work with fontspec
+%%  and have not already done so, e.g., by saying `\usepackage{...}'.
 %%
-\makeatletter
-\@ifpackageloaded{fontspec}{
-  \setmainfont{TeX Gyre Pagella}\def\synthslant{.16}\def\synthnegslant{-.14}
-}
-\makeatother
+\ExplSyntaxOn
+\sys_if_engine_luatex:T
+  {
+    \cs_if_exist:NTF \l_fontspec_font
+      {}
+      {
+        \setmainfont{TeX Gyre Pagella}
+        \def\synthslant{.16}
+        \def\synthnegslant{-.14}
+      }
+  }
+\ExplSyntaxOff
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
