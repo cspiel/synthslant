@@ -42,18 +42,20 @@ shear-transform.mp, and title.mp.
 \endpreamble
 
 
-\generate{\file{synthslant.sty}{\from{synthslant.dtx}{package}}
-          \file{synthslant-gauge.tex}{\from{synthslant.dtx}{gauge}}
-          \file{synthslant.ist}{\from{synthslant.dtx}{index-style}}}
+\edef\source{\jobname.dtx}
+
+\generate{\file{synthslant.sty}{\from{\source}{package}}
+          \file{synthslant-gauge.tex}{\from{\source}{gauge}}
+          \file{synthslant.ist}{\from{\source}{index-style}}}
 
 
 \nopostamble
-\generate{\file{title.mp}{\from{synthslant.dtx}{title}}}
-\generate{\file{shear-transform.mp}{\from{synthslant.dtx}{shear-transform}}}
+\generate{\file{title.mp}{\from{\source}{title}}}
+\generate{\file{shear-transform.mp}{\from{\source}{shear-transform}}}
 
 
 \nopreamble
-\generate{\file{compare-with-the-gimp.png.base64}{\from{synthslant.dtx}{compare-with-the-gimp}}}
+\generate{\file{compare-with-the-gimp.png.base64}{\from{\source}{compare-with-the-gimp}}}
 
 
 \endbatchfile
