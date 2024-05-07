@@ -28,6 +28,7 @@
 *.sty
 *.toc
 
+/RELEASE-HOWTO
 /compare-with-the-gimp.png
 /synthslant-gauge.pdf
 /synthslant-gauge.tex

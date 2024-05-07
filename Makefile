@@ -256,6 +256,13 @@ endef
 	convert $< -compress lzw eps2:$@
 
 
+%.html: %.md
+	markdown $<  > $@
+
+%: %.html
+	w3m -cols 79 $<  > $@
+
+
 
 synthslant.sty synthslant.ist synthslant-gauge.tex  \
 compare-with-the-gimp.png.base64 shear-transform.mp title.mp:  \
@@ -275,13 +282,6 @@ synthslant.dvi:  \
     compare-with-the-gimp.eps  \
     shear-transform.mps  \
     title.mps
-
-
-README.html: README.md
-	markdown $<  > $@
-
-README: README.html
-	w3m -cols 79 $<  > $@
 
 
 compare-with-the-gimp.png: compare-with-the-gimp.png.base64
