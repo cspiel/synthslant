@@ -88,7 +88,8 @@ clean:
 	$(RM) ./*.aux ./*.brf ./*.dvi ./*.glg ./*.glo ./*.gls
 	$(RM) ./*.hd ./*.idx ./*.ilg ./*.ind ./*.loe ./*.lof ./*.log ./*.lot
 	$(RM) ./*.mp ./*.mps ./*.mpx ./*.out ./*.pdf ./*.ps ./*.toc
-	$(RM) mptextmp.* mpxerr.tex README README.html
+	$(RM) mptextmp.* mpxerr.tex
+	$(RM) README README.html RELEASE-HOWTO RELEASE-HOWTO.html
 	$(RM) compare-with-the-gimp.eps compare-with-the-gimp.png
 
 
