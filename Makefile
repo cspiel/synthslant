@@ -44,7 +44,9 @@ SPELLCHECK_FLAGS :=  \
     --lang=en_US --mode=tex
 
 
+PROJECT_NAME := synthslant
 SOURCE_FILES := LICENSE Makefile synthslant.dtx synthslant.ins
+DOCUMENTATION_FILES := synthslant-gauge.pdf synthslant.pdf
 
 
 
@@ -71,16 +73,26 @@ gauge: synthslant-gauge.pdf
 .PHONY: cpio
 cpio:
 	cd ..;  \
-        echo $(addprefix synthslant/,$(SOURCE_FILES))  |  \
+        print $(addprefix $(notdir $(PWD))/,$(SOURCE_FILES))  |  \
             cpio -o  |  \
-            gzip  > "synthslant-$$(date +%Y-%m-%d).cpio.gz"
+            gzip  > "$(PROJECT_NAME)-$$(date +%Y-%m-%dT%H:%M:%S).cpio.gz"
 
 
 .PHONY: tar
 tar:
 	cd ..;  \
-        tar czf "synthslant-$$(date +%Y-%m-%d).tar.gz"  \
-          $(addprefix synthslant/,$(SOURCE_FILES))
+        tar czf "$(PROJECT_NAME)-$$(date +%Y-%m-%dT%H:%M:%S).tar.gz"  \
+            $(addprefix $(notdir $(PWD))/,$(SOURCE_FILES))
+
+
+.PHONY: package
+package: $(DOCUMENTATION_FILES)
+	mkdir $(PROJECT_NAME)
+	cp $(SOURCE_FILES) $(PROJECT_NAME)
+	mkdir $(PROJECT_NAME)/docs
+	cp $(DOCUMENTATION_FILES) $(PROJECT_NAME)/docs
+	tar czf ../$(PROJECT_NAME).tar.gz $(PROJECT_NAME)
+	$(RM) -r $(PROJECT_NAME)
 
 
 .PHONY: clean
@@ -143,7 +155,8 @@ all:    Make everything there is to make.  This is the .DEFAULT_GOAL.
 clean:  Remove some products.
 
 cpio:   In the parent directory create a cpio(1) archive of the
-        project source files whose name is time-stamped.
+        project source files whose name is time-stamped.  Intended for
+        quick snapshots.
 
 doc:    Build "synthslant.pdf" the Syntslant documentation.
 
@@ -155,20 +168,31 @@ maintainer-clean: Remove every product file that can be rebuilt even
 
 mostlyclean: Remove some more products than clean:.
 
+package: In the parent directory create a tar(1) file of the project
+        source files and the PDF documentation files.  This archive
+        is in the form and has a name that CTAN prefers.
+
 pdf:    Build doc: and gauge:.
 
 sty:    Only extract "synthslant.sty" from "synthslant.dtx".  This
         operation requires LaTeX (-> $(LATEX)) and nothing else.
 
 tar:    In the parent directory create a tar(1) file of the project
-        source files whose name is time-stamped.
+        source files whose name is time-stamped.  Intended for
+        quick snapshots.
 
 tool-check: Check whether some of the required tools to build the
         project are available.
 
+update-docs: Copy the documentation files into the "docs"
+        sub-directory.
+
 
 Selected Implicit Rules
 -----------------------
+%: %.html
+        Convert HTML to plain text.  Requires w3m(1).
+
 %.dvi %.pdf: %.dtx
         Run LaTeX or pdfLaTeX (-> $(LATEX)) on dtx source until a
         fix-point is reached.
@@ -176,6 +200,9 @@ Selected Implicit Rules
 %.dvi %.pdf: %.tex
         Run LaTeX or pdfLaTeX (-> $(LATEX)) on tex file until a
         fix-point is reached.
+
+%.html: %.md
+        Convert markdown to HTML.  Requires markdown(1).
 
 %.mx.pdf: %.dvi
         Convert dvi to pdf via dvipdfmx (-> $(DVIPDFMX)).
@@ -187,9 +214,9 @@ Selected Implicit Rules
 Some Explicit Rules
 -------------------
 README.html:
-        Convert "README.md" to html.  Requires markdown(1).
+        Convert "README.md" to html.
 
-README: Convert "README.html" to plain text.  Requires w3m(1).
+README: Convert "README.html" to plain text.
 
 endef
 
