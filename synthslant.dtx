@@ -52,6 +52,7 @@
   \newcommand*{\textls}[2][]{#2}
 \fi
 \usepackage{needspace}
+\usepackage[section]{placeins}
 \usepackage{ragged2e}
 \usepackage{setspace}
 \usepackage[slant=.18, negslant=-.16]{synthslant}
@@ -119,7 +120,7 @@
   citecolor = blue,
   colorlinks = true,
   linkcolor = blue,
-  linktocpage = false,
+  linktocpage = true,
   pdfauthor={Dr. Christoph L. Spiel},
   pdfcreationdate={\pdffiledate},
   pdfkeywords={LaTeX, font, italic, oblique, slant, upright},
@@ -156,8 +157,10 @@
 
 \newcommand*{\floatcaptionwidth}{.79\textwidth}
 
-\captionsetup[figure]{font=small, justification=centerlast, labelfont=sc, width=\floatcaptionwidth}
-\captionsetup[table]{font=small, justification=centerlast, labelfont=sc, width=\floatcaptionwidth}
+\captionsetup[figure]{font=small, justification=centerlast,
+                      labelfont=sc, width=\floatcaptionwidth}
+\captionsetup[table]{font=small, justification=centerlast,
+                     labelfont=sc, width=\floatcaptionwidth}
 
 
 \newsavebox{\listlabelbox}
@@ -191,10 +194,11 @@
   \fancyhead[L]{}
   \fancyhead[R]{\thepage}
 }
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\rightmark}
-\fancyhead[R]{\textsf{\thepage}}
+\fancypagestyle{fancy}{
+  \fancyhf{}
+  \fancyhead[L]{\rightmark}
+  \fancyhead[R]{\thepage}
+}
 \newcommand*{\resetfancyhead}
             {\fancyhead[L]{\textsf{\textsc{\textls[20]{\nouppercase\rightmark}}}}}
 
@@ -234,9 +238,6 @@
 
 \pretocmd{\DescribeEnv}{\needspace{25pt}}{\relax}{\PrependingFailed}
 \pretocmd{\DescribeMacro}{\needspace{25pt}}{\relax}{\PrependingFailed}
-
-
-\setcounter{IndexColumns}{2}
 
 
 \setlength{\columnsep}{20pt}
@@ -464,6 +465,10 @@
 
 \newcommand*{\tikzlogo}{\textrm{Ti\textit{k\/}Z}}
 
+\newcommand*{\toccontinuesonnextpage}
+            {\addtocontents{toc}{\par\medskip\hfill
+                                 \textit{Table of Contents continued on next page.}}}
+
 \newcommand*{\topstrut}{\rule{0pt}{1.3em}}
 
 \newcommand*{\transpose}[1]{{#1}^{\text{T}}}
@@ -476,6 +481,10 @@
              \copy0\kern\ttellipsisgap
              \copy0\kern\ttellipsisgap
              \box0\kern\ttellipsisgap}
+
+\newcommand*{\unmarkedfntext}[1]
+            {{\def\thefootnote{}\footnote{#1}%
+              \addtocounter{footnote}{-1}}}
 
 \newcommand*{\visualpar}{\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
 
@@ -530,7 +539,7 @@ quote             '!'
 %  \DoNotIndex{\edef,\else}
 %  \DoNotIndex{\endgroup,\endmicrotypecontext,\endnegslantenvironment,\endslantenvironment}
 %  \DoNotIndex{\expandafter,\ExplSyntaxOff,\ExplSyntaxOn}
-%  \DoNotIndex{\fi,\font,\fontdimen,\fontspec,\fp}
+%  \DoNotIndex{\fi,\font,\fontdimen,\fontspec,\fp,\fpeval}
 %  \DoNotIndex{\hbox,\hskip}
 %  \DoNotIndex{\ifcase,\ifcsdef,\ifdefined,\ifluatex,\ifmmode,\ifnum,\ifpdftex,\ifx,\itshape}
 %  \DoNotIndex{\kern}
@@ -540,13 +549,14 @@ quote             '!'
 %  \DoNotIndex{\newbox,\newcommand,\NewDocumentCommand,\NewDocumentEnvironment,\newenvironment,\newrobustcmd}
 %  \DoNotIndex{\node,\nolinebreak}
 %  \DoNotIndex{\or}
-%  \DoNotIndex{\PackageInfo,\PackageWarning,\ProcessOptionsX,\providecommand,\ProvidesPackage}
+%  \DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\ProcessOptionsX,\providecommand,\ProvidesPackage}
 %  \DoNotIndex{\pdfoutput,\pdfrestore,\pdfsave,\pdfsetmatrix,\pstilt}
 %  \DoNotIndex{\relax,\RequirePackage}
-%  \DoNotIndex{\sbox,\skip,\space}
+%  \DoNotIndex{\sbox,\skip,\space,\string}
 %  \DoNotIndex{\tikz}
 %  \DoNotIndex{\upshape,\usebox}
 %  \DoNotIndex{\wd}
+%  \DoNotIndex{\xdef}
 %
 %
 %  \changes{v0.1}{2024-2-12}{Initial version}
@@ -644,25 +654,17 @@ end
 %
 %
 %  \clearpage
-%  \thispagestyle{pagenumberonly}
+%  \pagestyle{pagenumberonly}
+%
+%  \unmarkedfntext{The font samples~\singlequotes{fga} on the title page were generated with the
+%    help of \MP{} using \doublequotes{\acronym{URW} Palladio} in styles~\singlequotes{roman}
+%    and~\singlequotes{italic}.  The affine transformations were\enspace \code{slanted
+%    .2}\enspace for the slanted roman and\enspace \code{slanted -.2}\enspace for the upright
+%    italics.}
 %  \tableofcontents
-%
-%  \vspace{\fill}
-%
-%  \begingroup
-%    \footnotesize
-%    \singlespacing
-%    \noindent
-%    The font samples~\singlequotes{fga} on the title page
-%    were generated with the help of \MP{} using \doublequotes{\acronym{URW} Palladio~L}
-%    in styles~\singlequotes{roman} and~\singlequotes{italic}.
-%    The affine transformations were \code{slanted .2} for the slanted roman and
-%    \code{slanted -.2} for the upright italics.\par
-%  \endgroup
 %
 %
 %  \clearpage
-%  \thispagestyle{pagenumberonly}
 %  \listoftables
 %  \bigskip
 %  \listoffigures
@@ -670,6 +672,7 @@ end
 %
 %  \clearpage
 %  \pagenumbering{arabic}
+%  \pagestyle{fancy}
 %  \section{Introduction}\label{sec:introduction}
 %
 %  The \packagename{synthslant} package provides a translator (e.\,g.~\LaTeX, \pdfLaTeX, or
@@ -760,7 +763,7 @@ end
 %
 %    \begin{tabular}{@{}l@{}}
 %      \toprule
-%      Font Name  \\
+%      Font  \\
 %      \midrule
 %      Cairo\index{font>Cairo}  \\
 %      Commissioner\index{font>Commissioner}  \\
@@ -802,7 +805,7 @@ end
 %
 %    \begin{tabular}[t]{@{}p{12em}@{}}
 %      \toprule
-%      Font Name  \\
+%      Font  \\
 %      \midrule
 %      Arvo\index{font>Arvo}  \\
 %      Computer Modern Roman\index{font>Computer Modern Roman}  \\
@@ -819,7 +822,7 @@ end
 %    \qquad
 %    \begin{tabular}[t]{@{}p{12em}@{}}
 %      \toprule
-%      Font Name  \\
+%      Font  \\
 %      \midrule
 %      Cabin\index{font>Cabin}  \\
 %      Clear Sans\index{font>Clear Sans}  \\
@@ -1249,7 +1252,7 @@ end
 %        \begin{tabfigures}
 %          \begin{tabular}[t]{@{}p{9.5em}l@{}}
 %            \toprule
-%            Font Name  &  Slant  \\
+%            Font  &  Slant  \\
 %            \midrule
 %            \acronym{ADF} Accanthis\index{font>ADF Accanthis=\acronym{ADF} Accanthis}  &  .26  \\
 %            \acronym{ADF} Baskervald\index{font>ADF Baskervald=\acronym{ADF} Baskervald}  &  .32  \\
@@ -1271,7 +1274,7 @@ end
 %          \qquad
 %          \begin{tabular}[t]{@{}p{9.5em}l@{}}
 %            \toprule
-%            Font Name  &  Slant  \\
+%            Font  &  Slant  \\
 %            \midrule
 %            Day Roman\index{font>Day Roman}                                    &  .2  \\
 %            \acronym{EB} Garamond\index{font>EB Garamond=\acronym{EB} Garamond}  &  .3  \\
@@ -1293,7 +1296,7 @@ end
 %          \qquad
 %          \begin{tabular}[t]{@{}p{9.5em}l@{}}
 %            \toprule
-%            Font Name  &  Slant  \\
+%            Font  &  Slant  \\
 %            \midrule
 %            Merriweather\index{font>Merriweather}                              &  .14  \\
 %            MLModern\index{font>MLModern}                                      &  .23  \\
@@ -1875,12 +1878,14 @@ end
 %    \clearpage
 %    \phantomsection
 %    \resetfancyhead
-%    \addcontentsline{toc}{section}{Change History}
+%    \addtocontents{toc}{\medskip}
+%    \addcontentsline{toc}{section}{\numberline{}Change History}
 %    \PrintChanges
 %
 %    \clearpage
 %    \phantomsection
-%    \addcontentsline{toc}{section}{References}
+%    \addtocontents{toc}{\medskip}
+%    \addcontentsline{toc}{section}{\numberline{}References}
 %    \begin{RaggedRight}
 %      \begin{thebibliography}{88}
 %      \bibitem{package:relsize}
@@ -1992,7 +1997,9 @@ end
 %      \setlength{\columnsep}{30pt}
 %      \label{sec:index}
 %      \phantomsection
-%      \addcontentsline{toc}{section}{Index}
+%      \addcontentsline{toc}{section}{\numberline{}Index}
+%      \addtocontents{toc}{\medskip}
+%      \raggedcolumns
 %      \PrintIndex
 %    \end{RaggedRight}
 %  }
