@@ -132,9 +132,94 @@
 }
 
 
+\SetExtraKerning[context=drop-left-sidebearing, name=source-code-normal, unit=space]
+                {font={T1/SourceCodePro-LF/m/n/44, T1/SourceCodePro-TLF/m/n/44}}
+                {
+                  1={-150,},
+                  2={-120,},
+                  3={-120,},
+                  4={-40,},
+                  A={-100,},
+                  B={-170,}
+                }
+
+\newlength{\sectiontocindent}
+\newlength{\sectionnumberwidth}
+\newlength{\subsectiontocindent}
+\newlength{\subsectionnumberwidth}
+\newlength{\subsubsectiontocindent}
+\newlength{\subsubsectionnumberwidth}
+
+\setlength{\sectiontocindent}{0pt}
+\setlength{\sectionnumberwidth}{40pt}
+\setlength{\subsectiontocindent}{40pt}
+\setlength{\subsectionnumberwidth}{25pt}
+\setlength{\subsubsectiontocindent}{65pt}
+\setlength{\subsubsectionnumberwidth}{30pt}
+
 \makeatletter
-\renewcommand*{\@dotsep}{10000} % suppress leaders
-\patchcmd{\@dottedtocline}{\normalfont}{\bfseries}{\relax}{\PatchingFailed}
+\renewcommand*{\l@section}[2]
+              {\ifnum \c@tocdepth >\z@
+                 \addpenalty\@secpenalty
+                 \addvspace{1.0em \@plus\p@}%
+                 \setlength{\@tempdima}{\sectionnumberwidth}%
+                 \begingroup
+                   \def\numberline##1{\hb@xt@\@tempdima{%
+                       \tt
+                       \fontsize{44}{0}\selectfont
+                       \microtypecontext{kerning=drop-left-sidebearing}%
+                       \iffalse\raisebox{-30pt}[0pt][0pt]{\rule{0.1pt}{40pt}}\fi
+                       \textcolor{customred3}{##1}%
+                       \hfil}}%
+                   \parindent \z@
+                   \rightskip \@pnumwidth
+                   \parfillskip -\@pnumwidth
+                   \leavevmode
+                   \advance\leftskip\@tempdima
+                   \hskip -\leftskip
+                   \bfseries
+                   \iffalse
+                     \nobreak\hfil
+                     \nobreak\hb@xt@\@pnumwidth{\hss #2\kern-\p@\kern\p@}%
+                   \else
+                     {\sffamily\large #1}\quad
+                     {#2}\hfil\hbox{}
+                   \fi
+                   \par
+                 \endgroup
+               \fi}
+
+\renewcommand*{\@dottedtocline}[5]
+              {\ifnum #1>\c@tocdepth
+               \else
+                 \vskip \z@ \@plus.2\p@
+                 \begingroup
+                 \leftskip #2\relax
+                 \rightskip \@tocrmarg
+                 \parfillskip -\rightskip
+                 \parindent #2\relax\@afterindenttrue
+                 \interlinepenalty\@M
+                 \leavevmode
+                 \@tempdima #3\relax
+                 \advance\leftskip \@tempdima
+                 \null\nobreak
+                 \hskip -\leftskip
+                 {#4}\nobreak
+                 \iffalse
+                   \leaders\hbox{$\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
+                   \nobreak\hb@xt@\@pnumwidth{\hfil\normalfont \normalcolor #5\kern-\p@\kern\p@}%
+                 \else
+                   \hbox{\quad\normalfont\bfseries #5}\nobreak\hfill\hbox{}%
+                 \fi
+                 \par
+                 \endgroup
+               \fi}
+
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{\subsectiontocindent}{\subsectionnumberwidth}}
+\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{\subsubsectiontocindent}{\subsubsectionnumberwidth}}
+\newrobustcmd*{\tocsquashedsubsections}
+              {\def\l@subsection{\@dottedtocline{2}{0pt}{\subsubsectionnumberwidth}}%
+               \def\l@subsubsection{\@dottedtocline{3}{0pt}{\subsubsectionnumberwidth}}}
 \makeatother
 
 
@@ -191,6 +276,7 @@
 
 
 \fancypagestyle{pagenumberonly}{
+  \fancyhf{}
   \fancyhead[L]{}
   \fancyhead[R]{\thepage}
 }
@@ -466,8 +552,10 @@
 \newcommand*{\tikzlogo}{\textrm{Ti\textit{k\/}Z}}
 
 \newcommand*{\toccontinuesonnextpage}
-            {\addtocontents{toc}{\par\medskip\hfill
-                                 \textit{Table of Contents continued on next page.}}}
+            {\addtocontents{toc}{\par
+                                 \bigskip
+                                 \hfill\textit{Table of Contents continued on next page.}\par
+                                 \clearpage}}
 
 \newcommand*{\topstrut}{\rule{0pt}{1.3em}}
 
@@ -1336,8 +1424,8 @@ end
 %  more flexible and powerful interface, see~\cref{sec:advanced-interface}.
 %
 %  \begin{note}
-%    The following restrictions and workarounds to get line-breaking and automatic hyphenation
-%    working again do \emph{not} apply to the
+%    The following restrictions and workarounds to get line-breaking and \TeX's automatic
+%    hyphenation working again do \emph{not} apply to the
 %    \packagename{fontspec}\index{package>\packagename{fontspec}} back-end.
 %  \end{note}
 %
@@ -1878,7 +1966,7 @@ end
 %    \clearpage
 %    \phantomsection
 %    \resetfancyhead
-%    \addtocontents{toc}{\medskip}
+%    \addtocontents{toc}{\bigskip}
 %    \addcontentsline{toc}{section}{\numberline{}Change History}
 %    \PrintChanges
 %
@@ -1997,8 +2085,8 @@ end
 %      \setlength{\columnsep}{30pt}
 %      \label{sec:index}
 %      \phantomsection
-%      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \addtocontents{toc}{\medskip}
+%      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
 %      \PrintIndex
 %    \end{RaggedRight}
@@ -2006,8 +2094,13 @@ end
 %
 %
 %  \clearpage
+%  \toccontinuesonnextpage
 %  \section{Package Code}\label{sec:package-code}
-%  \addtocontents{toc}{\begingroup\small}
+%  \addtocontents{toc}{\protect\begin{list}{}{\leftmargin=\subsectiontocindent\parsep=0pt}}
+%  \addtocontents{toc}{\protect\item}
+%  \addtocontents{toc}{\RaggedRight}
+%  \addtocontents{toc}{\small}
+%  \addtocontents{toc}{\tocsquashedsubsections}
 %  \addtocontents{toc}{\protect\begin{multicols}{2}}
 %  \addtocontents{toc}{\protect\raggedcolumns}
 %
@@ -2630,7 +2723,7 @@ end
 %
 %
 %  \addtocontents{toc}{\protect\end{multicols}}
-%  \addtocontents{toc}{\endgroup}
+%  \addtocontents{toc}{\protect\end{list}}
 %
 %
 %  \Finale
