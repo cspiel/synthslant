@@ -496,7 +496,7 @@
 \newenvironment*{specialcodesection}[1]
                 {\Needspace{4\baselineskip}%
                  \begin{tcolorbox}[colback=white, colframe=\markercolor,
-                                   bottomrule=0pt, leftrule=5pt, rightrule=0pt, toprule=0pt]
+                                   bottomrule=.5pt, leftrule=5pt, rightrule=.5pt, toprule=.5pt]
                  \sffamily
                  \begin{list}
                        {\specialcodesectionheading{#1}}
@@ -2195,12 +2195,16 @@ end
 %    \begin{macrocode}
 \ExplSyntaxOn
 \fp_compare:nNnTF {\synthslant} < {.0}
-  {\PackageError{synthslant}{\string\synthslant\space <\space 0}
-                {Pass\space a\space value\space that\space is\space non-negative.}}
+  {\PackageError{synthslant}
+                {\string\synthslant\space <\space 0}
+                {Pass\space a\space value\space that\space
+                 is\space non-negative.}}
   {}
 \fp_compare:nNnTF {\synthnegslant} > {.0}
-  {\PackageError{synthslant}{\string\synthnegslant\space >\space 0}
-                {Pass\space a\space value\space that\space is\space non-positive.}}
+  {\PackageError{synthslant}
+                {\string\synthnegslant\space >\space 0}
+                {Pass\space a\space value\space that\space
+                 is\space non-positive.}}
   {}
 \ExplSyntaxOff
 
@@ -2352,13 +2356,15 @@ end
 %    \begin{macrocode}
       \fp_compare:nNnTF {#1} >= {.0}
         {
-          \box_set_wd:Nn \l_tmpa_box {\l_tmpa_dim - #1\l_tmpb_dim}
+          \box_set_wd:Nn \l_tmpa_box
+              {\l_tmpa_dim - #1\l_tmpb_dim}
         }
         {
           \draw_suspend_begin:
             \kern#1\l_tmpb_dim
           \draw_suspend_end:
-          \box_set_wd:Nn \l_tmpa_box {\l_tmpa_dim + #1\l_tmpb_dim}
+          \box_set_wd:Nn \l_tmpa_box
+              {\l_tmpa_dim + #1\l_tmpb_dim}
         }
 %    \end{macrocode}
 %
@@ -2449,7 +2455,8 @@ end
 %    \begin{macrocode}
   \newcommand*{\synthslantbox@fontspect@shear@box}[2]{
     \begingroup
-    \expandafter\fontspec[FakeSlant = #1]{\l_fontspec_family_tl}
+    \expandafter
+    \fontspec[FakeSlant=#1]{\l_fontspec_family_tl}
     #2
     \endgroup
   }
@@ -2574,8 +2581,12 @@ end
 %    \begin{macrocode}
 \ifnum\synthslant@engine=4% fontspec
   \newrobustcmd*{\synthslantbox}[2]{%
-    \edef\synthslant@slant@value{#1}% definition for compatibility of both branches
-    \synthslantbox@fontspect@shear@box{\synthslant@slant@value}{#2}%
+%    \end{macrocode}
+%    The following (expanding) definition is only here for the compatibility of both branches.
+%    \begin{macrocode}
+    \edef\synthslant@slant@value{#1}
+    \synthslantbox@fontspect@shear@box{\synthslant@slant@value}
+                                      {#2}%
   }
 %    \end{macrocode}
 %
@@ -2631,7 +2642,8 @@ end
 \NewDocumentEnvironment{slantenvironment}{}
   {\upshape
    \ifcsdef{microtypecontext}
-           {\expandafter\microtypecontext\expandafter{\slantcontext}}
+           {\expandafter\microtypecontext
+            \expandafter{\slantcontext}}
            {}}
   {\ifcsdef{endmicrotypecontext}
            {\endmicrotypecontext}
@@ -2658,8 +2670,8 @@ end
 %  \end{macro}
 %
 %  \begin{macro}{\synthslantbox@right@negslant@correction}
-%    We could play the same trick here as in \cs{synthslantbox@right@slant@correction} and use
-%    \cs{synthnegslant} instead of \cs{synthslant}.  But my experiments show no need for a
+%    We could play the same trick here as in \cs{synthslantbox@\-right@\-slant@\-correction} and
+%    use \cs{synthnegslant} instead of \cs{synthslant}.  But my experiments show no need for a
 %    correction.  Anyhow, this macro may be convenient to override someday.
 %
 %    \begin{macrocode}
@@ -2689,7 +2701,8 @@ end
 \NewDocumentEnvironment{negslantenvironment}{}
   {\itshape
    \ifcsdef{microtypecontext}
-           {\expandafter\microtypecontext\expandafter{\negslantcontext}}
+           {\expandafter\microtypecontext
+            \expandafter{\negslantcontext}}
            {}}
   {\ifcsdef{endmicrotypecontext}
            {\endmicrotypecontext}
