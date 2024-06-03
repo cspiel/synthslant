@@ -59,7 +59,7 @@ sty: synthslant.sty
 
 
 .PHONY: pdf
-pdf: doc gauge
+pdf: doc gauge test
 
 
 .PHONY: doc
@@ -68,6 +68,10 @@ doc: synthslant.pdf
 
 .PHONY: gauge
 gauge: synthslant-gauge.pdf
+
+
+.PHONY: test
+test: synthslant-minimal-test.pdf
 
 
 .PHONY: cpio
@@ -181,6 +185,10 @@ tar:    In the parent directory create a tar(1) file of the project
         source files whose name is time-stamped.  Intended for
         quick snapshots.
 
+test:   Run some tests.  Currently only compiles a minimal document
+        to check whether "synthslant.sty" contains all the necessary
+        \RequirePackage directives.
+
 tool-check: Check whether some of the required tools to build the
         project are available.
 
@@ -292,7 +300,8 @@ endef
 
 
 
-synthslant.sty synthslant.ist synthslant-gauge.tex  \
+synthslant.sty synthslant.ist  \
+synthslant-gauge.tex synthslant-minimal-test.tex  \
 compare-with-the-gimp.png.base64 shear-transform.mp title.mp:  \
   synthslant.ins synthslant.dtx
 	$(LATEX) $(LATEX_FLAGS) $<
