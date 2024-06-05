@@ -1759,13 +1759,13 @@ end
 %  and --~after recompiling with the appropriate \LaTeX-engine~-- used to examine the details of
 %  the slant operations.
 %
-%  Page~2, Sec.~3.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native al
-%  well as synthesized ones.  Here, the slanted glyphs as well as the upright italics should
-%  blend well with the native italics/obliques and the normal font, respectively.
+%  Page~2, Sec.~3.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
+%  synthesized ones.  Here, the slanted glyphs as well as the upright italics should blend well
+%  with the native italics/obliques and with the normal font, respectively.
 %
-%  Page~3, Sec.~3.2 and following sub-sections, examines the coupling of
-%  \packagename{synthslant} with the \TeX-system and some of its extensions.  If a slant engine
-%  malfunctions, it will become evident on this page.
+%  Page~3, Sec.~3.2 and following sub-sections, examine the coupling of \packagename{synthslant}
+%  with the \TeX-system and some of its extensions.  If a slant engine malfunctions, it will
+%  become evident on this page.
 %
 %
 %  \clearpage
@@ -2109,11 +2109,13 @@ end
 %  and explain its implementation details.
 %
 %
+%  \changes{v0.1a}{2024-6-2}{Add missing dependency on \packagename{etoolbox}.
+%                            Fix suggested by \code{mbertucci47}.}
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2024/05/08  v0.1a  Synthetically Slant glyphs]
+                [2024/06/02  v0.1a  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
