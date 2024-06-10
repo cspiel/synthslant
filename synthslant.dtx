@@ -780,8 +780,8 @@ end
 %
 %  \subsection{Appeal for Artificially Slanted Type}\label{sec:appleal-for-artificially-slanted}
 %
-%  Artificially slanted type have a bad reputation.  Whenever there is an order to round up the
-%  usual font suspects synthetically slanted, bolded\footnote{Package~\packagename{amsbsy}
+%  Artificially slanted type have a lousy reputation.  Whenever there is an order to round up
+%  the usual font suspects synthetically slanted, bolded\footnote{Package~\packagename{amsbsy}
 %  defines a \doublequotes{Poor Man's Bold} macro~\cs{pmb} that works by
 %  \singlequotes{overprinting}.  The authors of \packagename{amsbsy} recommend to prefer
 %  package~\packagename{bm} for bold mathematical symbols, though.}, and condensed type along
@@ -1240,7 +1240,7 @@ end
 %    \indexpackageoption{negslant}
 %    Set the default value for \hyperref[syn:synthnegslant]{\cs{synthnegslant}} \emph{only.}
 %    The argument \meta{slant-expr} is a floating-point expression.  Note that for this option
-%    \meta{slant-expr} must evaluate to a non-positive value.
+%    \meta{slant-expr} must evaluate to a nonpositive value.
 %
 %  \item[|PDF|, |pdf|]\label{item:pdf}
 %    \indexpackageoption{pdf}
@@ -1251,7 +1251,7 @@ end
 %    \indexpackageoption{posslant}
 %    Set the default value for \hyperref[syn:synthslant]{\cs{synthslant}} \emph{only.}  The
 %    argument \meta{slant-expr} is a floating-point expression.  Note that for this option
-%    \meta{slant-expr} must evaluate to a non-negative value.
+%    \meta{slant-expr} must evaluate to a nonnegative value.
 %
 %  \item[|PS|, |ps|]\label{item:postscript}
 %    \index{ps}
@@ -1268,7 +1268,7 @@ end
 %  \item[|slant=|\meta{slant-expr}]\label{item:slant}
 %    \indexpackageoption{slant}
 %    Set the default values for both \hyperref[syn:synthslant]{\cs{synthslant}} and
-%    \hyperref[syn:synthnegslant]{\cs{synthnegslant}}, this is, behave as if the two package
+%    \hyperref[syn:synthnegslant]{\cs{synthnegslant}}, this is, act as if the two package
 %    options \(\code{posslant} = \meta{slant-expr}\) and \(\code{negslant} =
 %    -(\meta{slant-expr})\) have been given.  The argument \meta{slant-expr} is a floating-point
 %    expression.
@@ -1310,7 +1310,7 @@ end
 %
 %  \DescribeMacro{\synthslant}
 %  Control the slant applied by \hyperref[syn:textsynthslant]{\cs{textsynthslant}}.
-%  This value is non-negative.
+%  This value is nonnegative.
 %
 %  \begin{synopsis}\label{syn:synthslant}
 %    \cs{synthslant}
@@ -1411,7 +1411,7 @@ end
 %  \DescribeMacro{\synthnegslant}
 %  Control the slant applied by
 %  \hyperref[syn:textsynthuprightitalic]{\cs{textsynthuprightitalic}}.  This value is
-%  non-positive.
+%  nonpositive.
 %
 %  \begin{synopsis}\label{syn:synthnegslant}
 %    \cs{synthnegslant}
@@ -2201,13 +2201,13 @@ end
   {\PackageError{synthslant}
                 {\string\synthslant\space <\space 0}
                 {Pass\space a\space value\space that\space
-                 is\space non-negative.}}
+                 is\space nonnegative.}}
   {}
 \fp_compare:nNnTF {\synthnegslant} > {.0}
   {\PackageError{synthslant}
                 {\string\synthnegslant\space >\space 0}
                 {Pass\space a\space value\space that\space
-                 is\space non-positive.}}
+                 is\space nonpositive.}}
   {}
 \ExplSyntaxOff
 
