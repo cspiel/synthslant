@@ -368,6 +368,8 @@
 
 \newcommand*{\degree}{{}^\circ}
 
+\newcommand*{\detoxindex}[1]{\index{\detokenize{#1}}}
+
 \newcommand*{\doublequotes}[1]{\guillemetright\kern-.03333em #1\guillemetleft}
 
 \newcommand*{\dumpmacro}[1]{\texttt{\detokenize\expandafter{#1}\unskip}}
@@ -389,6 +391,18 @@
              \setlength{\fboxsep}{0pt}%
              \framebox{\rule{#1}{0pt}\rule{0pt}{#2}}}
 \newcommand*{\hollowsquare}[1]{\hollowrectangle{#1}{#1}}
+
+\pretocmd{\IndexParms}
+         {\RaggedRight}
+         {\relax}
+         {\PrependingFailed}
+
+\makeatletter
+\apptocmd{\index@prologue}
+         {Numbers typeset in boldface name pages in the user's manual.}
+         {\relax}
+         {\AppendingFailed}
+\makeatother
 
 \newcommand*{\logmacro}[1]
             {\ifdef{#1}
@@ -576,6 +590,8 @@
             {{\def\thefootnote{}\footnote{#1}%
               \addtocounter{footnote}{-1}}}
 
+\newcommand*{\userman}[1]{\textbf{\hyperpage{#1}}}
+
 \newcommand*{\visualpar}{\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
 
 \newenvironment*{widecodeexample}
@@ -614,6 +630,7 @@
 %</driver>
 %<*index-style>
 actual            '='
+delim_0           ",~"
 heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large "
 heading_suffix    "}\\nopagebreak\n"
 headings_flag     1
@@ -793,8 +810,9 @@ end
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
 %  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
 %  problems are somewhat minor and I wonder how far one could get with an
-%  \propername{OpenType}~font that supports a \code{size}~axis\index{font>axis>size=\code{size}}
-%  as well as an \code{opsz}~axis\index{font>axis>opsz=\code{opsz}} in the necessary ranges to
+%  \propername{OpenType}~font that supports a
+%  \code{size}~axis\index{font>axis>size=\code{size}|userman} as well as an
+%  \code{opsz}~axis\index{font>axis>opsz=\code{opsz}|userman} in the necessary ranges to
 %  construct convincing small-caps out of the multiple-master font.
 %
 %  In my view artificial slanting keeps much of the font's character intact.  In fact one
@@ -835,13 +853,14 @@ end
 %
 %  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.
 %  \foreignphrase{Eureka!}  In particular the oldest (and once upon a time the only) font family
-%  shipping with \TeX, \href{https://tug.org/FontCatalogue/cmrfonts.html}{Computer Modern
-%  Roman}\index{font>Computer Modern Roman} --~nowadays member of the \acronym{CM}-Super
-%  family~-- is available in a deluge of almost thirty shapes.  It covers not just slanted roman
-%  or slanted smallcaps but also slanted typewriter and somewhat surprisingly upright italics.
-%  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
-%  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
-%  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
+%  shipping with \TeX, \href{https://tug.org/FontCatalogue/cmrfonts.html}{\acronym{CM}
+%  Roman}\index{font>CM Roman=\acronym{CM} Roman|userman} --~nowadays member of the
+%  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
+%  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
+%  upright italics.  Furthermore, the \LaTeXe{} font selection scheme provisions
+%  \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for upright
+%  italics~\cite{fntguide}.  The former is accompanied by the macros~\cs{slshape}
+%  and~\cs{textsl}.
 %
 %  \begin{wraptable}{r}{.382\textwidth}
 %    \renewcommand*{\floatcaptionwidth}{\textwidth}
@@ -855,13 +874,13 @@ end
 %      \toprule
 %      Font  \\
 %      \midrule
-%      Cairo\index{font>Cairo}  \\
-%      Commissioner\index{font>Commissioner}  \\
-%      Geologica\index{font>Geologica}  \\
-%      Gluten\index{font>Gluten}  \\
-%      Inter\index{font>Inter}  \\
-%      Recursive\index{font>Recursive}   \\
-%      Roboto Flex\index{font>Roboto Flex}  \\
+%      Cairo\index{font>Cairo|userman}  \\
+%      Commissioner\index{font>Commissioner|userman}  \\
+%      Geologica\index{font>Geologica|userman}  \\
+%      Gluten\index{font>Gluten|userman}  \\
+%      Inter\index{font>Inter|userman}  \\
+%      Recursive\index{font>Recursive|userman}   \\
+%      Roboto Flex\index{font>Roboto Flex|userman}  \\
 %      \bottomrule
 %    \end{tabular}
 %  \end{wraptable}
@@ -875,8 +894,9 @@ end
 %  \code{slnt}-axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
 %  \href{https://v-fonts.com/}{Variable Fonts}.}  that offer a slant-axis\footnote{The
 %  registered axis is called \code{slnt} and it is not to be confused with the
-%  \code{ital}~axis.}\index{font>axis>slant=\code{slant}}\index{font>axis>ital=\code{ital}} that
-%  can be controlled with \packagename{fontspec}'s\index{package>\packagename{fontspec}}
+%  \code{ital}~axis.}\index{font>axis>slant=\code{slant}|userman}\index{font>axis>ital=\code{ital}|userman}
+%  that can be controlled with
+%  \packagename{fontspec}'s\index{package>fontspec=\packagename{fontspec}|userman}
 %  \code{Slant}\footnote{Since \packagename{fontspec} version~2.9a as of 2024/2/13.}~key and
 %  \cref{tab:slanted-series-fonts} for a rather incomplete list of fonts that are shipped with
 %  slanted shapes.  For these fonts \packagename{synthslant} is largely superfluous unless
@@ -897,15 +917,15 @@ end
 %      \toprule
 %      Font  \\
 %      \midrule
-%      Arvo\index{font>Arvo}  \\
-%      Computer Modern Roman\index{font>Computer Modern Roman}  \\
-%      Domitian\index{font>Domitian}  \\
-%      Droid Serif\index{font>Droid Serif}  \\
-%      Erewhon\index{font>Erewhon}  \\
-%      Extended Charter\index{font>Extended Charter}  \\
-%      \acronym{GFS} Artemisia\index{font>GFS Artemisia=\acronym{GFS} Artemisia}  \\
-%      \acronym{GFS} Bodoni\index{font>GFS Bodoni=\acronym{GFS} Bodoni} \\
-%      \acronym{GFS} Didot\index{font>GFSDidot=\acronym{GFS} Didot}  \\
+%      Arvo\index{font>Arvo|userman}  \\
+%      \acronym{CM} Roman\index{font>CM Roman\acronym{CM} Roman|userman}  \\
+%      Domitian\index{font>Domitian|userman}  \\
+%      Droid Serif\index{font>Droid Serif|userman}  \\
+%      Erewhon\index{font>Erewhon|userman}  \\
+%      Extended Charter\index{font>Extended Charter|userman}  \\
+%      \acronym{GFS} Artemisia\index{font>GFS Artemisia=\acronym{GFS} Artemisia|userman}  \\
+%      \acronym{GFS} Bodoni\index{font>GFS Bodoni=\acronym{GFS} Bodoni|userman} \\
+%      \acronym{GFS} Didot\index{font>GFSDidot=\acronym{GFS} Didot|userman}  \\
 %      \\
 %      \bottomrule
 %    \end{tabular}
@@ -914,16 +934,16 @@ end
 %      \toprule
 %      Font  \\
 %      \midrule
-%      Cabin\index{font>Cabin}  \\
-%      Clear Sans\index{font>Clear Sans}  \\
-%      Cuprum\index{font>Cuprum}  \\
-%      Fira Sans\index{font>Fira Sans}  \\
-%      Gandhi Sans\index{font>Gandhi Sans}  \\
-%      \acronym{Inria} Sans\index{font>Inria Sans=\acronym{Inria} Sans}  \\
-%      Lato\index{font>Lato}\itshapemark  \\
-%      Montserrat\index{font>Montserrat}  \\
-%      \acronym{PT} Sans\index{font>PT Sans=\acronym{PT} Sans}  \\
-%      Source Sans Pro\index{font>Source Sans Pro}  \\
+%      Cabin\index{font>Cabin|userman}  \\
+%      Clear Sans\index{font>Clear Sans|userman}  \\
+%      Cuprum\index{font>Cuprum|userman}  \\
+%      Fira Sans\index{font>Fira Sans|userman}  \\
+%      Gandhi Sans\index{font>Gandhi Sans|userman}  \\
+%      \acronym{Inria} Sans\index{font>Inria Sans=\acronym{Inria} Sans|userman}  \\
+%      Lato\itshapemark\index{font>Lato|userman}  \\
+%      Montserrat\index{font>Montserrat|userman}  \\
+%      \acronym{PT} Sans\index{font>PT Sans=\acronym{PT} Sans|userman}  \\
+%      Source Sans Pro\index{font>Source Sans Pro|userman}  \\
 %      \bottomrule
 %    \end{tabular}
 %
@@ -946,15 +966,16 @@ end
 %  \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}  With the help of the latter affine
 %  transformations of arbitrary content can be coded directly by setting the transformation
 %  matrix.  A slight variant of his code is used in this package for the \acronym{PDF}- and
-%  \packagename{l3draw}\index{package>\packagename{l3draw}}-slant~engines.  The implementations
-%  for \pstrickslogo, \tikzlogo{}, and \packagename{fontspec}\packagename{fontspec} are trivial
-%  as they build upon shear~functions supplied by the respective packages.
+%  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman}-slant~engines.  The
+%  implementations for \pstrickslogo, \tikzlogo{}, and
+%  \packagename{fontspec}\packagename{fontspec} are trivial as they build upon shear~functions
+%  supplied by the respective packages.
 %
 %
 %  \subsection{Shear Transformation, Slant, and Angle}\label{sec:shear-transformation}
 %
-%  \index{slant>operation}
-%  \index{shear>transformation}
+%  \index{slant>operation|userman}
+%  \index{shear>transformation|userman}
 %  Mathematically the slant operation is a shear transformation, which can be expressed with the
 %  equation
 %  \begin{equation}\label{equ:shear-transformation}
@@ -1112,7 +1133,7 @@ end
 %  For \(\alpha = 0\) the shear matrix becomes the identity matrix.  Throughout of
 %  \packagename{synthslant} we work with the \meta{slant} which is \(\sin \alpha\) in
 %  \cref{equ:shear-transformation} and avoid converting back and forth to the
-%  \index{shear>angle}shear angle~\(\alpha\).\footnote{At least one slant engine currently
+%  \index{shear>angle|userman}shear angle~\(\alpha\).\footnote{At least one slant engine currently
 %  requires such a conversion, namely~\pstrickslogo.  The math is hidden from the user, though.}
 %  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)}, \mbox{\(\sin 11.5\degree
 %  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\footnote{For small
@@ -1132,8 +1153,8 @@ end
 %  \begin{enumerate}
 %  \item\label{it:no-italics}
 %    Generate a slanted serif in the unfortunate situation when a serif font comes without
-%    italics such as \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW}
-%    Antiqua}.
+%    italics such as
+%    \singlequotes{\acronym{URW}~Antiqua}\index{font>URW Antiqua=\acronym{URW} Antiqua|userman}.
 %
 %    Here, the user is relatively free to choose a \meta{slant}, for there are no italics whose
 %    angle must be matched.  \packagename{Synthslant}'s default of~.2 should be a good starting
@@ -1147,8 +1168,8 @@ end
 %
 %  \item\label{it:correct-italics-angle}
 %    An italics shape that has an excessive slant angle, as
-%    e.\,g.~\singlequotes{Libre~Caslon}\index{font>Libre Caslon} may be corrected, i.\,e.,
-%    partially un-slanted.
+%    e.\,g.~\singlequotes{Libre~Caslon}\index{font>Libre Caslon|userman} may be corrected,
+%    i.\,e., partially un-slanted.
 %
 %    In this case, and generally if a font as a whole needs to be corrected, an alternative
 %    approach like the one sketched in \cref{sec:alternative} on \cpageref{sec:alternative} may
@@ -1156,16 +1177,16 @@ end
 %
 %  \item\label{it:generate-sole-obliques}
 %    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
-%    e.\,g., \singlequotes{\acronym{URW}~Grotesk}.\index{font>URW Grotesk=\acronym{URW} Grotesk}
+%    e.\,g., \singlequotes{\acronym{URW}~Grotesk}.\index{font>URW Grotesk=\acronym{URW} Grotesk|userman}
 %
 %  \item\label{it:generate-extra-obliques}
 %    Supply a slanted sans-serif shape for sans-serif fonts with designed, this is \emph{true}
-%    obliques as e.\,g.~\singlequotes{Open Sans}.\index{font>Open Sans}
+%    obliques as e.\,g.~\singlequotes{Open Sans}.\index{font>Open Sans|userman}
 %
 %  \item\label{it:slant-typewriter}
 %    Fixed-width --~also called \singlequotes{typewriter} or \singlequotes{teletype}~-- fonts
-%    without obliques (Yes, I am looking at you, Inconsolata!)\index{font>Inconsolata} finally
-%    get an oblique shape.
+%    without obliques (Yes, I am looking at you, Inconsolata!)\index{font>Inconsolata|userman}
+%    finally get an oblique shape.
 %
 %  \item\label{it:slanted-small-caps}
 %    Small caps without accompanying italics can be slanted, too.
@@ -1203,7 +1224,9 @@ end
 %
 %  \begingroup
 %  \newcommand*{\indexpackageoption}[1]
-%              {\index{package option>#1=\code{#1}}\index{#1=\code{#1}~(option)}\ignorespaces}
+%              {\detoxindex{package option>#1=\code{#1}|userman}%
+%               \detoxindex{#1=\code{#1}~(option)|userman}%
+%               \ignorespaces}
 %  \begin{description}
 %        [before={\let\oldmakelabel=\makelabel
 %                 \renewcommand{\makelabel}[1]
@@ -1224,13 +1247,14 @@ end
 %
 %  \item[|fontspec|]\label{item:fontspec}
 %    \indexpackageoption{fontspec}
-%    Use \packagename{fontspec}\index{package>\packagename{fontspec}} as slanting
-%    back-end.\footnote{Requires \filesystem{fontspec.sty.}}
+%    Use \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}|userman} as
+%    slanting back-end.\footnote{Requires \filesystem{fontspec.sty.}}
 %
 %  \item[|l3draw|]\label{item:l3draw}
 %    \indexpackageoption{l3draw}
-%    Select the \singlequotes{draw} layer\index{package>\packagename{l3draw}} of \LaTeXIII{} as
-%    base for the slanting engine.\footnote{This option requires \filesystem{l3draw.sty.}}
+%    Select the \singlequotes{draw} layer\index{package>l3draw=\packagename{l3draw}|userman} of
+%    \LaTeXIII{} as base for the slanting engine.\footnote{This option requires
+%    \filesystem{l3draw.sty.}}
 %
 %    \begin{caution}
 %      This engine is experimental and the \singlequotes{draw} layer of \LaTeXIII{} itself is
@@ -1256,11 +1280,11 @@ end
 %    \meta{slant-expr} must evaluate to a nonnegative value.
 %
 %  \item[|PS|, |ps|]\label{item:postscript}
-%    \index{ps}
-%    Use \pstrickslogo\index{package>\packagename{pstricks}} to delegate slanting to the
-%    PostScript\index{PostScript} interpreter.  Obviously requires \pstrickslogo\footnote{The
-%    package actually required is \filesystem{pst-3d.sty.}} and \acronym{DVI}-to-PostScript
-%    translation.
+%    \index{ps|userman}
+%    Use \pstrickslogo\index{package>pstricks=\packagename{pstricks}|userman} to delegate
+%    slanting to the PostScript\index{PostScript|userman} interpreter.  Obviously requires
+%    \pstrickslogo\footnote{The package actually required is \filesystem{pst-3d.sty.}} and
+%    \acronym{DVI}-to-PostScript translation.
 %
 %    \begin{caution}
 %      This engine is still experimental and produces low-quality output!  See
@@ -1279,8 +1303,8 @@ end
 %
 %  \item[|TikZ|, |tikz|]\label{item:tikz}
 %    \indexpackageoption{tikz}
-%    Use \packagename{TikZ}\index{package>\packagename{TikZ}} for slanting.\footnote{Requires
-%    \filesystem{tikz.sty.}}
+%    Use \packagename{TikZ}\index{package>tikz=\packagename{tikz}|userman} for
+%    slanting.\footnote{Requires \filesystem{tikz.sty.}}
 %
 %    \begin{caution}
 %      This engine is still experimental and produces low-quality output!  See
@@ -1344,21 +1368,21 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
-%            \acronym{ADF} Accanthis\index{font>ADF Accanthis=\acronym{ADF} Accanthis}  &  .26  \\
-%            \acronym{ADF} Baskervald\index{font>ADF Baskervald=\acronym{ADF} Baskervald}  &  .32  \\
-%            \acronym{ADF} Berenis\index{font>ADF Berenis=\acronym{ADF} Berenis}  &  .2  \\
-%            \acronym{ADF} Venturis\index{font>ADF Venturis=\acronym{ADF} Venturis}  &  .2  \\
-%            Alegreya\index{font>Alegreya}                                      &  .2  \\
-%            Arvo\index{font>Arvo}                                              &  .2  \\
-%            BaskervilleF\index{font>BaskervilleF}                              &  .2  \\
-%            Bera Serif\index{font>Bera Serif}                                  &  .2  \\
-%            Bitter\index{font>Bitter}                                          &  .16  \\
-%            Caladea\index{font>Caladea}                                        &  .14  \\
-%            Clara\index{font>Clara}                                            &  .24  \\
-%            Cochineal\index{font>Cochineal}                                    &  .2  \\
-%            Coelacanth\index{font>Coelacanth}                                  &  .2  \\
-%            Crimson Pro\index{font>Crimson Pro}                                &  .2  \\
-%            Crimson Text\index{font>Crimson Text}                              &  .2  \\
+%            \acronym{ADF} Accanthis\index{font>ADF Accanthis=\acronym{ADF} Accanthis|userman}  &  .26  \\
+%            \acronym{ADF} Baskervald\index{font>ADF Baskervald=\acronym{ADF} Baskervald|userman}  &  .32  \\
+%            \acronym{ADF} Berenis\index{font>ADF Berenis=\acronym{ADF} Berenis|userman}  &  .2  \\
+%            \acronym{ADF} Venturis\index{font>ADF Venturis=\acronym{ADF} Venturis|userman}  &  .2  \\
+%            Alegreya\index{font>Alegreya|userman}                                      &  .2  \\
+%            Arvo\index{font>Arvo|userman}                                              &  .2  \\
+%            BaskervilleF\index{font>BaskervilleF|userman}                              &  .2  \\
+%            Bera Serif\index{font>Bera Serif|userman}                                  &  .2  \\
+%            Bitter\index{font>Bitter|userman}                                          &  .16  \\
+%            Caladea\index{font>Caladea|userman}                                        &  .14  \\
+%            Clara\index{font>Clara|userman}                                            &  .24  \\
+%            Cochineal\index{font>Cochineal|userman}                                    &  .2  \\
+%            Coelacanth\index{font>Coelacanth|userman}                                  &  .2  \\
+%            Crimson Pro\index{font>Crimson Pro|userman}                                &  .2  \\
+%            Crimson Text\index{font>Crimson Text|userman}                              &  .2  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1366,19 +1390,19 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
-%            Day Roman\index{font>Day Roman}                                    &  .2  \\
-%            \acronym{EB} Garamond\index{font>EB Garamond=\acronym{EB} Garamond}  &  .3  \\
-%            etbb\index{font>etbb}                                              &  .2  \\
-%            fbb\index{font>fbb}                                                &  .2  \\
-%            Garamond Expert\index{font>Garamond Expert}                        &  .2  \\
-%            Gandhi Serif\index{font>Gandhi Serif}                              &  .2  \\
-%            Gentium\index{font>Gentium}                                        &  .2  \\
-%            Ibarra Real Nova\index{font>Ibarra Real Nova}                      &  .2  \\
-%            \acronym{IBM} Plex Serif\index{font>IBM Plex Serif=\acronym{IBM} Plex Serif}  &  .24  \\
-%            \acronym{Inria} Serif\index{font>Inria Serif=\acronym{Inria} Serif}  &  .2  \\
-%            Libertinus Serif\index{font>Libertinus Serif}                      &  .2  \\
-%            Libre Baskerville\index{font>Libre Baskerville}                    &  .3  \\
-%            Libre Caslon\index{font>Libre Caslon}                              &  .38  \\
+%            Day Roman\index{font>Day Roman|userman}                                    &  .2  \\
+%            \acronym{EB} Garamond\index{font>EB Garamond=\acronym{EB} Garamond|userman}  &  .3  \\
+%            etbb\index{font>etbb|userman}                                              &  .2  \\
+%            fbb\index{font>fbb|userman}                                                &  .2  \\
+%            Garamond Expert\index{font>Garamond Expert|userman}                        &  .2  \\
+%            Gandhi Serif\index{font>Gandhi Serif|userman}                              &  .2  \\
+%            Gentium\index{font>Gentium|userman}                                        &  .2  \\
+%            Ibarra Real Nova\index{font>Ibarra Real Nova|userman}                      &  .2  \\
+%            \acronym{IBM} Plex Serif\index{font>IBM Plex Serif=\acronym{IBM} Plex Serif|userman}  &  .24  \\
+%            \acronym{Inria} Serif\index{font>Inria Serif=\acronym{Inria} Serif|userman}  &  .2  \\
+%            Libertinus Serif\index{font>Libertinus Serif|userman}                      &  .2  \\
+%            Libre Baskerville\index{font>Libre Baskerville|userman}                    &  .3  \\
+%            Libre Caslon\index{font>Libre Caslon|userman}                              &  .38  \\
 %                                                                               &  \\
 %                                                                               &  \\
 %            \bottomrule
@@ -1388,20 +1412,20 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
-%            Merriweather\index{font>Merriweather}                              &  .14  \\
-%            MLModern\index{font>MLModern}                                      &  .23  \\
-%            Noto Serif\index{font>Noto Serif}                                  &  .22  \\
-%            \acronym{PT} Serif\index{font>PT Serif=\acronym{PT} Serif}         &  .2  \\
-%            Roboto Slab\index{font>Roboto Slab}                                &  .2  \\
-%            Quattrocento\index{font>Quattrocento}                              &  .2  \\
-%            Source Serif Pro\index{font>Source Serif Pro}                      &  .18  \\
-%            Spectral\index{font>Spectral}                                      &  .18  \\
-%            \acronym{STIX}\index{font>STIX=\acronym{STIX}}                     &  .2  \\
-%            \TeX{} Gyre Pagella\index{font>TeX Gyre Pagella=\TeX{} Gyre Pagella}  &  .16  \\
-%            \acronym{TX} Fonts Serif\index{font>TX Fonts Serif=\acronym{TX} Fonts Serif}  &  .2  \\
-%            \acronym{URW} Antiqua\index{font>URW Antiqua=\acronym{URW} Antiqua}  &  .2  \\
-%            \acronym{URW} Nimbus Roman\index{font>URW Nimbus Roman=\acronym{URW} Nimbus Roman}  &  .2  \\
-%            Utopia\index{font>Utopia}                                          &  .2  \\
+%            Merriweather\index{font>Merriweather|userman}                              &  .14  \\
+%            \acronym{ML} Modern\index{font>ML Modern=\acronym{ML} Modern|userman}      &  .23  \\
+%            Noto Serif\index{font>Noto Serif|userman}                                  &  .22  \\
+%            \acronym{PT} Serif\index{font>PT Serif=\acronym{PT} Serif|userman}         &  .2  \\
+%            Roboto Slab\index{font>Roboto Slab|userman}                                &  .2  \\
+%            Quattrocento\index{font>Quattrocento|userman}                              &  .2  \\
+%            Source Serif Pro\index{font>Source Serif Pro|userman}                      &  .18  \\
+%            Spectral\index{font>Spectral|userman}                                      &  .18  \\
+%            \acronym{STIX}\index{font>STIX=\acronym{STIX}|userman}                     &  .2  \\
+%            \TeX{} Gyre Pagella\index{font>TeX Gyre Pagella=\TeX{} Gyre Pagella|userman}  &  .16  \\
+%            \acronym{TX} Fonts Serif\index{font>TX Fonts Serif=\acronym{TX} Fonts Serif|userman}  &  .2  \\
+%            \acronym{URW} Antiqua\index{font>URW Antiqua=\acronym{URW} Antiqua|userman}  &  .2  \\
+%            \acronym{URW} Nimbus Roman\index{font>URW Nimbus Roman=\acronym{URW} Nimbus Roman|userman}  &  .2  \\
+%            Utopia\index{font>Utopia|userman}                                          &  .2  \\
 %                                                                               &  \\
 %            \bottomrule
 %          \end{tabular}
@@ -1428,7 +1452,7 @@ end
 %  \begin{note}
 %    The following restrictions and workarounds to get line-breaking and \TeX's automatic
 %    hyphenation working again do \emph{not} apply to the
-%    \packagename{fontspec}\index{package>\packagename{fontspec}} back-end.
+%    \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}|userman} back-end.
 %  \end{note}
 %
 %  \noindent
@@ -1438,7 +1462,7 @@ end
 %  provisions to re-enable at least some breakability.
 %
 %  \begin{enumerate}
-%  \item Spaces introduce breakpoint,\index{breakpoint at space} e.\,g.
+%  \item Spaces introduce breakpoint,\index{breakpoint at space|userman} e.\,g.
 %    \begin{codeexample}
 %      \cs{textsynthslant}\{topological dual space\}
 %    \end{codeexample}
@@ -1446,8 +1470,8 @@ end
 %    second word (producing another horizontal box).  \TeX{} sees two (unbreakable) boxes and a
 %    discardable space when it comes to linebreaking.
 %
-%  \item Discretionary hyphens\index{discretionary hyphen} in the form of \singlequotes{\cs{-}}
-%    get propagated.  So, we could improve on our above example by saying
+%  \item Discretionary hyphens\index{discretionary hyphen|userman} in the form of
+%    \singlequotes{\cs{-}} get propagated.  So, we could improve on our above example by saying
 %    \begin{codeexample}
 %      \cs{textsynthslant}\{topo\cs{-}log\cs{-}i\cs{-}cal dual space\}
 %    \end{codeexample}
@@ -1468,7 +1492,7 @@ end
 %
 %  In horizontal mode switch to an upright shape, slant \meta{text} with the slant value stored
 %  in \hyperref[syn:synthslant]{\cs{synthslant}} and apply \doublequotes{slant
-%  correction}\index{slant>correction} --~the equivalent of italics correction~-- at the
+%  correction}\index{slant>correction|userman} --~the equivalent of italics correction~-- at the
 %  right-hand side of~\meta{text}.
 %
 %  In math mode just slant \meta{text} with the slant value stored in
@@ -1485,7 +1509,7 @@ end
 %
 %    \noindent
 %    where we show the font modification in conjunction with the
-%    \packagename{babel}~macro\index{package>\packagename{babel}}
+%    \packagename{babel}~macro\index{package>babel=\packagename{babel}|userman}
 %    \cs{foreignlanguage}~\cite{package:babel}.~\visualpar
 %
 %    In math-mode you cannot have enough fonts, symbols, and most of the gizmos over there!  I
@@ -1579,7 +1603,7 @@ end
 %  \end{synopsis}
 %
 %  Switch to an upright font shape and --~if
-%  package~\packagename{microtype}~\cite{package:microtype}\index{package>\packagename{microtype}}
+%  package~\packagename{microtype}~\cite{package:microtype}\index{package>microtype=\packagename{microtype}|userman}
 %  has been loaded~-- enter the Microtype-context defined by
 %  macro~\hyperref[syn:slantcontext]{\cs{slantcontext}}.  At the end add some slant correction,
 %  which is the equivalent of italics correction.
@@ -1781,7 +1805,7 @@ end
 %    \packagename{Syntslant}~manipulations may not survive
 %    (pre-)\discretionary{}{}{}processing by \MP.
 %
-%  \item[\packagename{l3draw} engine.]\index{package>\packagename{l3draw}}\mbox{}
+%  \item[\packagename{l3draw} engine.]\index{package>l3draw=\packagename{l3draw}|userman}\mbox{}
 %    \begin{itemize}
 %    \item Depending of the shear direction the \packagename{l3draw} engine may generate some
 %      extra positive or negative space at the ends of the text.
@@ -1791,10 +1815,10 @@ end
 %    \item Markedly slower than the \acronym{PDF}-implementation!
 %    \end{itemize}
 %
-%  \item[\pstrickslogo{} engine.]\index{package>\packagename{pstricks}}
+%  \item[\pstrickslogo{} engine.]\index{package>pstricks=\packagename{pstricks}|userman}
 %    The \pstrickslogo{} engine produces some extra space at the ends of the text.
 %
-%  \item[\tikzlogo{} engine.]\index{package>\packagename{tikz}}
+%  \item[\tikzlogo{} engine.]\index{package>tikz=\packagename{tikz}|userman}
 %    The \tikzlogo{} engine produces some extra space at the ends of the text.
 %  \end{description}
 %
@@ -1847,7 +1871,7 @@ end
 %
 %  I want to elaborate the example given in \cref{sec:usage-ideas},
 %  \cref{it:correct-italics-angle} and generate less-angled italics for
-%  Libre~Caslon.\index{font>Libre Caslon} Here is a suitable map line taken from
+%  Libre~Caslon.\index{font>Libre Caslon|userman} Here is a suitable map line taken from
 %  \filesystem{pdftex.map} on my system:
 %
 %  \begin{multilinecodeexample}
@@ -2082,7 +2106,7 @@ end
 %
 %
 %    \clearpage
-%    \begin{RaggedRight}
+%    \begingroup
 %      \setcounter{IndexColumns}{2}
 %      \setlength{\columnsep}{30pt}
 %      \label{sec:index}
@@ -2090,8 +2114,9 @@ end
 %      \addtocontents{toc}{\medskip}
 %      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
+%      \let\code=\relax
 %      \PrintIndex
-%    \end{RaggedRight}
+%    \endgroup
 %  }
 %
 %
