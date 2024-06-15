@@ -362,7 +362,9 @@
 \newcommand*{\citenum}[1]{\@nameuse{b@#1}}
 \makeatother
 
-\def\code#1{\texttt{#1}}
+\renewcommand*{\code}[1]{\texttt{#1}}
+
+\newcommand*{\codelineindicator}{\mbox{\small$\ell$}}
 
 \newrobustcmd*{\command}[1]{\mbox{\textbf{#1}}}
 
@@ -386,6 +388,12 @@
 \renewcommand*{\fps@table}{htbp}
 \makeatother
 
+\let\oldhdclindex=\hdclindex
+\renewcommand*{\hdclindex}[2]
+              {\ifstrequal{#2}{code}
+                          {\oldhdclindex{#1}{codeidx}}
+                          {\oldhdclindex{#1}{#2}}}
+
 \newcommand*{\hollowrectangle}[2]
             {\setlength{\fboxrule}{.5pt}%
              \setlength{\fboxsep}{0pt}%
@@ -398,10 +406,20 @@
          {\PrependingFailed}
 
 \makeatletter
+\ExplSyntaxOn
 \apptocmd{\index@prologue}
-         {Numbers typeset in boldface name pages in the user's manual.}
+         {\legacy_if:nTF {codeline@index}
+                         {We\space prefix\space all\space references\space
+                          to\space code\space lines\space with~\singlequotes{\codelineindicator}.}
+                         {}}
          {\relax}
          {\AppendingFailed}
+
+\newcommand*{\linenumberdecoration}
+            {\legacy_if:nTF {codeline@index}
+                            {\codelineindicator}
+                            {}}
+\ExplSyntaxOff
 \makeatother
 
 \newcommand*{\logmacro}[1]
@@ -450,6 +468,8 @@
 }
 
 \newcommand*{\singlequotes}[1]{\mbox{\guilsinglright #1\guilsinglleft}}
+
+\renewcommand*{\SpecialIndex}{\CodeMacroIndex{codeidx}}% override `\code' with `\codeidx'
 
 \definecolor{customred1}{rgb}{.890, .282, .282}%-- https://paletton.com/
 \definecolor{customred2}{rgb}{.831, .110, .110}
@@ -630,7 +650,9 @@
 %</driver>
 %<*index-style>
 actual            '='
-delim_0           ",~"
+delim_0           "\\nobreakspace"
+delim_1           "\\nobreakspace"
+delim_2           "\\nobreakspace"
 heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large "
 heading_suffix    "}\\nopagebreak\n"
 headings_flag     1
@@ -2114,7 +2136,9 @@ end
 %      \addtocontents{toc}{\medskip}
 %      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
-%      \let\code=\relax
+%      \def\codeidx##1{\linenumberdecoration\textbf{##1}}
+%      \def\main##1{\linenumberdecoration\underline{\textbf{##1}}}
+%      \def\usage##1{\textit{\textbf{##1}}}
 %      \PrintIndex
 %    \endgroup
 %  }
