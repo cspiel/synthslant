@@ -26,7 +26,6 @@
 
 \PassOptionsToClass{a4paper}{article}
 \PassOptionsToPackage{hyperfootnotes=false}{hyperref}
-\PassOptionsToPackage{charter, scale=1.06}{newtxmath}
 \PassOptionsToPackage{dvipsnames}{xcolor}
 
 \usepackage{amsmath}
@@ -66,7 +65,7 @@
 \usepackage[default, lining, proportional, regular, semibold]{sourceserifpro}
 \usepackage[lining, proportional, regular, semibold]{sourcesanspro}
 \usepackage[lining, regular]{sourcecodepro}
-\usepackage[xcharter]{newtxmath}
+\usepackage[scaled=1.08, uprightscript, xcharter]{newtxmath}
 \setstretch{1.04166}% \baselineskip: 12.5pt
 
 
@@ -364,7 +363,7 @@
 
 \renewcommand*{\code}[1]{\texttt{#1}}
 
-\newcommand*{\codelineindicator}{\mbox{\small$\ell$}}
+\newcommand*{\codelineindicator}{\mbox{\small$\mathscr{l}$}}
 
 \newrobustcmd*{\command}[1]{\mbox{\textbf{#1}}}
 
@@ -468,8 +467,6 @@
 }
 
 \newcommand*{\singlequotes}[1]{\mbox{\guilsinglright #1\guilsinglleft}}
-
-\renewcommand*{\SpecialIndex}{\CodeMacroIndex{codeidx}}% override `\code' with `\codeidx'
 
 \definecolor{customred1}{rgb}{.890, .282, .282}%-- https://paletton.com/
 \definecolor{customred2}{rgb}{.831, .110, .110}
@@ -650,13 +647,14 @@
 %</driver>
 %<*index-style>
 actual            '='
-delim_0           "\\nobreakspace"
-delim_1           "\\nobreakspace"
-delim_2           "\\nobreakspace"
+delim_0           "\\nobreak\\enspace"
+delim_1           "\\nobreak\\enspace"
+delim_2           "\\nobreak\\enspace"
 heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large "
 heading_suffix    "}\\nopagebreak\n"
 headings_flag     1
 level             '>'
+line_max          65536
 quote             '!'
 %</index-style>
 %  \fi
@@ -2137,7 +2135,7 @@ end
 %      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
 %      \def\codeidx##1{\linenumberdecoration\textbf{##1}}
-%      \def\main##1{\linenumberdecoration\underline{\textbf{##1}}}
+%      \def\main##1{\linenumberdecoration\underbar{\textbf{##1}}}
 %      \def\usage##1{\textit{\textbf{##1}}}
 %      \PrintIndex
 %    \endgroup
