@@ -623,6 +623,15 @@
 
 
 \hyphenation{% https://hyphenateit.com/en-us
+  neg-slant-context
+  neg-slant-environment
+  slant-context
+  slant-environment
+  synth-neg-slant
+  synth-slant
+  synth-slant-box
+  text-synth-slant
+  text-synth-upright-italic
 }
 
 
@@ -795,6 +804,56 @@ end
 %  \listoftables
 %  \bigskip
 %  \listoffigures
+%
+%
+%  \clearpage
+%  \phantomsection
+%  \addcontentsline{toc}{section}{\numberline{}Quick Reference}
+%  \addtocontents{toc}{\medskip}
+%  \section*{Quick Reference}
+%
+%  Alphabetically sorted list of all user macros and environments defined by
+%  package~\packagename{synthslant}.  The list of all package options can be found on
+%  \cpageref{sec:package-options} and \pageref{secend:package-options}.  The
+%  \hyperref[sec:index]{Index} on pages~\pageref{sec:index} to~\pageref{secend:index} may
+%  provide some more detailed insights.
+%
+%  \begin{list}{}{\itemindent=-\leftmargin \itemsep=4.5pt plus 2pt minus 1pt}
+%    \NewDocumentCommand{\qritem}{m m O{}}
+%                {\item
+%                 \hyperref[#1]{#2}#3\relax
+%                 \def\qrref{\cpageref{#1}}\par\ignorespaces}
+%  \qritem{syn:negslantcontext}{\cs{negslantcontext}}
+%    Name of the \packagename{microtype} context used when typesetting backward slanted
+%    text~(\qrref)
+%
+%  \qritem{syn:negslantenvironment}{\code{negslantenvironment}}
+%    Wrapper around \cs{synthslantbox} when slanting backward with
+%    \cs{textsynthuprightitalic}~(\qrref)
+%
+%  \qritem{syn:slantcontext}{\cs{slantcontext}}
+%    Name of the \packagename{microtype} context used when typesetting forward slanted
+%    text~(\cpageref{syn:slantcontext})
+%
+%  \qritem{syn:slantenvironment}{\code{slantenvironment}}
+%    Wrapper around \cs{synthslantbox} when slanting forward with
+%    \cs{textsynthslant}~(\qrref)
+%
+%  \qritem{syn:synthnegslant}{\cs{synthnegslant}}
+%    Slant value used by \cs{textsynthuprightitalic}~(\qrref)
+%
+%  \qritem{syn:synthslantbox}{\cs{synthslantbox}}[\marg{slant}\marg{text}]
+%    Slant \meta{text} (forward or backward) with \meta{slant}~(\qrref)
+%
+%  \qritem{syn:synthslant}{\cs{synthslant}}
+%    Slant value used by \cs{textsynthslant}~(\qrref)
+%
+%  \qritem{syn:textsynthslant}{\cs{textsynthslant}}[\marg{text}]
+%    Forward slant upright glyphs~(\qrref)
+%
+%  \qritem{syn:textsynthuprightitalic}{\cs{textsynthuprightitalic}}[\marg{text}]
+%    Backward slant italics or oblique glyphs~(\qrref)
+%  \end{list}
 %
 %
 %  \clearpage
@@ -1337,7 +1396,7 @@ end
 %  floating-point \emph{expressions} as their arguments not just plain floating-point literals.
 %  See Ref.~\citenum{latex3-interfaces}, Ch.~29, \doublequotes{The \textsf{l3fp}~module~--
 %  Floating points} for a description of the floating-point expression syntax and the available
-%  functions.
+%  functions.\label{secend:package-options}
 %
 %
 %  \clearpage
@@ -1649,7 +1708,7 @@ end
 %  Microtype-context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
 %
 %  \DescribeMacro{\slantcontext}
-%  Microtype context used when typesetting slanted text.
+%  Name of the \packagename{microtype} context used when typesetting slanted text.
 %
 %  \begin{synopsis}\label{syn:slantcontext}
 %    \cs{slantcontext}
@@ -1668,7 +1727,7 @@ end
 %  \end{note}
 %
 %  \DescribeMacro{\negslantcontext}
-%  Microtype context used when typesetting un-slanted text.
+%  Name of the \packagename{microtype} context used when typesetting backward slanted text.
 %
 %  \begin{synopsis}\label{syn:negslantcontext}
 %    \cs{negslantcontext}
@@ -1962,7 +2021,8 @@ end
 %  \end{example}
 %
 %
-%  \subsection{Combining \LaTeX{} and \command{dvipdfmx}}\label{sec:alternative-latex}
+%  \subsection{Combining \LaTeX{} and
+%              \texorpdfstring{\command{dvipdfmx}}{dvipdfmx}}\label{sec:alternative-latex}
 %
 %  The alternative when using \LaTeX{} is similar the one elaborated in the previous section.
 %  The font mapline gets modified by \cs{special} primitive
@@ -2129,8 +2189,8 @@ end
 %    \begingroup
 %      \setcounter{IndexColumns}{2}
 %      \setlength{\columnsep}{30pt}
-%      \label{sec:index}
 %      \phantomsection
+%      \label{sec:index}
 %      \addtocontents{toc}{\medskip}
 %      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
@@ -2138,6 +2198,7 @@ end
 %      \def\main##1{\linenumberdecoration\underbar{\textbf{##1}}}
 %      \def\usage##1{\textit{\textbf{##1}}}
 %      \PrintIndex
+%      \label{secend:index}
 %    \endgroup
 %  }
 %
@@ -2333,7 +2394,7 @@ end
 %  \end{macro}
 %
 %
-%  \subsubsection{\acronym{PDF} Slant Engine}
+%  \subsubsection{\texorpdfstring{\acronym{PDF}}{PDF} Slant Engine}
 %
 %  The \acronym{PDF}-engine works well and it is the best tested alternative.
 %
