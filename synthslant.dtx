@@ -387,11 +387,19 @@
 \renewcommand*{\fps@table}{htbp}
 \makeatother
 
+\apptocmd{\GlossaryParms}
+         {\RaggedRight\normalsize}
+         {\relax}
+         {\AppendingFailed}
+
 \let\oldhdclindex=\hdclindex
 \renewcommand*{\hdclindex}[2]
               {\ifstrequal{#2}{code}
                           {\oldhdclindex{#1}{codeidx}}
                           {\oldhdclindex{#1}{#2}}}
+
+\let\oldhdpindex=\hdpindex
+\renewcommand*{\hdpindex}[2]{\textbf{\oldhdpindex{#1}{#2}}}
 
 \newcommand*{\hollowrectangle}[2]
             {\setlength{\fboxrule}{.5pt}%
@@ -433,6 +441,24 @@
                                  width=\textwidth + \marginparsep + \marginparwidth}%
                  \begin{fullwidth}}
                 {\end{fullwidth}}
+
+
+\let\originalmulticols=\multicols
+\let\endoriginalmulticols=\endmulticols
+\RenewDocumentEnvironment{multicols}{m o o}
+                         {\ifnum #1=1
+                            \IfNoValueTF{#2}{\relax}{#2}%
+                          \else
+                            \IfNoValueTF{#2}
+                                        {\originalmulticols{#1}}
+                                        {\originalmulticols{#1}[#2]}%
+                          \fi}
+                         {\ifnum #1=1
+                            \relax
+                          \else
+                            \endoriginalmulticols
+                          \fi}
+
 
 \newenvironment*{multilinecodeexample}
                 {\begin{quote}\tt
@@ -666,6 +692,23 @@ level             '>'
 line_max          65536
 quote             '!'
 %</index-style>
+%<*changes-style>
+actual            '='
+delim_0           "\\nobreak\\enspace"
+delim_1           "\\nobreak\\enspace"
+delim_2           "\\nobreak\\enspace"
+heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large "
+heading_suffix    "}\\nopagebreak\n"
+headings_flag     0
+item_x1           "\\efill\n\\subitem "
+item_x2           "\\ "
+keyword           "\\glossaryentry"
+level             '>'
+line_max          65536
+postamble         "\n\\end{theglossary}\n"
+preamble          "\\begin{theglossary}\n  \\makeatletter\\scan@allowedfalse"
+quote             '!'
+%</changes-style>
 %  \fi
 %
 %
@@ -695,7 +738,7 @@ quote             '!'
 %  \DoNotIndex{\xdef}
 %
 %
-%  \changes{v0.1}{2024-2-12}{Initial version}
+%  \changes{v0.1}{2024-2-12}{Initial version.}
 %
 %
 %  \pagenumbering{roman}
@@ -2070,11 +2113,15 @@ end
 %
 %  \MaybeStop{
 %    \clearpage
-%    \phantomsection
-%    \resetfancyhead
-%    \addtocontents{toc}{\bigskip}
-%    \addcontentsline{toc}{section}{\numberline{}Change History}
-%    \PrintChanges
+%    \begingroup
+%      \setcounter{GlossaryColumns}{1}
+%      \phantomsection
+%      \label{sec:changes}
+%      \resetfancyhead
+%      \addtocontents{toc}{\bigskip}
+%      \addcontentsline{toc}{section}{\numberline{}Change History}
+%      \PrintChanges
+%    \endgroup
 %
 %    \clearpage
 %    \phantomsection

@@ -241,7 +241,7 @@ help:
 define MAKE_INDEX_AND_GLOSSARY
 sed -e '/@/d'  < $*.idx  > ,$*.idx;  mv ,$*.idx $*.idx;  \
 $(MAKEINDEX) $(MAKEINDEX_FLAGS) -s synthslant.ist -t $*.ilg -o $*.ind $*.idx;  \
-$(MAKEINDEX) $(MAKEINDEX_FLAGS) -s gglo.ist -t $*.glg -o $*.gls $*.glo
+$(MAKEINDEX) $(MAKEINDEX_FLAGS) -s synthslant.gst -t $*.glg -o $*.gls $*.glo
 endef
 
 define GREP_LATEX_WARNINGS
