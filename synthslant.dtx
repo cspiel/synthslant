@@ -407,10 +407,10 @@
              \framebox{\rule{#1}{0pt}\rule{0pt}{#2}}}
 \newcommand*{\hollowsquare}[1]{\hollowrectangle{#1}{#1}}
 
-\pretocmd{\IndexParms}
-         {\RaggedRight}
+\apptocmd{\IndexParms}
+         {\RaggedRight\small}
          {\relax}
-         {\PrependingFailed}
+         {\AppendingFailed}
 
 \makeatletter
 \ExplSyntaxOn
