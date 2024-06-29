@@ -270,7 +270,13 @@ endef
 
 
 %.mps: %.mp
-	$(METAPOST) -s 'outputtemplate="%j.mps"' $(METAPOST_FLAGS) $<
+	$(METAPOST) -s 'outputtemplate="%j.mps"' $(METAPOST_FLAGS) $<  ||  {  \
+            printf '===  $*.log  ===\n';  \
+            cat $*.log;  \
+            printf '\n\n===  mpxerr.log  ===\n';  \
+            cat mpxerr.log;  \
+            false;  \
+        }  1>&2
 
 
 %.eps: %.png
