@@ -5,6 +5,8 @@ tools
 metapost
 makeindex
 bibtex
+##  Collections
+collection-fontsrecommended
 ##  Packages
 amscls
 amsfonts
