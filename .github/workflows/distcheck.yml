@@ -13,17 +13,19 @@ jobs:
 
       - name: Install TeX Live
         uses: zauguin/install-texlive@v3
+        with:
+          package_file: .github/texlive-packages
 
       - name: Install GNU Make
-        run: >
+        run: |
           sudo apt-get update &&
           sudo apt-get install make
 
       - name: Run Tool Check
         run: make tool-check
 
-      - name: Make Default Target
-        run: make
+      - name: Make `all` Target
+        run: make all
 
-      - name: Make distcheck Target
+      - name: Make `distcheck` Target
         run: make distcheck

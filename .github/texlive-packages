@@ -1,0 +1,41 @@
+###  List if TeX Live packages to install
+##  Binaries and tools
+latex-bin
+tools
+bibtex
+##  Packages
+amsmath
+booktabs
+caption
+cleveref
+dtk-logos
+enumitem
+etoolbox
+fancyhdr
+fontenc
+fontspec
+fullwidth
+hypdoc
+hyphenat
+iftex
+l3draw
+mathtools
+microtype
+mlmodern
+multicol
+needspace
+newtxmath
+parskip
+placeins
+pst-3d
+ragged2e
+setspace
+sourcecodepro
+sourcesanspro
+sourceserifpro
+tcolorbox
+tikz
+titlesec
+wrapfig
+xcolor
+xkeyval
