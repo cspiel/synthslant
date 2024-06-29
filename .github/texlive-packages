@@ -7,6 +7,7 @@ makeindex
 bibtex
 ##  Packages
 amscls
+amsfonts
 amsmath
 booktabs
 caption
