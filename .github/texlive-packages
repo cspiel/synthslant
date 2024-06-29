@@ -2,6 +2,7 @@
 ##  Binaries and tools
 latex-bin
 tools
+metapost
 makeindex
 bibtex
 ##  Packages
