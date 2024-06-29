@@ -8,11 +8,9 @@ amsmath
 booktabs
 caption
 cleveref
-dtk-logos
 enumitem
 etoolbox
 fancyhdr
-fontenc
 fontspec
 fullwidth
 hypdoc
