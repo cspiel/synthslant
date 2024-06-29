@@ -18,13 +18,11 @@ fullwidth
 hypdoc
 hyphenat
 iftex
-l3draw
 mathtools
 microtype
 mlmodern
-multicol
 needspace
-newtxmath
+newtx
 parskip
 placeins
 pst-3d
@@ -34,7 +32,6 @@ sourcecodepro
 sourcesanspro
 sourceserifpro
 tcolorbox
-tikz
 titlesec
 wrapfig
 xcolor
