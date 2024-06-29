@@ -14,9 +14,9 @@ amsmath
 booktabs
 caption
 cleveref
+dtk-bibliography
 enumitem
 etoolbox
-dtk-bibliography
 fancyhdr
 fetamont
 fontspec
@@ -25,6 +25,7 @@ hologo
 hypdoc
 hyphenat
 iftex
+kvsetkeys
 ltxcmds
 ly1
 mathtools
