@@ -16,6 +16,7 @@ caption
 cleveref
 enumitem
 etoolbox
+dtk-bibliography
 fancyhdr
 fontspec
 fullwidth
