@@ -6,6 +6,7 @@ metapost
 makeindex
 bibtex
 ##  Packages
+amscls
 amsmath
 booktabs
 caption
