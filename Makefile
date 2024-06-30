@@ -127,6 +127,8 @@ perf: synthslant-gauge.tex synthslant.sty
 tool-check:
 	@printf '***  LATEX_PROPER = "%s"\n' '$(LATEX_PROPER)'
 	$(LATEX_PROPER) --version
+	@printf '\n\n***  BibTeX\n'
+	bibtex --version
 	@printf '\n\n***  MAKEINDEX = "%s"\n' '$(MAKEINDEX)'
 	$(MAKEINDEX)  < /dev/null
 	@printf '\n\n***  METAPOST = "%s"\n' '$(METAPOST)'
