@@ -6,6 +6,7 @@ metapost
 makeindex
 bibtex
 ##  Collections
+collection-context
 collection-fontsrecommended
 ##  Packages
 amscls
@@ -14,7 +15,6 @@ amsmath
 booktabs
 caption
 cleveref
-context
 dantelogo
 dtk-bibliography
 enumitem
