@@ -1,3 +1,6 @@
+![distcheck status](https://github.com/cspiel/synthslant/actions/workflows/distcheck.yml/badge.svg)
+
+
 #  SynthSlant &ndash; Synthetic slanting of glyphs
 
 LaTeX package `synthslant` slants short pieces of text to the right or to the left.
