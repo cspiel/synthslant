@@ -16,7 +16,7 @@ jobs:
         with:
           package_file: .github/texlive-packages
 
-      - name: Install GNU Make
+      - name: Install Extra Tools
         run: |
           sudo apt-get update &&
           sudo apt-get install make
@@ -25,7 +25,9 @@ jobs:
         run: make tool-check
 
       - name: Make `all` Target
-        run: make all
+        run: |
+          make maintainer-clean &&
+          make all
 
       - name: Make `distcheck` Target
         run: make distcheck
