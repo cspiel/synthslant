@@ -35,7 +35,7 @@ METAPOST_FLAGS := -file-line-error -interaction=nonstopmode -tex=latex
 
 
 PROJECT_NAME := synthslant
-SOURCE_FILES := LICENSE Makefile synthslant.dtx synthslant.ins
+SOURCE_FILES := LICENSE Makefile README.md synthslant.dtx synthslant.ins
 DOCUMENTATION_FILES := synthslant-gauge.pdf synthslant.pdf
 
 
@@ -93,7 +93,7 @@ distcheck: dist
 	test -d '$(TEMPORARY_DIRECTORY)'
 	test -w '$(TEMPORARY_DIRECTORY)'
 	tar xzf $(PROJECT_NAME).tar.gz -C $(TEMPORARY_DIRECTORY)
-	$(MAKE) --directory=$(TEMPORARY_DIRECTORY)/$(PROJECT_NAME) all
+	$(MAKE) --directory=$(TEMPORARY_DIRECTORY)/$(PROJECT_NAME) LATEX_FLAGS='$(LATEX_FLAGS)' all
 	$(RM) -r $(TEMPORARY_DIRECTORY)
 	@printf '\n\ndistcheck passed.\n'
 
@@ -120,7 +120,7 @@ maintainer-clean: mostlyclean
 
 .PHONY: perf
 perf: synthslant-gauge.tex synthslant.sty
-	perf stat --repeat=10 -- $(LATEX) $(LATEX_FLAGS) -interaction batchmode -draftmode $<
+	perf stat --repeat=10 -- $(LATEX) $(LATEX_FLAGS) -interaction=batchmode -draftmode $<
 
 
 .PHONY: tool-check
