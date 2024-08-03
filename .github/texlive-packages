@@ -33,6 +33,8 @@ iftex
 kvdefinekeys
 kvsetkeys
 letltxmacro
+listings
+listingsutf8
 ltxcmds
 ly1
 mathtools
@@ -42,6 +44,7 @@ needspace
 newtx
 oberdiek
 parskip
+pdfcol
 pdfescape
 pgf
 placeins
@@ -54,6 +57,7 @@ sourcecodepro
 sourcesanspro
 sourceserifpro
 tcolorbox
+tikzfill
 titlesec
 trimspaces
 uniquecounter
