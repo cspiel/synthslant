@@ -36,7 +36,6 @@
 \usepackage{etoolbox}%--\tracingpatches
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
-\usepackage{fullwidth}
 \usepackage{hypdoc}
 \usepackage{hyphenat}
 \usepackage{mathtools}
@@ -56,7 +55,7 @@
 \usepackage{setspace}
 \usepackage[slant=.18, negslant=-.16]{synthslant}
 \usepackage{titlesec}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usepackage{titlesec}\renewcommand*{\bottomtitlespace}{.15\textheight}%nobottomtitles*
 \usepackage{wrapfig}
 \usepackage{xcolor}
@@ -436,11 +435,14 @@
                     \message{^^JEnd macro dump.^^J}}
                    {\message{^^JMacro \string#1 is not defined.^^J}}}
 
-\newenvironment*{maxipage}
-                {\fullwidthsetup{leftmargin=-\marginparsep - \marginparwidth,
-                                 width=\textwidth + \marginparsep + \marginparwidth}%
-                 \begin{fullwidth}}
-                {\end{fullwidth}}
+\newenvironment*{widebody}
+                {\begin{list}{}{\leftmargin=-\marginparwidth
+                                \listparindent=\parindent
+                                \parsep=\parskip
+                                \rightmargin=0pt
+                                \topsep=0pt}
+                 \item\relax}
+                {\end{list}}
 
 
 \let\originalmulticols=\multicols
@@ -554,8 +556,10 @@
 \newcommand*{\specialcodesectionheading}[1]{\textcolor{\markercolor}{\textbf{\textit{#1}}}}
 \newenvironment*{specialcodesection}[1]
                 {\Needspace{4\baselineskip}%
-                 \begin{tcolorbox}[colback=white, colframe=\markercolor,
-                                   bottomrule=.5pt, leftrule=5pt, rightrule=.5pt, toprule=.5pt]
+                 \begin{tcolorbox}[blanker,
+                                   borderline west={3pt}{0pt}{\markercolor},
+                                   breakable,
+                                   left=15pt]
                  \sffamily
                  \begin{list}
                        {\specialcodesectionheading{#1}}
@@ -568,6 +572,7 @@
                  \item
                  \nointerlineskip
                  \leavevmode\par
+                 \fussy
                  \noindent}
                 {\end{list}
                  \end{tcolorbox}}
@@ -638,14 +643,14 @@
 \newcommand*{\visualpar}{\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
 
 \newenvironment*{widecodeexample}
-                {\begin{maxipage}
+                {\begin{widebody}
                  \flushright
                  \begin{minipage}{\textwidth}
                  \ttfamily
                  \begin{tabbing}}
                 {\end{tabbing}
                  \end{minipage}
-                 \end{maxipage}}
+                 \end{widebody}}
 
 
 \hyphenation{% https://hyphenateit.com/en-us
@@ -861,18 +866,22 @@ end
 %  \hyperref[sec:index]{Index} on pages~\pageref{sec:index} to~\pageref{secend:index} may
 %  provide some more detailed insights.
 %
-%  \begin{list}{}{\itemindent=-\leftmargin \itemsep=4.5pt plus 2pt minus 1pt}
+%  \begin{list}{}{\itemindent=-\leftmargin
+%                 \itemsep=5pt plus 2pt minus 1pt}
 %    \NewDocumentCommand{\qritem}{m m O{}}
 %                {\item
 %                 \hyperref[#1]{#2}#3\relax
-%                 \def\qrref{\cpageref{#1}}\par\ignorespaces}
+%                 \def\qrref{\quad\textbf{\pageref{#1}}}%
+%                 \leavevmode
+%                 \linebreak
+%                 \ignorespaces}
 %  \qritem{syn:negslantcontext}{\cs{negslantcontext}}
 %    Name of the \packagename{microtype} context used when typesetting backward slanted
-%    text~(\qrref)
+%    text.\qrref
 %
 %  \qritem{syn:negslantenvironment}{\code{negslantenvironment}}
 %    Wrapper around \cs{synthslantbox} when slanting backward with
-%    \cs{textsynthuprightitalic}~(\qrref)
+%    \cs{textsynthuprightitalic}.\qrref
 %
 %  \qritem{syn:slantcontext}{\cs{slantcontext}}
 %    Name of the \packagename{microtype} context used when typesetting forward slanted
@@ -880,28 +889,27 @@ end
 %
 %  \qritem{syn:slantenvironment}{\code{slantenvironment}}
 %    Wrapper around \cs{synthslantbox} when slanting forward with
-%    \cs{textsynthslant}~(\qrref)
+%    \cs{textsynthslant}.\qrref
 %
 %  \qritem{syn:synthnegslant}{\cs{synthnegslant}}
-%    Slant value used by \cs{textsynthuprightitalic}~(\qrref)
+%    Slant value used by \cs{textsynthuprightitalic}.\qrref
 %
 %  \qritem{syn:synthslantbox}{\cs{synthslantbox}}[\marg{slant}\marg{text}]
-%    Slant \meta{text} (forward or backward) with \meta{slant}~(\qrref)
+%    Slant \meta{text} (forward or backward) with \meta{slant}.\qrref
 %
 %  \qritem{syn:synthslant}{\cs{synthslant}}
-%    Slant value used by \cs{textsynthslant}~(\qrref)
+%    Slant value used by \cs{textsynthslant}.\qrref
 %
 %  \qritem{syn:textsynthslant}{\cs{textsynthslant}}[\marg{text}]
-%    Forward slant upright glyphs~(\qrref)
+%    Forward slant \meta{text}.\qrref
 %
 %  \qritem{syn:textsynthuprightitalic}{\cs{textsynthuprightitalic}}[\marg{text}]
-%    Backward slant italics or oblique glyphs~(\qrref)
+%    Backward slant \meta{text}.\qrref
 %  \end{list}
 %
 %
 %  \clearpage
 %  \pagenumbering{arabic}
-%  \pagestyle{fancy}
 %  \section{Introduction}\label{sec:introduction}
 %
 %  The \packagename{synthslant} package provides a translator (e.\,g.~\LaTeX, \pdfLaTeX, or
@@ -1481,9 +1489,8 @@ end
 %             with the left-hand table of \cref{tab:slanted-series-fonts}.}
 %    \label{tab:slant-values}
 %
-%    \fullwidthsetup{skipabove=0pt, skipbelow=0pt}
-%    \begin{maxipage}
-%      \begin{minipage}{\textwidth}
+%    \begin{widebody}
+%      \begin{minipage}{\linewidth}
 %        \flushright
 %        \begin{tabfigures}
 %          \begin{tabular}[t]{@{}p{9.5em}l@{}}
@@ -1525,8 +1532,8 @@ end
 %            Libertinus Serif\index{font>typeface>Libertinus Serif|userman}                      &  .2  \\
 %            Libre Baskerville\index{font>typeface>Libre Baskerville|userman}                    &  .3  \\
 %            Libre Caslon\index{font>typeface>Libre Caslon|userman}                              &  .38  \\
-%                                                                               &  \\
-%                                                                               &  \\
+%                                                                                                &  \\
+%                                                                                                &  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1548,12 +1555,12 @@ end
 %            \acronym{URW} Antiqua\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}  &  .2  \\
 %            \acronym{URW} Nimbus Roman\index{font>typeface>URW Nimbus Roman=\acronym{URW} Nimbus Roman|userman}  &  .2  \\
 %            Utopia\index{font>typeface>Utopia|userman}                                          &  .2  \\
-%                                                                               &  \\
+%                                                                                                &  \\
 %            \bottomrule
 %          \end{tabular}
 %        \end{tabfigures}
 %      \end{minipage}
-%    \end{maxipage}
+%    \end{widebody}
 %  \end{table}
 %
 %  \DescribeMacro{\synthnegslant}
