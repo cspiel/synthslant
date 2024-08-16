@@ -1926,6 +1926,8 @@ end
 %  \clearpage
 %  \section{Limitations and Known Problems}\label{sec:limitations}
 %
+%  \index{limitations|userman}
+%  \index{known problems|userman}
 %  Here I list some of the known problems of \packagename{syntslant}.  Conceivably there are
 %  more.
 %
@@ -2014,10 +2016,10 @@ end
 %  \noindent
 %  which I had to break into three lines to make it fit this page.  The
 %  \singlequotes{{\ttfamily\ttdots\,}} indicate parts of the identifiers that I left out beyond
-%  that.  There are in fact four map lines for \code{T1}-encoded Libre~Caslon italics, those for
+%  that.  There are in fact four map lines for \code{T1}-encoded Libre~Caslon italics: those for
 %  lining figures~\singlequotes{\code{lf}}, oldstyle figures~\singlequotes{\code{osf}}, tabular
 %  lining figures~\singlequotes{\code{tlf}}, and tabular oldstyle
-%  figures~\singlequotes{\code{osf}}.
+%  figures~\singlequotes{\code{tosf}}.
 %
 %  The slant operation I want to add to the \meta{special}~part has the format:
 %
@@ -2101,8 +2103,8 @@ end
 %
 %  The font is activated in the same way as in the \acronym{PDF}-path
 %  (\cref{sec:alternative-pdftex}).  The further translation of the resulting \acronym{DVI}-file
-%  must be performed with an application that is aware of the \cs{special}~primitive as for
-%  example~\command{dvipdfmx}~\cite{dvipdfmx} is.
+%  \emph{must} be performed with an application that is aware of the \cs{special}~primitive as
+%  for example~\command{dvipdfmx}~\cite{dvipdfmx} is.
 %
 %  \begin{note}
 %    Despite the option syntax originates with \command{dvips} it is not able to interpret any
