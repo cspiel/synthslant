@@ -29,6 +29,7 @@
 \PassOptionsToPackage{dvipsnames}{xcolor}
 
 \usepackage{amsmath}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{dtk-logos}
@@ -1627,6 +1628,36 @@ end
 %  In math mode just slant \meta{text} with the slant value stored in
 %  \hyperref[syn:synthslant]{\cs{synthslant}}.
 %
+%  \begin{tip}
+%    Discriminating typesetters will want to include trailing punctuation in \meta{text}.
+%    Compare for example:
+%
+%    \begin{center}
+%      \begin{tabular}{@{}>{\ttfamily}l@{\hspace{4em}}l@{}}
+%        \cs{textsynthslant}\{FONT\},  &  \\
+%        \cs{textsynthslant}\{bar\},  &
+%        \textsynthslant{FONT}, \textsynthslant{bar}, \textsynthslant{bay}.  \\
+%        \cs{textsynthslant}\{bay\}.  &
+%      \end{tabular}
+%    \end{center}
+%
+%    \noindent
+%    with
+%
+%    \begin{center}
+%      \begin{tabular}{@{}>{\ttfamily}l@{\hspace{4em}}l@{}}
+%        \cs{textsynthslant}\{FONT,\}  &  \\
+%        \cs{textsynthslant}\{bar,\}  &
+%        \textsynthslant{FONT,} \textsynthslant{bar,} \textsynthslant{bay.}  \\
+%        \cs{textsynthslant}\{bay.\}  &
+%      \end{tabular}
+%    \end{center}
+%
+%    \noindent
+%    This is similar advice as in the case of italics and also holds for
+%    \cs{textsynthuprightitalic} as well as any other slanting macro.
+%  \end{tip}
+%
 %  \begin{usecases}
 %    If italics seem to be too intrusive in the body we can substitute slanted text for example
 %    for foreign phrases like \singlequotes{et.\,al.} and \singlequotes{etc.}:
@@ -1810,7 +1841,7 @@ end
 %    When the tracking of upright italics is changed
 %    it may be advisable
 %
-%    \begin{itemize}[notopsep]
+%    \begin{itemize}
 %    \item to break ligatures, e.\,g.~\code{no ligatures = \{f\}},
 %    \item to adjust the outer kerning, e.\,g.~\code{outer~kerning = \{0, 0\}} and
 %    \item to adapt the inter-word spacing, e.\,g.~\code{spacing = \{100,,\}}.
