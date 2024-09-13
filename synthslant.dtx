@@ -848,11 +848,13 @@ end
 %    italics.}
 %  \tableofcontents
 %
+%  \vspace{\fill}
 %
-%  \clearpage
 %  \listoftables
 %  \bigskip
 %  \listoffigures
+%
+%  \vspace{\fill}
 %
 %
 %  \clearpage
@@ -2145,11 +2147,16 @@ end
 %
 %  \clearpage
 %  \appendix
+%  \toccontinuesonnextpage
 %
 %
 %
 %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%
+%  \newcommand*{\codeidx}[1]{\linenumberdecoration\textbf{#1}}
+%  \renewcommand*{\main}[1]{\linenumberdecoration\underbar{\textbf{#1}}}
+%  \renewcommand*{\usage}[1]{\textit{\textbf{#1}}}
 %
 %  \MaybeStop{
 %    \clearpage
@@ -2281,9 +2288,6 @@ end
 %      \addtocontents{toc}{\medskip}
 %      \addcontentsline{toc}{section}{\numberline{}Index}
 %      \raggedcolumns
-%      \def\codeidx##1{\linenumberdecoration\textbf{##1}}
-%      \def\main##1{\linenumberdecoration\underbar{\textbf{##1}}}
-%      \def\usage##1{\textit{\textbf{##1}}}
 %      \PrintIndex
 %      \label{secend:index}
 %    \endgroup
@@ -2291,7 +2295,6 @@ end
 %
 %
 %  \clearpage
-%  \toccontinuesonnextpage
 %  \section{Package Code}\label{sec:package-code}
 %  \addtocontents{toc}{\protect\begin{list}{}{\leftmargin=\subsectiontocindent\parsep=0pt}}
 %  \addtocontents{toc}{\protect\item}
