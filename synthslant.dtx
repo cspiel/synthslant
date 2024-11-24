@@ -960,14 +960,14 @@ end
 %  the title~page of this manual~-- the italic versions of the upright characters are so
 %  markedly different that I would like to ask whether they match the upright shape in a strict
 %  sense.  For the double-storey~\sample{a} becomes single-storey, the start of the loop
-%  of~\sample{g} moves from the far left into the middle.  Alongside, the aspect ratio of both
-%  of the counters change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font
+%  of~\sample{g} moves from the far left to the middle.  Alongside, the aspect ratio of both of
+%  the counters change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font
 %  pairing.  We can make sense of the seeming contradiction by recognizing that the italics
 %  shape is not simply slanted, but creates tension in respect to the upright type by a variety
 %  of additional design features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once
 %  again:
 %
-%  \begin{quote}
+%  \begin{quote}\samepage
 %    The most popular typefaces are the easiest to read; their popularity has made them
 %    disappear from conscious cognition.  It becomes impossible to tell if they are easy to read
 %    because they are commonly used, or if they are commonly used because they are easy to read.
@@ -990,10 +990,16 @@ end
 %  Roman}\index{font>typeface>CM Roman=\acronym{CM} Roman|userman} --~nowadays member of the
 %  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
 %  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
-%  upright italics.  Furthermore, the \LaTeXe{} font selection scheme provisions
-%  \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for upright
-%  italics~\cite{fntguide}.  The former is accompanied by the macros~\cs{slshape}
-%  and~\cs{textsl}.
+%  upright italics\footnote{Only a few font families come with upright italics as,
+%  e.\,g., FF~Seria, Joanna, Literata, Odile, or Romanée.}.\relax
+%  \index{font>typeface>FF Seria=\acronym{FF}~Seria|userman}\relax
+%  \index{font>typeface>Joanna|userman}\relax
+%  \index{font>typeface>Literata|userman}\relax
+%  \index{font>typeface>Odile|userman}\relax
+%  \index{font>typeface>Romanée|userman}
+%  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
+%  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
+%  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
 %
 %  \begin{wraptable}{r}{.382\textwidth}
 %    \renewcommand*{\floatcaptionwidth}{\textwidth}
