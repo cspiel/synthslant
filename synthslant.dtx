@@ -1284,7 +1284,7 @@ end
 %  occasions.  Here are some ideas.
 %
 %  \begin{enumerate}
-%  \item\label{it:no-italics}
+%  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
 %    Generate a slanted serif in the unfortunate situation when a serif font comes without
 %    italics such as
 %    \singlequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
@@ -1292,6 +1292,13 @@ end
 %    Here, the user is relatively free to choose a \meta{slant}, for there are no italics whose
 %    angle must be matched.  \packagename{Synthslant}'s default of~.2 should be a good starting
 %    point.
+%
+%  \item[\number\value{enumi}b.\refstepcounter{enumi}]\label{it:paired-with-no-italics}
+%    If a secondary serif font --~again assumed to have no italics or obliques~-- is paired with
+%    a primary serif font which has italics the slant angle of the former can be matched with
+%    that of the primary font.  An example of such a constellation is
+%    \singlequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
+%    \singlequotes{Eczar}\index{font>typeface>Eczar|userman}.
 %
 %  \item\label{it:upright-italics}
 %    Augment a serif font that features an italics shape with upright italics.
