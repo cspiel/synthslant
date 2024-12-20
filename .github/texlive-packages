@@ -33,6 +33,7 @@ iftex
 kvdefinekeys
 kvsetkeys
 letltxmacro
+librecaslon
 listings
 listingsutf8
 ltxcmds
