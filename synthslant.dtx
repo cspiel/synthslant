@@ -1368,6 +1368,9 @@ end
 %  options allow to predefine the forward and backward slant angles as well as the selection of
 %  a particular slanting engine.
 %
+%  If no \meta{option}s are given, \packagename{synthslant} assumes \code{auto} and
+%  \code{slant=.2}.
+%
 %  \begingroup
 %  \newcommand*{\indexpackageoption}[1]
 %              {\detoxindex{package option>#1=\code{#1}|userman}%
@@ -1416,8 +1419,8 @@ end
 %
 %  \item[|PDF|, |pdf|]\label{item:pdf}
 %    \indexpackageoption{pdf}
-%    Select the \acronym{PDF}-slant engine.  This requires the document is translated with
-%    \pdfLaTeX{} or a compatible program.
+%    Select the \acronym{PDF}-slant engine.  This option requires that the document is
+%    translated with \pdfLaTeX{} or a compatible program.
 %
 %  \item[|posslant=|\meta{slant-expr}]\label{item:posslant}
 %    \indexpackageoption{posslant}
@@ -1444,8 +1447,6 @@ end
 %    options \(\code{posslant} = \meta{slant-expr}\) and \(\code{negslant} =
 %    -(\meta{slant-expr})\) have been given.  The argument \meta{slant-expr} is a floating-point
 %    expression.
-%
-%    If omitted \packagename{synthslant} assumes \(.2\) and \(-.2\), respectively.
 %
 %  \item[|TikZ|, |tikz|]\label{item:tikz}
 %    \indexpackageoption{tikz}
@@ -1879,6 +1880,8 @@ end
 %
 %  \begin{note}
 %    The slant angles of different glyphs in the same font may slightly differ from each other.
+%    Usually, longer shapes have less slant than short shapes.
+%
 %    We look for a representative \meta{slant}, a kind of average that achieves a visual match
 %    with the italics or obliques of the font family.
 %  \end{note}
