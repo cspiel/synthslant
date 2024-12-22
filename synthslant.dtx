@@ -1519,6 +1519,7 @@ end
 %            \acronym{ADF} Berenis\index{font>typeface>ADF Berenis=\acronym{ADF} Berenis|userman}  &  .2  \\
 %            \acronym{ADF} Venturis\index{font>typeface>ADF Venturis=\acronym{ADF} Venturis|userman}  &  .2  \\
 %            Alegreya\index{font>typeface>Alegreya|userman}                                      &  .2  \\
+%            Aleo\index{font>typeface>Aleo|userman}                                              &  .13  \\
 %            Arvo\index{font>typeface>Arvo|userman}                                              &  .2  \\
 %            BaskervilleF\index{font>typeface>BaskervilleF|userman}                              &  .2  \\
 %            Bera Serif\index{font>typeface>Bera Serif|userman}                                  &  .2  \\
@@ -1529,7 +1530,6 @@ end
 %            Charis \acronym{SIL}\index{font>typeface>Charis SIL=Charis \acronym{SIL}|userman}   &  .17  \\
 %            Clara\index{font>typeface>Clara|userman}                                            &  .24  \\
 %            Cochineal\index{font>typeface>Cochineal|userman}                                    &  .2  \\
-%            Coelacanth\index{font>typeface>Coelacanth|userman}                                  &  .2  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1537,6 +1537,7 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
+%            Coelacanth\index{font>typeface>Coelacanth|userman}                                  &  .2  \\
 %            Crimson Pro\index{font>typeface>Crimson Pro|userman}                                &  .2  \\
 %            Crimson Text\index{font>typeface>Crimson Text|userman}                              &  .2  \\
 %            Day Roman\index{font>typeface>Day Roman|userman}                                    &  .2  \\
@@ -1552,7 +1553,6 @@ end
 %            \acronym{Inria} Serif\index{font>typeface>Inria Serif=\acronym{Inria} Serif|userman}  &  .2  \\
 %            Libertinus Serif\index{font>typeface>Libertinus Serif|userman}                      &  .2  \\
 %            Libre Baskerville\index{font>typeface>Libre Baskerville|userman}                    &  .3  \\
-%            Libre Caslon\index{font>typeface>Libre Caslon|userman}                              &  .38  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1560,6 +1560,7 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
+%            Libre Caslon\index{font>typeface>Libre Caslon|userman}                              &  .38  \\
 %            Merriweather\index{font>typeface>Merriweather|userman}                              &  .14  \\
 %            \acronym{ML} Modern\index{font>typeface>ML Modern=\acronym{ML} Modern|userman}      &  .23  \\
 %            Noto Serif\index{font>typeface>Noto Serif|userman}                                  &  .22  \\
@@ -1575,7 +1576,6 @@ end
 %            \acronym{URW} Nimbus Roman\index{font>typeface>URW Nimbus Roman=\acronym{URW} Nimbus Roman|userman}  &  .2  \\
 %            Utopia\index{font>typeface>Utopia|userman}                                          &  .2  \\
 %            Vollkorn\index{font>typeface>Vollkorn|userman}                                      &  .17  \\
-%                                                                                                &  \\
 %            \bottomrule
 %          \end{tabular}
 %        \end{tabfigures}
@@ -2831,7 +2831,7 @@ end
 %
 %  \begin{macro}{\synthslantbox@right@slant@correction}
 %    This is a simple yet surprisingly effective heuristic for slant correction on the
-%    right-hand side if the slanted text.  The value~\cs{synthslant} is \(\sin \alpha\), where
+%    right-hand side of the slanted text.  The value~\cs{synthslant} is \(\sin \alpha\), where
 %    \(\alpha\) is the slant angle; see \cref{equ:shear-transformation} on
 %    \cpageref{equ:shear-transformation}.  Multiplied with the ex-height of the current font,
 %    \cs{fontdimen5}, this is a good approximation of the necessary slant correction.
