@@ -1334,6 +1334,11 @@ end
 %    without obliques (Yes, I am looking at you, Inconsolata!)\index{font>typeface>Inconsolata|userman}
 %    finally get an oblique shape.
 %
+%  \item\label{it:slant-selected-glyphs}
+%    Some italic fonts only provide upright versions for selected glyphs, e.\,g.~the square
+%    brackets.  With \packagename{synthslant} these renegade characters can be slanted to match
+%    the italic font's natural angle.
+%
 %  \item\label{it:slanted-small-caps}
 %    Small caps without accompanying italics can be slanted, too.
 %
@@ -1342,7 +1347,7 @@ end
 %    math-italics even more of a heeling.
 %
 %  \item\label{it:correct-math-script}
-%    If the slant of the math script font is at odds with the slant of the usual math italics,
+%    If the slant of the math script font is at odds with the slant of the usual math~italics,
 %    it may be possible to apply \packagename{synthslant} on the script symbols for matching
 %    angles.
 %
@@ -2350,7 +2355,7 @@ end
 %    better.
 %
 %    Remember that the slant is not an angle (with respect to the \(y\)-axis), but the sine of
-%    it; The value~\(.2\) approximately corresponds to a slant-angle of 12\textdegree\!.
+%    it.  The value~\(.2\) approximately corresponds to a slant-angle of 12\textdegree\!.
 %
 %    \begin{macrocode}
 \providecommand*{\synthslant}{.2}
