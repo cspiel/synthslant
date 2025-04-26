@@ -938,7 +938,7 @@ end
 %  \singlequotes{overprinting}.  The authors of \packagename{amsbsy} recommend to prefer
 %  package~\packagename{bm} for bold mathematical symbols, though.}, and condensed type along
 %  with artificial small-caps swiftly are stuffed into the black Maria.\footnote{See for example
-%  Ref.~\citenum{strizver:2014}, p.~97, but compare p.~142 and also
+%  Ref.~\citenum{strizver:2014}, p.~97, but compare with p.~142 and also
 %  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  I can retrace this
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
 %  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
@@ -957,15 +957,14 @@ end
 %
 %  What seems to have gotten lost in the discussion is the shapes of true italics that were
 %  designed alongside with the roman type.  If we have an unbiased look at it --~for example at
-%  the title~page of this manual~-- the italic versions of the upright characters are so
-%  markedly different that I would like to ask whether they match the upright shape in a strict
-%  sense.  For the double-storey~\sample{a} becomes single-storey, the start of the loop
-%  of~\sample{g} moves from the far left to the middle.  Alongside, the aspect ratio of both of
-%  the counters change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font
-%  pairing.  We can make sense of the seeming contradiction by recognizing that the italics
-%  shape is not simply slanted, but creates tension in respect to the upright type by a variety
-%  of additional design features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once
-%  again:
+%  the title~page of this manual~-- the italic versions of the upright characters are markedly
+%  different that I would like to ask whether they match the upright shape in a strict sense.
+%  For the double-storey~\sample{a} becomes single-storey, the start of the loop of~\sample{g}
+%  moves from the far left to the middle.  Alongside, the aspect ratio of both of the counters
+%  change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font pairing.  We can
+%  make sense of the seeming contradiction by recognizing that the italics shape is not simply
+%  slanted, but creates tension in respect to the upright type by a variety of additional design
+%  features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once again:
 %
 %  \begin{quote}\samepage
 %    The most popular typefaces are the easiest to read; their popularity has made them
@@ -1108,7 +1107,7 @@ end
 %  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman}-slant~engines.  The
 %  implementations for \pstrickslogo, \tikzlogo{}, and
 %  \packagename{fontspec}\packagename{fontspec} are trivial as they build upon shear~functions
-%  supplied by the respective packages.
+%  supplied by the packages.
 %
 %
 %  \subsection{Shear Transformation, Slant, and Angle}\label{sec:shear-transformation}
@@ -1317,9 +1316,9 @@ end
 %    e.\,g.~\singlequotes{Libre~Caslon}\index{font>typeface>Libre Caslon|userman} may be corrected,
 %    i.\,e., partially un-slanted.
 %
-%    In this case, and generally if a font as a whole needs to be corrected, an alternative
-%    approach like the one sketched in \cref{sec:alternative} on \cpageref{sec:alternative} may
-%    be warranted.
+%    Here, and generally if a font as a whole needs to be corrected, an alternative approach
+%    like the one sketched in \cref{sec:alternative} on \cpageref{sec:alternative} may be
+%    warranted.
 %
 %  \item\label{it:generate-sole-obliques}
 %    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
@@ -1610,10 +1609,10 @@ end
 %  \end{note}
 %
 %  \noindent
-%  Both macros provide \emph{simplistic} support for slanting hyphenatable
-%  words and space-separated phrases for a given \meta{text}.  The fundamental shear
-%  transformation would produce an single unbreakable horizontal box.  So we have added two
-%  provisions to re-enable at least some breakability.
+%  Both macros provide \emph{simplistic} support for slanting hyphenatable words and
+%  space-separated phrases for a given \meta{text}.  The fundamental shear transformation would
+%  produce an single unbreakable horizontal box.  We have added two provisions to re-enable at
+%  least some breakability.
 %
 %  \begin{enumerate}
 %  \item Spaces introduce breakpoint,\index{breakpoint at space|userman} e.\,g.
@@ -1678,8 +1677,8 @@ end
 %    \end{center}
 %
 %    \noindent
-%    This is similar advice as in the case of italics and also holds for
-%    \cs{textsynthuprightitalic} as well as any other slanting macro.
+%    This is similar advice as for italics and also holds for \cs{textsynthuprightitalic} as
+%    well as any other slanting macro.
 %  \end{tip}
 %
 %  \begin{usecases}
@@ -1973,7 +1972,7 @@ end
 %
 %  Page~2, Sec.~3.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
 %  synthesized ones.  Here, the slanted glyphs as well as the upright italics should blend well
-%  with the native italics/obliques and with the normal font, respectively.
+%  with the native italics/obliques and with the normal font.
 %
 %  Page~3, Sec.~3.2 and following sub-sections, examine the coupling of \packagename{synthslant}
 %  with the \TeX-system and some of its extensions.  If a slant engine malfunctions, it will
@@ -2012,7 +2011,7 @@ end
 %
 %
 %  \clearpage
-%  \section{Alternative Solution}\label{sec:alternative}
+%  \section{Alternative Solutions}\label{sec:alternative}
 %
 %  Here is an alternative to \packagename{synthslant} that I am aware of.  It changes the slant
 %  of a font as a whole and it is impossible to undo the change within the document.
@@ -2085,7 +2084,7 @@ end
 %  \end{codeexample}
 %
 %  \noindent
-%  so for a shear to the left, for example, \(\meta{slant} = -.12\), which means the font gets
+%  so, for a shear to the left, for example, \(\meta{slant} = -.12\), which means the font gets
 %  slanted by~\(-8\degree\) the \meta{special}~part becomes
 %
 %  \begin{codeexample}
@@ -2169,6 +2168,32 @@ end
 %  \end{note}
 %
 %
+%  \subsection{Harness a Font Editor\label{sec:font-editor}}
+%
+%  An alternative outside of the typical \LaTeX-toolchain is to harness a font editor, as, for
+%  example, \application{FontForge}~\cite{fontforge} to create a slanted version of an upright
+%  font or upright italics.  Here, the first step is to check the font's license whether the
+%  generation of a variant is permitted and what restrictions apply to its use.
+%
+%  \application{FontForge} can generate slanted versions of a given set of glyphs with the
+%  \acronym{GUI}-sequence: Element~\(\rightarrow\) Style~\(\rightarrow\) Oblique and the desired
+%  slant angle in degrees (though with the opposite sign that \packagename{syntslant} uses).  In
+%  \application{FontForge}'s own extension language the corresponding procedure is
+%  called~\code{Skew}.
+%
+%  Note that some of the glyphs' attributes as e.\,g.~tracking, kerning, or hints may be gone or
+%  wrong for the slanted versions of the selected glyphs.
+%
+%  When exporting the changed font from a font editor users of \pdfTeX{} and \LuaTeX{} may
+%  choose different formats, think of \acronym{PFB} vs.~\acronym{TTF}.  If \MP{} will be a
+%  consumer of the newly created font, \acronym{PFB} must be used.
+%
+%  Finally, install the font e.\,g.~with \application{autoinst} which is part of
+%  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.
+%  If the slanted font is to integrate seamlessly with the existing fonts, usually some of the
+%  relevant font-description files (\filesystem{.fd}) have to be modified.
+%
+%
 %  \clearpage
 %  \appendix
 %  \toccontinuesonnextpage
@@ -2232,6 +2257,12 @@ end
 %              2020,
 %              \biburl{https://ctan.org/pkg/dvipdfmx}.
 %
+%      \bibitem{package:fontinst}
+%          \bibauthor{Jeffrey, Alan} and \bibauthor{Rowland McDonnell} and \bibauthor{Lars Hellström}.
+%              \bibtitle{Package~\packagename{fontinst}}.
+%              2009,
+%              \biburl{https://ctan.org/pkg/fontinst}.
+%
 %      \bibitem{fntguide}
 %              \bibauthor{\LaTeXIII{} Project Team,} ed.
 %              \bibtitle{\LaTeXe{} font selection}.
@@ -2256,6 +2287,12 @@ end
 %              \acronym{BIS}~publishers, Amsterdam,
 %              2014.
 %
+%      \bibitem{fonttools}
+%              \bibauthor{Penninga, Marc}.
+%              \bibtitle{fonttools}.
+%              2025,
+%              \biburl{https://ctan.org/tex-archive/fonts/utilities/fontools}.
+%
 %      \bibitem{dvips}
 %              \bibauthor{Rokicki, Tomas}.
 %              \bibtitle{\command{dvips}}.
@@ -2274,7 +2311,7 @@ end
 %              2007,
 %              \biburl{https://tug.org/mail-archives/pdftex/2007-January/006910.html}.
 %
-%     \bibitem{stamm:2020}
+%      \bibitem{stamm:2020}
 %              \bibauthor{Stamm, Philipp}.
 %              \bibtitle{Schrifttypen -- Verstehen Kombinieren:
 %                        Schriftmischung als Reiz in der Typografie}.
@@ -2299,6 +2336,11 @@ end
 %              \bibtitle{\pdfTeX}.
 %              2023,
 %              \biburl{http://mirrors.ctan.org/systems/doc/pdftex/manual/pdftex-a.pdf}.
+%
+%      \bibitem{fontforge}
+%              \bibauthor{Williams, George} et al.
+%              \bibtitle{FontForge}.
+%              \biburl{https://fontforge.org/en-US/}.
 %      \end{thebibliography}
 %    \end{RaggedRight}
 %
@@ -2479,7 +2521,7 @@ end
 %
 %
 %  \begin{macro}{\synthslant@shear@box}
-%    The various slant engine macros are all subsumed under \cs{synthslant@\-shear@\-box}.  So
+%    The various slant engine macros are all subsumed under \cs{synthslant@\-shear@\-box}.  So,
 %    the higher-level code becomes (almost) engine independent.
 %  \end{macro}
 %
