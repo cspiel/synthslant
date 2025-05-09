@@ -830,10 +830,11 @@ end
 %  \begingroup
 %    \footnotesize
 %    \noindent
-%    This package is copyright \textcopyright~2024 Ch.~L.~Spiel.  It may be distributed and/or
-%    modified under the conditions of the \href{https://www.latex-project.org/lppl.txt}{\LaTeX{}
-%    Project Public License} \acronym{(LPPL)}, either version~1.3c of this license or --~at your
-%    option~-- any later version.  This work has the \acronym{LPPL} maintenance status
+%    This package is copyright \textcopyright~2024, 2025 Ch.~L.~Spiel.  It may be distributed
+%    and/or modified under the conditions of the
+%    \href{https://www.latex-project.org/lppl.txt}{\LaTeX{} Project Public License}
+%    \acronym{(LPPL)}, either version~1.3c of this license or --~at your option~-- any later
+%    version.  This work has the \acronym{LPPL} maintenance status
 %    \doublequotes{author-maintained}.\par
 %  \endgroup
 %
@@ -1400,8 +1401,9 @@ end
 %
 %  \item[|fontspec|]\label{item:fontspec}
 %    \indexpackageoption{fontspec}
-%    Use \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}|userman} as
-%    slanting back-end.\footnote{Requires \filesystem{fontspec.sty.}}
+%    Use \packagename{fontspec}~\cite{package:fontspec}\relax
+%    \index{package>fontspec=\packagename{fontspec}|userman} as
+%    slanting back-end.\footnote{Requires \LuaTeX{} and \filesystem{fontspec.sty.}}
 %
 %  \item[|l3draw|]\label{item:l3draw}
 %    \indexpackageoption{l3draw}
@@ -1534,6 +1536,7 @@ end
 %            Charis \acronym{SIL}\index{font>typeface>Charis SIL=Charis \acronym{SIL}|userman}   &  .17  \\
 %            Clara\index{font>typeface>Clara|userman}                                            &  .24  \\
 %            Cochineal\index{font>typeface>Cochineal|userman}                                    &  .2  \\
+%            Coelacanth\index{font>typeface>Coelacanth|userman}                                  &  .2  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1541,7 +1544,6 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
-%            Coelacanth\index{font>typeface>Coelacanth|userman}                                  &  .2  \\
 %            Crimson Pro\index{font>typeface>Crimson Pro|userman}                                &  .2  \\
 %            Crimson Text\index{font>typeface>Crimson Text|userman}                              &  .2  \\
 %            Day Roman\index{font>typeface>Day Roman|userman}                                    &  .2  \\
@@ -1557,6 +1559,8 @@ end
 %            \acronym{Inria} Serif\index{font>typeface>Inria Serif=\acronym{Inria} Serif|userman}  &  .2  \\
 %            Libertinus Serif\index{font>typeface>Libertinus Serif|userman}                      &  .2  \\
 %            Libre Baskerville\index{font>typeface>Libre Baskerville|userman}                    &  .3  \\
+%            Libre Caslon\index{font>typeface>Libre Caslon|userman}                              &  .38  \\
+%            Lora\index{font>typeface>Lora|userman}                                              &  .07  \\
 %            \bottomrule
 %          \end{tabular}%
 %          \qquad
@@ -1564,9 +1568,9 @@ end
 %            \toprule
 %            Font  &  Slant  \\
 %            \midrule
-%            Libre Caslon\index{font>typeface>Libre Caslon|userman}                              &  .38  \\
 %            Merriweather\index{font>typeface>Merriweather|userman}                              &  .14  \\
 %            \acronym{ML} Modern\index{font>typeface>ML Modern=\acronym{ML} Modern|userman}      &  .23  \\
+%            Neuton\index{font>typeface>Neuton|userman}                                          &  .16  \\
 %            Noto Serif\index{font>typeface>Noto Serif|userman}                                  &  .22  \\
 %            \acronym{PT} Serif\index{font>typeface>PT Serif=\acronym{PT} Serif|userman}         &  .2  \\
 %            Roboto Slab\index{font>typeface>Roboto Slab|userman}                                &  .2  \\
@@ -1580,6 +1584,7 @@ end
 %            \acronym{URW} Nimbus Roman\index{font>typeface>URW Nimbus Roman=\acronym{URW} Nimbus Roman|userman}  &  .2  \\
 %            Utopia\index{font>typeface>Utopia|userman}                                          &  .2  \\
 %            Vollkorn\index{font>typeface>Vollkorn|userman}                                      &  .17  \\
+%                                                                                                &  \\
 %            \bottomrule
 %          \end{tabular}
 %        \end{tabfigures}
@@ -2017,7 +2022,7 @@ end
 %  of a font as a whole and it is impossible to undo the change within the document.
 %
 %
-%  \subsection{Using \pdfTeX}\label{sec:alternative-pdftex}
+%  \subsection{Use \pdfTeX}\label{sec:alternative-pdftex}
 %
 %  In \pdfTeX{} fonts can be re-mapped in the document preamble with the
 %  primitive~\cs{pdfmapline}; see the \pdfTeX{} Reference Manual~\cite[Sec.~6.1]{pdftex} for a
@@ -2129,7 +2134,7 @@ end
 %  \end{example}
 %
 %
-%  \subsection{Combining \LaTeX{} and
+%  \subsection{Combine \LaTeX{} and
 %              \texorpdfstring{\command{dvipdfmx}}{dvipdfmx}}\label{sec:alternative-latex}
 %
 %  The alternative when using \LaTeX{} is similar the one elaborated in the previous section.
@@ -2166,6 +2171,22 @@ end
 %    Despite the option syntax originates with \command{dvips} it is not able to interpret any
 %    \code{\cs{special}\{pdf:mapline \ttdots\}}.
 %  \end{note}
+%
+%
+%  \clearpage
+%  \subsection{Directly Use \LuaLaTeX{} and Package \packagename{fontspec}\label{sec:alternative-lualatex}}
+%
+%  The \LuaTeX{} engine can be coaxed to transform glyphs similar to \pdfTeX.  With the support
+%  of package~\packagename{fontspec}~\cite{package:fontspec}\relax
+%  \index{package>fontspec=\packagename{fontspec}|userman} slanting is available via the
+%  \cs{fontspec}-macro:
+%
+%  \begin{codeexample}
+%    \cs{fontspec}\{\meta{FONT-FILENAME}\}[FakeSlant=\meta{slant}]
+%  \end{codeexample}
+%
+%  Actually, package~\packagename{synthslant} uses a similar call to implement its own slanting
+%  macros if the package is loaded with option~\hyperref[item:fontspec]{\code{fontspec}}.
 %
 %
 %  \subsection{Harness a Font Editor\label{sec:font-editor}}
@@ -2293,6 +2314,12 @@ end
 %              2025,
 %              \biburl{https://ctan.org/tex-archive/fonts/utilities/fontools}.
 %
+%      \bibitem{package:fontspec}
+%              \bibauthor{Robertson, Will}
+%              \bibtitle{Package~\packagename{fontspec}}.
+%              2024,
+%              \biburl{https://ctan.org/tex-archive/macros/unicodetex/latex/fontspec}.
+%
 %      \bibitem{dvips}
 %              \bibauthor{Rokicki, Tomas}.
 %              \bibtitle{\command{dvips}}.
@@ -2381,7 +2408,7 @@ end
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2024/12/20  v0.1a  Synthetically Slant glyphs]
+                [2025/05/05  v0.1a  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
@@ -5304,10 +5331,16 @@ Font name: \fontname\font.
 \section{Slanted Samples}
 
 \begin{center}
+  \renewcommand*{\arraystretch}{.86}
   \begin{tabular}{@{}llll@{}}
     \toprule
     Slant  &  L.case  &  Mixed Case  &  Uppercase  \\
     \midrule
+    .05  &  \slbox{.05}{\fontsample}  &  \slbox{.05}{\FontSample}  &  \slbox{.05}{\FONTSAMPLE}  \\
+    .06  &  \slbox{.06}{\fontsample}  &  \slbox{.06}{\FontSample}  &  \slbox{.06}{\FONTSAMPLE}  \\
+    .07  &  \slbox{.07}{\fontsample}  &  \slbox{.07}{\FontSample}  &  \slbox{.07}{\FONTSAMPLE}  \\
+    .08  &  \slbox{.08}{\fontsample}  &  \slbox{.08}{\FontSample}  &  \slbox{.08}{\FONTSAMPLE}  \\
+    .09  &  \slbox{.09}{\fontsample}  &  \slbox{.09}{\FontSample}  &  \slbox{.09}{\FONTSAMPLE}  \\[.2em]
     .10  &  \slbox{.10}{\fontsample}  &  \slbox{.10}{\FontSample}  &  \slbox{.10}{\FONTSAMPLE}  \\
     .11  &  \slbox{.11}{\fontsample}  &  \slbox{.11}{\FontSample}  &  \slbox{.11}{\FONTSAMPLE}  \\
     .12  &  \slbox{.12}{\fontsample}  &  \slbox{.12}{\FontSample}  &  \slbox{.12}{\FONTSAMPLE}  \\
@@ -5317,7 +5350,7 @@ Font name: \fontname\font.
     .16  &  \slbox{.16}{\fontsample}  &  \slbox{.16}{\FontSample}  &  \slbox{.16}{\FONTSAMPLE}  \\
     .17  &  \slbox{.17}{\fontsample}  &  \slbox{.17}{\FontSample}  &  \slbox{.17}{\FONTSAMPLE}  \\
     .18  &  \slbox{.18}{\fontsample}  &  \slbox{.18}{\FontSample}  &  \slbox{.18}{\FONTSAMPLE}  \\
-    .19  &  \slbox{.19}{\fontsample}  &  \slbox{.19}{\FontSample}  &  \slbox{.19}{\FONTSAMPLE}  \\[.25em]
+    .19  &  \slbox{.19}{\fontsample}  &  \slbox{.19}{\FontSample}  &  \slbox{.19}{\FONTSAMPLE}  \\[.2em]
     .20  &  \slbox{.20}{\fontsample}  &  \slbox{.20}{\FontSample}  &  \slbox{.20}{\FONTSAMPLE}  \\
     .21  &  \slbox{.21}{\fontsample}  &  \slbox{.21}{\FontSample}  &  \slbox{.21}{\FONTSAMPLE}  \\
     .22  &  \slbox{.22}{\fontsample}  &  \slbox{.22}{\FontSample}  &  \slbox{.22}{\FONTSAMPLE}  \\
@@ -5327,7 +5360,7 @@ Font name: \fontname\font.
     .26  &  \slbox{.26}{\fontsample}  &  \slbox{.26}{\FontSample}  &  \slbox{.26}{\FONTSAMPLE}  \\
     .27  &  \slbox{.27}{\fontsample}  &  \slbox{.27}{\FontSample}  &  \slbox{.27}{\FONTSAMPLE}  \\
     .28  &  \slbox{.28}{\fontsample}  &  \slbox{.28}{\FontSample}  &  \slbox{.28}{\FONTSAMPLE}  \\
-    .29  &  \slbox{.29}{\fontsample}  &  \slbox{.29}{\FontSample}  &  \slbox{.29}{\FONTSAMPLE}  \\[.25em]
+    .29  &  \slbox{.29}{\fontsample}  &  \slbox{.29}{\FontSample}  &  \slbox{.29}{\FONTSAMPLE}  \\[.2em]
     .30  &  \slbox{.30}{\fontsample}  &  \slbox{.30}{\FontSample}  &  \slbox{.30}{\FONTSAMPLE}  \\
     .31  &  \slbox{.31}{\fontsample}  &  \slbox{.31}{\FontSample}  &  \slbox{.31}{\FONTSAMPLE}  \\
     .32  &  \slbox{.32}{\fontsample}  &  \slbox{.32}{\FontSample}  &  \slbox{.32}{\FONTSAMPLE}  \\
