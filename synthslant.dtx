@@ -937,8 +937,8 @@ end
 %  the usual font suspects synthetically slanted, bolded\footnote{Package~\packagename{amsbsy}
 %  defines a \doublequotes{Poor Man's Bold} macro~\cs{pmb} that works by
 %  \singlequotes{overprinting}.  The authors of \packagename{amsbsy} recommend to prefer
-%  package~\packagename{bm} for bold mathematical symbols, though.}, and condensed type along
-%  with artificial small-caps swiftly are stuffed into the black Maria.\footnote{See for example
+%  package~\packagename{bm} for bold mathematical symbols, though.}\!, and condensed type along
+%  with artificial small-caps swiftly are stuffed into the black Maria.\!\footnote{See for example
 %  Ref.~\citenum{strizver:2014}, p.~97, but compare with p.~142 and also
 %  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  I can retrace this
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
@@ -991,7 +991,7 @@ end
 %  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
 %  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
 %  upright italics\footnote{Only a few font families come with upright italics as,
-%  e.\,g., FF~Seria, Joanna, Literata, Odile, or Romanée.}.\relax
+%  e.\,g., FF~Seria, Joanna, Literata, Odile, or Romanée.}\!.\relax
 %  \index{font>typeface>FF Seria=\acronym{FF}~Seria|userman}\relax
 %  \index{font>typeface>Joanna|userman}\relax
 %  \index{font>typeface>Literata|userman}\relax
@@ -1096,7 +1096,7 @@ end
 %  \pdfTeX-primitive \cs{pdfliteral} for shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly
 %  thereafter \propername{Bruno Le Floch} pointed to another \pdfTeX-primitive, namely
 %  \cs{pdfsetmatrix}, available with (in 2013) more recent
-%  \pdfTeX~versions~\cite{pdftex}.\footnote{The user-level manipulation of the transformation
+%  \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the transformation
 %  matrix has been part of the \acronym{PDF}-standard since its initial publication in
 %  1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
 %  (\singlequotes{concat}~-- concatenate matrix to current transformation matrix).~\visualpar{}
@@ -1272,10 +1272,10 @@ end
 %  For \(\alpha = 0\) the shear matrix becomes the identity matrix.  Throughout of
 %  \packagename{synthslant} we work with the \meta{slant} which is \(\sin \alpha\) in
 %  \cref{equ:shear-transformation} and avoid converting back and forth to the
-%  \index{shear>angle|userman}shear angle~\(\alpha\).\footnote{At least one slant engine currently
+%  \index{shear>angle|userman}shear angle~\(\alpha\).\!\footnote{At least one slant engine currently
 %  requires such a conversion, namely~\pstrickslogo.  The math is hidden from the user, though.}
 %  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)}, \mbox{\(\sin 11.5\degree
-%  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\footnote{For small
+%  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\!\footnote{For small
 %  angles~\(\lvert\alpha\rvert\) measured in radians the sine is approximately linear: \(\sin
 %  \alpha \approx \alpha\).}  For real-life serif fonts \meta{slant} is in the range of~\(.1\)
 %  to~\(.45\) and a value of~\(.2\) seems to be quite common.  My \filesystem{pdftex.map} lists
@@ -1403,12 +1403,12 @@ end
 %    \indexpackageoption{fontspec}
 %    Use \packagename{fontspec}~\cite{package:fontspec}\relax
 %    \index{package>fontspec=\packagename{fontspec}|userman} as
-%    slanting back-end.\footnote{Requires \LuaTeX{} and \filesystem{fontspec.sty.}}
+%    slanting back-end.\!\footnote{Requires \LuaTeX{} and \filesystem{fontspec.sty.}}
 %
 %  \item[|l3draw|]\label{item:l3draw}
 %    \indexpackageoption{l3draw}
 %    Select the \singlequotes{draw} layer\index{package>l3draw=\packagename{l3draw}|userman} of
-%    \LaTeXIII{} as base for the slanting engine.\footnote{This option requires
+%    \LaTeXIII{} as base for the slanting engine.\!\footnote{This option requires
 %    \filesystem{l3draw.sty.}}
 %
 %    \begin{caution}
@@ -1457,7 +1457,7 @@ end
 %  \item[|TikZ|, |tikz|]\label{item:tikz}
 %    \indexpackageoption{tikz}
 %    Use \packagename{TikZ}\index{package>tikz=\packagename{tikz}|userman} for
-%    slanting.\footnote{Requires \filesystem{tikz.sty.}}
+%    slanting.\!\footnote{Requires \filesystem{tikz.sty.}}
 %
 %    \begin{caution}
 %      This engine is still experimental and produces low-quality output!  See
