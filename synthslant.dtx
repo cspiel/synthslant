@@ -2450,7 +2450,7 @@ end
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2025/05/15  v0.1a  Synthetically Slant glyphs]
+                [2025/05/16  v0.1b  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
@@ -2857,15 +2857,16 @@ end
 %  \begin{macro}{\synthslantbox@soft@hyphen}
 %    Allow for line breaks at hyphenation opportunities~(\singlequotes{\cs{-}}).
 %
+%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
 %    \begin{macrocode}
-\def\synthslantbox@soft@hyphen#1\-#2\relax{%
+\def\synthslantbox@soft@hyphen#1\-#2\@nil{%
   \synthslant@shear@box{\synthslant@slant@value}{#1}%
   \ifx\relax#2%
     \relax
   \else
     \synthslant@nolinebreak
     \discretionary{-}{}{}%
-    \synthslantbox@soft@hyphen#2\relax
+    \synthslantbox@soft@hyphen#2\@nil
   \fi
 }
 
@@ -2875,9 +2876,10 @@ end
 %  \begin{macro}{\synthslantbox@hard@hyphen}
 %    Allow for line breaks at embedded, explicit hyphens~(\singlequotes{-}).
 %
+%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
 %    \begin{macrocode}
-\def\synthslantbox@hard@hyphen#1-#2\relax{%
-  \synthslantbox@soft@hyphen#1\-\relax
+\def\synthslantbox@hard@hyphen#1-#2\@nil{%
+  \synthslantbox@soft@hyphen#1\-\@nil
   \ifx\relax#2%
     \relax
   \else
@@ -2885,7 +2887,7 @@ end
     \synthslant@shear@box{\synthslant@slant@value}{-}%
     \synthslant@nolinebreak
     \discretionary{}{}{}%
-    \synthslantbox@hard@hyphen#2\relax
+    \synthslantbox@hard@hyphen#2\@nil
   \fi
 }
 
@@ -2895,14 +2897,15 @@ end
 %  \begin{macro}{\synthslantbox@space}
 %    Allow for line breaks at embedded spaces~(\singlequotes{\textvisiblespace}).
 %
+%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
 %    \begin{macrocode}
-\def\synthslantbox@space#1 #2\relax{%
-  \synthslantbox@hard@hyphen#1-\relax
+\def\synthslantbox@space#1 #2\@nil{%
+  \synthslantbox@hard@hyphen#1-\@nil
   \ifx\relax#2%
     \relax
   \else
     \space
-    \synthslantbox@space#2\relax
+    \synthslantbox@space#2\@nil
   \fi
 }
 
@@ -2934,11 +2937,15 @@ end
 %    Normally, a user wants to call \cs{text\-synth\-slant} or
 %    \cs{text\-synth\-up\-right\-italic}, however \LaTeX~wizards may have other ideas.
 %
+%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
 %    \begin{macrocode}
 \else
   \newrobustcmd*{\synthslantbox}[2]{%
     \edef\synthslant@slant@value{#1}%
-    \expandafter\synthslantbox@space#2 \relax\relax
+%    \end{macrocode}
+%    The space in front of \cs{@nil} is crucial to initiate the chain of macro calls.
+%    \begin{macrocode}
+    \expandafter\synthslantbox@space#2 \@nil
   }
 \fi
 
@@ -5373,8 +5380,8 @@ KJ8AAAAASUVORK5CYII=
   \sf
   {\huge\bfseries SyntSlant Calibration Sheet}
 
-  For \packagename{synthslant} version~\getpackageversion{synthslant} as of
-  \getpackagedate{synthslant}.
+  for \packagename{synthslant} version~\getpackageversion{synthslant} as of
+  \getpackagedate{synthslant}
 \end{center}
 
 Selected slant engine: {\tt\makeatletter\synthslant@engine@name\makeatother}.
