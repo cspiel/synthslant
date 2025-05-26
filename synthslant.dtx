@@ -57,7 +57,7 @@
 \usepackage[slant=.18, negslant=-.16]{synthslant}
 \usepackage{titlesec}
 \usepackage[most]{tcolorbox}
-\usepackage{titlesec}\renewcommand*{\bottomtitlespace}{.15\textheight}%nobottomtitles*
+\usepackage{titlesec}
 \usepackage{wrapfig}
 \usepackage{xcolor}
 
@@ -131,18 +131,6 @@
   raiselinks = false,
   urlcolor = [rgb]{0, 0, .5}% = navy
 }
-
-
-\SetExtraKerning[context=drop-left-sidebearing, name=source-code-normal, unit=space]
-                {font={T1/SourceCodePro-LF/m/n/44, T1/SourceCodePro-TLF/m/n/44}}
-                {
-                  1={-150,},
-                  2={-120,},
-                  3={-120,},
-                  4={-40,},
-                  A={-100,},
-                  B={-170,}
-                }
 
 \newlength{\sectiontocindent}
 \newlength{\sectionnumberwidth}
@@ -286,17 +274,19 @@
   \fancyhead[L]{\rightmark}
   \fancyhead[R]{\thepage}
 }
+
+\newcommand*{\letterspacedsmallcaps}[1]{\textsc{\textls[20]{#1}}}
 \newcommand*{\resetfancyhead}
-            {\fancyhead[L]{\textsf{\textsc{\textls[20]{\nouppercase\rightmark}}}}}
+            {\fancyhead[L]{\textsf{\letterspacedsmallcaps{\nouppercase\rightmark}}}}
 
 \renewcommand*{\headrulewidth}{0pt}
 \renewcommand*{\sectionmark}[1]
               {\def\truesectionname{#1}%
                \markright{\textsf{\marginalizesectionnumber{\thesection}%
-                                  \textsc{\textls[20]{#1}}}}}
+                                  \letterspacedsmallcaps{#1}}}}
 \renewcommand*{\subsectionmark}[1]
               {\markright{\textsf{\marginalizesectionnumber{\thesubsection}%
-                                  \textsc{\textls[20]{\truesectionname:\enspace}}#1}}}
+                                  \letterspacedsmallcaps{\truesectionname:\enspace}#1}}}
 
 
 \titleformat{\section}[hang]
@@ -413,20 +403,19 @@
          {\AppendingFailed}
 
 \makeatletter
-\ExplSyntaxOn
-\apptocmd{\index@prologue}
-         {\legacy_if:nTF {codeline@index}
-                         {We\space prefix\space all\space references\space
-                          to\space code\space lines\space with~\singlequotes{\codelineindicator}.}
-                         {}}
-         {\relax}
-         {\AppendingFailed}
+\IndexPrologue{\section*{Index}%
+               \markboth{\sf\letterspacedsmallcaps{Index}}{\sf\letterspacedsmallcaps{Index}}%
+               Numbers written in italics refer to definitions;
+               numbers in regular style refer to pages where an entry is used.
+               \ifx\special@index\HD@codeline@wrindex
+                 References to code lines are prefixed with~\singlequotes{\codelineindicator}.
+                 Again italics refer to definitions and regular style to lines where the code is used.
+               \fi}
 
 \newcommand*{\linenumberdecoration}
-            {\legacy_if:nTF {codeline@index}
-                            {\codelineindicator}
-                            {}}
-\ExplSyntaxOff
+            {\ifx\special@index\HD@codeline@wrindex
+               \codelineindicator
+             \fi}
 \makeatother
 
 \newcommand*{\logmacro}[1]
@@ -860,15 +849,19 @@ end
 %
 %
 %  \clearpage
+%  \pagestyle{fancy}
 %  \phantomsection
 %  \addcontentsline{toc}{section}{\numberline{}Quick Reference}
 %  \addtocontents{toc}{\medskip}
 %  \section*{Quick Reference}
+%  \markboth{\sf\letterspacedsmallcaps{Quick Reference}}{\sf\letterspacedsmallcaps{Quick Reference}}
+%  \index{quick reference|userman}
 %
-%  Alphabetically sorted list of all user macros and environments defined by
-%  package~\packagename{synthslant}.  The list of all package options can be found on
-%  \cpageref{sec:package-options} and \pageref{secend:package-options}.  The
-%  \hyperref[sec:index]{Index} on pages~\pageref{sec:index} to~\pageref{secend:index} may
+%  This is an alphabetically sorted list of all user macros and environments defined by
+%  package~\packagename{synthslant} along with the page numbers of their descriptions.  The list
+%  of all \hyperref[sec:package-options]{package options} can be found on
+%  pages~\pageref{sec:package-options} and \pageref{secend:package-options}.  The
+%  \hyperref[sec:index]{Index} on pages~\pageref{sec:index} and~\pageref{secend:index} may
 %  provide some more detailed insights.
 %
 %  \begin{list}{}{\itemindent=-\leftmargin
@@ -922,12 +915,13 @@ end
 %  a short piece of text gets slanted forward or backward.  Moreover, specialized macros for the
 %  two most important use cases are provided, namely slanting an upright font forward and making
 %  an italics font upright.  Unbeknown to some users, \pdfTeX{} performs a similar operation
-%  under the hood: of the 40\thousandsseparator210~map lines in my \filesystem{pdftex.map}
+%  under the hood: of the 40\thousandsseparator210~map lines in our \filesystem{pdftex.map}
 %  currently 1\thousandsseparator236 instruct \pdfTeX{} to artificially slant a font.  This
 %  means some three percent of the shapes are generated this way.
 %
-%  Similar transformations can be achieved by other means.  I elaborate on one of the
-%  alternatives in \cref{sec:alternative} on \cpageref{sec:alternative}.
+%  Similar transformations can be achieved by other means.  We elaborate on some of the
+%  alternatives in \cref{sec:alternative} on
+%  pages~\pageref{sec:alternative}--\pageref{secend:alternative}.
 %  Package~\packagename{synthslant} however focuses on ease of use and strict locality of the
 %  glyph manipulation.
 %
@@ -941,18 +935,23 @@ end
 %  package~\packagename{bm} for bold mathematical symbols, though.}\!, and condensed type along
 %  with artificial small-caps swiftly are stuffed into the black Maria.\!\footnote{See for example
 %  Ref.~\citenum{strizver:2014}, p.~97, but compare with p.~142 and also
-%  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  I can retrace this
+%  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  We can retrace this
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
 %  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
-%  problems are somewhat minor and I wonder how far one could get with an
+%  problems are somewhat minor and we wonder how far one could get with an
 %  \propername{OpenType}~font that supports a
 %  \code{size}~axis\index{font>axis>size=\code{size}|userman} as well as an
 %  \code{opsz}~axis\index{font>axis>opsz=\code{opsz}|userman} in the necessary ranges to
-%  construct convincing small-caps out of the multiple-master font.
+%  construct convincing small-caps out of the multiple-master
+%  font.\!\footnote{\detoxindex{FontForge=\application{FontForge}|userman}\application{FontForge}~\cite{fontforge}
+%  provides a means to generate small caps of any given glyphs, which allows to control the
+%  \(x\)-scale and \(y\)-scale factors and the widths of the stems.  \acronym{GUI}-sequence:
+%  Element~> Style~> Add Small Capitals, script function: \code{SmallCaps}, and Python method:
+%  \code{addSmallCaps}.}
 %
-%  In my view artificial slanting keeps much of the font's character intact.  In fact one
+%  In our view artificial slanting keeps much of the font's character intact.  In fact one
 %  accusation of synthetically slanted type is that is creates less contrast than a proper
-%  italic~\cite[p.~141]{strizver:2014} to which I object that less contrast can in fact be
+%  italic~\cite[p.~141]{strizver:2014} to which we object that less contrast can in fact be
 %  enough contrast in a particular setting.  Moreover, small contrast with respect to the main
 %  type is a problem of second order.  It does not devalue the shape \foreignphrase{per se} as
 %  is true for artificial bold and condensed fonts.
@@ -960,7 +959,7 @@ end
 %  What seems to have gotten lost in the discussion is the shapes of true italics that were
 %  designed alongside with the roman type.  If we have an unbiased look at it --~for example at
 %  the title~page of this manual~-- the italic versions of the upright characters are markedly
-%  different that I would like to ask whether they match the upright shape in a strict sense.
+%  different that we would like to ask whether they match the upright shape in a strict sense.
 %  For the double-storey~\sample{a} becomes single-storey, the start of the loop of~\sample{g}
 %  moves from the far left to the middle.  Alongside, the aspect ratio of both of the counters
 %  change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font pairing.  We can
@@ -968,7 +967,7 @@ end
 %  slanted, but creates tension in respect to the upright type by a variety of additional design
 %  features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once again:
 %
-%  \begin{quote}\samepage
+%  \begin{quote}\small\samepage
 %    The most popular typefaces are the easiest to read; their popularity has made them
 %    disappear from conscious cognition.  It becomes impossible to tell if they are easy to read
 %    because they are commonly used, or if they are commonly used because they are easy to read.
@@ -1107,9 +1106,10 @@ end
 %  transformations of arbitrary content can be coded directly by setting the transformation
 %  matrix.  A slight variant of his code is used in this package for the \acronym{PDF}- and
 %  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman}-slant~engines.  The
-%  implementations for \pstrickslogo, \tikzlogo{}, and
-%  \packagename{fontspec}\packagename{fontspec} are trivial as they build upon shear~functions
-%  supplied by the packages.
+%  implementations for \pstrickslogo\index{package>pstricks=\packagename{pstricks}|userman},
+%  \tikzlogo\index{package>tikz=\packagename{tikz}|userman}, and
+%  \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}userman} are trivial as
+%  they build upon shear~functions supplied by the packages.
 %
 %
 %  \subsection{Shear Transformation, Slant, and Angle}\label{sec:shear-transformation}
@@ -1279,7 +1279,7 @@ end
 %  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\!\footnote{For small
 %  angles~\(\lvert\alpha\rvert\) measured in radians the sine is approximately linear: \(\sin
 %  \alpha \approx \alpha\).}  For real-life serif fonts \meta{slant} is in the range of~\(.1\)
-%  to~\(.45\) and a value of~\(.2\) seems to be quite common.  My \filesystem{pdftex.map} lists
+%  to~\(.45\) and a value of~\(.2\) seems to be quite common.  Our \filesystem{pdftex.map} lists
 %  negative \meta{slant} values in the range~\(-.4\) to~\(-.05\) and positive \meta{slant}
 %  values in the range~\(.14\) up to~\(.45\).  See \Cref{tab:slant-values} on
 %  \cpageref{tab:slant-values} for some actual values of serif fonts in \LaTeX.
@@ -1319,8 +1319,8 @@ end
 %    i.\,e., partially un-slanted.
 %
 %    Here, and generally if a font as a whole needs to be corrected, an alternative approach
-%    like the one sketched in \cref{sec:alternative} on \cpageref{sec:alternative} may be
-%    warranted.
+%    like the ones sketched in \cref{sec:alternative} on
+%    pages~\pageref{sec:alternative}--\pageref{secend:alternative} may be warranted.
 %
 %  \item\label{it:generate-sole-obliques}
 %    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
@@ -1358,7 +1358,7 @@ end
 %  \end{enumerate}
 %
 %  It is possible to obtain slants that run against the reading direction, so called
-%  \singlequotes{backslanted} glyphs, but I have rarely seen an
+%  \singlequotes{backslanted} glyphs, but we have rarely seen an
 %  \href{https://fontsinuse.com/tags/2044/left-leaning-italics-backslanted}{example} where the
 %  typography of a document could benefit from that.
 %
@@ -1436,7 +1436,7 @@ end
 %    \meta{slant-expr} must evaluate to a nonnegative value.
 %
 %  \item[|PS|, |ps|]\label{item:postscript}
-%    \index{ps|userman}
+%    \indexpackageoption{ps}
 %    Use \pstrickslogo\index{package>pstricks=\packagename{pstricks}|userman} to delegate
 %    slanting to the PostScript\index{PostScript|userman} interpreter.  Obviously requires
 %    \pstrickslogo\footnote{The package actually required is \filesystem{pst-3d.sty.}} and
@@ -1626,8 +1626,8 @@ end
 %      \cs{textsynthslant}\{topological dual space\}
 %    \end{codeexample}
 %    slants the first word (producing a horizontal box) inserts a space and then slants the
-%    second word (producing another horizontal box).  \TeX{} sees two (unbreakable) boxes and a
-%    discardable space when it comes to linebreaking.
+%    second word (producing another horizontal box) and so on.  \TeX{} sees three (unbreakable)
+%    boxes and a discardable space when it comes to linebreaking.
 %
 %  \item Discretionary hyphens\index{discretionary hyphen|userman} in the form of
 %    \singlequotes{\cs{-}} get propagated.  So, we could improve on our above example by saying
@@ -1701,9 +1701,9 @@ end
 %    \packagename{babel}~macro\index{package>babel=\packagename{babel}|userman}
 %    \cs{foreignlanguage}~\cite{package:babel}.~\visualpar
 %
-%    In math-mode you cannot have enough fonts, symbols, and most of the gizmos over there!  I
+%    In math-mode you cannot have enough fonts, symbols, and most of the gizmos over there!  We
 %    like to mark up automorphism groups associated with a given group with a slanted-roman
-%    typeface, though my macro has a more general name.
+%    typeface, though our macro has a more general name.
 %
 %    \begin{codeexample}
 %      \cs{newcommand*}\=\{\cs{functionspace}\}[1]  \\
@@ -1740,8 +1740,8 @@ end
 %    \end{codeexample}
 %
 %    \noindent
-%    where we have assumed that \packagename{amsmath} has been loaded to bring
-%    \cs{DeclareMathOperator} into scope.
+%    where we have assumed that \packagename{amsmath}~\cite{package:amsmath} has been loaded to
+%    bring \cs{DeclareMathOperator} into scope.
 %  \end{example}
 %
 %
@@ -1782,8 +1782,9 @@ end
 %  redefined or patched to meet different needs.
 %
 %  \DescribeEnv{slantenvironment}
-%  Wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is called for every
-%  forward-slanting operation with~\hyperref[syn:textsynthslant]{\cs{textsynthslant}}.
+%  This environment is a wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is
+%  called for every forward-slanting operation
+%  with~\hyperref[syn:textsynthslant]{\cs{textsynthslant}}.
 %
 %  \begin{synopsis}\label{syn:slantenvironment}
 %    \cs{begin}|{slantenvironment}|  \\
@@ -1803,8 +1804,8 @@ end
 %  \end{usecases}
 %
 %  \DescribeEnv{negslantenvironment}
-%  Wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is called for every
-%  backward-slanting operation
+%  This environment is a wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is
+%  called for every backward-slanting operation
 %  with~\hyperref[syn:textsynthuprightitalic]{\cs{textsynthuprightitalic}}.
 %
 %  \begin{synopsis}\label{syn:negslantenvironment}
@@ -1856,8 +1857,8 @@ end
 %  \end{note}
 %
 %  \begin{example}
-%    Upright italics often look somewhat tight.  I like to add some extra tracking to them.  So,
-%    I simply define the context~\code{synthnegslant}:
+%    Upright italics often look somewhat tight.  We like to add some extra tracking to them.  So,
+%    we simply define the context~\code{synthnegslant}:
 %
 %    \begin{codeexample}
 %      \cs{SetTracking}\=[context = synthnegslant]  \\
@@ -1890,13 +1891,13 @@ end
 %
 %  \begin{note}
 %    The slant angles of different italics or oblique glyphs in the same font may slightly
-%    differ from each other.  Usually, longer shapes have less slant than short shapes.
+%    differ from each other.  Usually, longer shapes have less slant than shorter shapes.
 %
 %    Look for a representative \meta{slant}, a kind of average that achieves a visual match with
 %    the italics or obliques.
 %  \end{note}
 %
-%  In the following, I suggest three techniques to determine or match the slant of a glyph with
+%  In the following, we suggest three techniques to determine or match the slant of a glyph with
 %  sufficient accuracy.  Direct measurements of the slant angle (\cref{sec:direct-measurement})
 %  pretend to be the most precise.  However --~as the previous Note indicated~-- its accuracy is
 %  limited by the differing slant angles of the letterforms.  The visual comparison of shapes
@@ -1982,7 +1983,7 @@ end
 %
 %    \caption[Compare slant angles]
 %            {Compare italics and slanted samples with \application{The Gimp}.~\visualpar{} For
-%             this screendump I loaded the samples on the first page of
+%             this screendump we loaded the samples on the first page of
 %             \filesystem{synthslant-gauge.pdf} at a resolution of~600\,dpi into
 %             \application{The Gimp}.  The \singlequotes{sample}~layer is aligned to the
 %             letter~\singlequotes{t} in the word~\singlequotes{White}.  Note that accidentally
@@ -2031,7 +2032,7 @@ end
 %
 %  \index{limitations|userman}
 %  \index{known problems|userman}
-%  Here I list some of the known problems of \packagename{syntslant}.  Conceivably there are
+%  Here we list some of the known problems of \packagename{syntslant}.  Conceivably there are
 %  more.
 %
 %  \begin{description}
@@ -2060,7 +2061,7 @@ end
 %  \clearpage
 %  \section{Alternative Solutions}\label{sec:alternative}
 %
-%  Here is an alternative to \packagename{synthslant} that I am aware of.  It changes the slant
+%  Here is an alternative to \packagename{synthslant} that we am aware of.  It changes the slant
 %  of a font as a whole and it is impossible to undo the change within the document.
 %
 %
@@ -2103,10 +2104,10 @@ end
 %  We are particularly interested in the \meta{special}~part that allows us to slant the whole
 %  font with a single instruction.
 %
-%  I want to elaborate the example given in \cref{sec:usage-ideas},
+%  We want to elaborate the example given in \cref{sec:usage-ideas},
 %  \cref{it:correct-italics-angle} and generate less-angled italics for
 %  Libre~Caslon.\index{font>typeface>Libre Caslon|userman} Here is a suitable map line taken from
-%  \filesystem{pdftex.map} on my system:
+%  \filesystem{pdftex.map} on our system:
 %
 %  \begin{multilinecodeexample}
 %    LibreCsln-Italic-osf-t1--base LibreCsln-Italic  \\
@@ -2117,14 +2118,14 @@ end
 %  \smallskip
 %
 %  \noindent
-%  which I had to break into three lines to make it fit this page.  The
-%  \singlequotes{{\ttfamily\ttdots\,}} indicate parts of the identifiers that I left out beyond
+%  which we had to break into three lines to make it fit this page.  The
+%  \singlequotes{{\ttfamily\ttdots\,}} indicate parts of the identifiers that we left out beyond
 %  that.  There are in fact four map lines for \code{T1}-encoded Libre~Caslon italics: those for
 %  lining figures~\singlequotes{\code{lf}}, oldstyle figures~\singlequotes{\code{osf}}, tabular
 %  lining figures~\singlequotes{\code{tlf}}, and tabular oldstyle
 %  figures~\singlequotes{\code{tosf}}.
 %
-%  The slant operation I want to add to the \meta{special}~part has the format:
+%  The slant operation we want to add to the \meta{special}~part has the format:
 %
 %  \begin{codeexample}
 %    \meta{slant}~SlantFont
@@ -2140,7 +2141,7 @@ end
 %  \end{codeexample}
 %
 %  \noindent
-%  Finally, I select the modified font e.\,g.~with macro
+%  Finally, we select the modified font e.\,g.~with macro
 %
 %  \begin{codeexample}
 %    \cs{usefont}\{\meta{encoding}\}\{\meta{family}\}\{\meta{series}\}\{\meta{shape}\}
@@ -2167,9 +2168,10 @@ end
 %    \end{center}
 %
 %    \noindent
-%    The only trick I have to reveal is that for the \doublequotes{original italics} I used the
-%    lining figures~\singlequotes{\code{lf}} version of the font, whereas the \doublequotes{less
-%    angled} version shows the oldstyle figures~\singlequotes{\code{osf}} version.
+%    The only trick we have to reveal is that for the \doublequotes{original italics} we used
+%    the lining figures~\singlequotes{\code{lf}} version of the font, whereas the
+%    \doublequotes{less angled} version shows the oldstyle figures~\singlequotes{\code{osf}}
+%    version.
 %
 %    The \TeX{} Font Metrics file (\acronym{TFM}) for this particular variant of Libre~Caslon
 %    was not touched.
@@ -2238,11 +2240,13 @@ end
 %  font or upright italics.  Here, the first step is to check the font's license whether the
 %  generation of a variant is permitted and what restrictions apply to its use.
 %
-%  \application{FontForge} can generate slanted versions of a given set of glyphs with the
-%  \acronym{GUI}-sequence: Element~\(\rightarrow\) Style~\(\rightarrow\) Oblique and the desired
-%  slant angle in degrees (though with the opposite sign that \packagename{syntslant} uses).  In
-%  \application{FontForge}'s own extension language the corresponding procedure is
-%  called~\code{Skew}.
+%  \detoxindex{FontForge=\application{FontForge}|userman}\application{FontForge} can generate
+%  slanted versions of a given set of glyphs with the \acronym{GUI}-sequence: Element~> Style~>
+%  Oblique and the desired slant angle in degrees (though with the opposite sign that
+%  \packagename{syntslant} uses).  In \application{FontForge}'s own extension language the
+%  corresponding function is called~\code{Skew}, in the Python extension use
+%  module function~\code{psMat.skew} to generate the transformation matrix and apply
+%  method~\code{transform} to a glyph with this matrix as method argument.
 %
 %  Note that some of the glyphs' attributes as e.\,g.~tracking, kerning, or hints may be gone or
 %  wrong for the slanted versions of the selected glyphs.
@@ -2254,7 +2258,8 @@ end
 %  Finally, install the font e.\,g.~with \application{autoinst} which is part of
 %  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.
 %  If the slanted font is to integrate seamlessly with the existing fonts, usually some of the
-%  relevant font-description files (\filesystem{.fd}) have to be modified.
+%  relevant font-description files (\filesystem{.fd}) have to be
+%  modified.\label{secend:alternative}
 %
 %
 %  \clearpage
@@ -2267,7 +2272,7 @@ end
 %
 %
 %  \newcommand*{\codeidx}[1]{\linenumberdecoration\textbf{#1}}
-%  \renewcommand*{\main}[1]{\linenumberdecoration\underbar{\textbf{#1}}}
+%  \renewcommand*{\main}[1]{\linenumberdecoration\textit{\textbf{#1}}}
 %  \renewcommand*{\usage}[1]{\textit{\textbf{#1}}}
 %
 %  \MaybeStop{
@@ -2279,15 +2284,26 @@ end
 %      \resetfancyhead
 %      \addtocontents{toc}{\bigskip}
 %      \addcontentsline{toc}{section}{\numberline{}Change History}
+%      \GlossaryPrologue{\section*{Change History}
+%                        \markboth{\sf\letterspacedsmallcaps{Change History}}{\sf\letterspacedsmallcaps{Change History}}}
 %      \PrintChanges
 %    \endgroup
+%
 %
 %    \clearpage
 %    \phantomsection
 %    \addtocontents{toc}{\medskip}
-%    \addcontentsline{toc}{section}{\numberline{}References}
+%    \addcontentsline{toc}{section}{\protect\numberline{}References}
 %    \begin{RaggedRight}
+%      \def\MakeUppercase##1{\sf\letterspacedsmallcaps{##1}}
 %      \begin{thebibliography}{88}
+%      \bibitem{package:amsmath}
+%              \bibauthor{American Mathematical Society} and the
+%              \bibauthor{\LaTeXIII\ Project Team}.
+%              \bibtitle{Package~\packagename{amsmath}}.
+%              2020,
+%              \biburl{https://ctan.org/pkg/amsmath}.
+%
 %      \bibitem{package:relsize}
 %          \bibauthor{Arseneau, Donald}.
 %          \bibtitle{The \textsf{relsize} package}.
@@ -2438,6 +2454,8 @@ end
 %  \addtocontents{toc}{\tocsquashedsubsections}
 %  \addtocontents{toc}{\protect\begin{multicols}{2}}
 %  \addtocontents{toc}{\protect\raggedcolumns}
+%  \index{package code|userman}
+%  \index{code reference|userman}
 %
 %  This is the \doublequotes{Reference Manual} section of the documentation
 %  where we describe the package's code
@@ -3018,7 +3036,7 @@ end
 %
 %  \begin{macro}{\synthslantbox@right@negslant@correction}
 %    We could play the same trick here as in \cs{synthslantbox@\-right@\-slant@\-correction} and
-%    use \cs{synthnegslant} instead of \cs{synthslant}.  But my experiments show no need for a
+%    use \cs{synthnegslant} instead of \cs{synthslant}.  But our experiments show no need for a
 %    correction.  Anyhow, this macro may be convenient to override someday.
 %
 %    \begin{macrocode}
@@ -5726,13 +5744,13 @@ value of all deltas should be much less than 3pt.
 \subsection{Line-Breaking}
 
 Left: plain text,  \\
-right: \code{\cs{textsynthslant}\{Show line-break\cs{-}ing in a sen\cs{-}tence.\}}
+right: \code{\cs{textsynthslant}\{Show line-break\cs{-}ing with a sen\cs{-}tence.\}}
 
 \begin{center}
   \setlength{\overfullrule}{0pt}
   \begin{minipage}[t]{0pt}Show line-breaking with a sentence.\end{minipage}%
   \hspace*{100pt}%
-  \begin{minipage}[t]{0pt}\textsynthslant{Show line-break\-ing in a sen\-tence.}\end{minipage}
+  \begin{minipage}[t]{0pt}\textsynthslant{Show line-break\-ing with a sen\-tence.}\end{minipage}
 \end{center}
 
 
