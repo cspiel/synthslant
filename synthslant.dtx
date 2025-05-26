@@ -1,6 +1,6 @@
 %  \iffalse
 %
-%  Copyright (C) 2024 by Ch. L. Spiel
+%  Copyright (C) 2025 by Ch. L. Spiel
 %
 %  This work may be distributed and/or modified under the conditions
 %  of the LaTeX Project Public License, either version 1.3c of this
@@ -737,7 +737,7 @@ quote             '!'
 %  \DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\ProcessOptionsX,\providecommand,\ProvidesPackage}
 %  \DoNotIndex{\pdfoutput,\pdfrestore,\pdfsave,\pdfsetmatrix,\pstilt}
 %  \DoNotIndex{\relax,\RequirePackage}
-%  \DoNotIndex{\sbox,\skip,\space,\string}
+%  \DoNotIndex{\sbox,\setbox,\skip,\space,\string}
 %  \DoNotIndex{\tikz}
 %  \DoNotIndex{\upshape,\usebox}
 %  \DoNotIndex{\wd}
@@ -2450,7 +2450,7 @@ end
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2025/05/16  v0.1b  Synthetically Slant glyphs]
+                [2025/05/22  v0.2  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
@@ -2858,6 +2858,7 @@ end
 %    Allow for line breaks at hyphenation opportunities~(\singlequotes{\cs{-}}).
 %
 %    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
+%    \changes{v0.2}{2025-5-22}{Also slant discretionary hyphens at the end of a line.}
 %    \begin{macrocode}
 \def\synthslantbox@soft@hyphen#1\-#2\@nil{%
   \synthslant@shear@box{\synthslant@slant@value}{#1}%
@@ -2865,7 +2866,8 @@ end
     \relax
   \else
     \synthslant@nolinebreak
-    \discretionary{-}{}{}%
+    \setbox0=\hbox{\synthslant@shear@box{\synthslant@slant@value}{-}}%
+    \discretionary{\box0}{}{}%
     \synthslantbox@soft@hyphen#2\@nil
   \fi
 }
