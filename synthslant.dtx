@@ -70,8 +70,8 @@
 
 
 \makeatletter
-\def\@get@fontclan#1-#2\relax{#1}
-\newcommand*{\fontclan}{\expandafter\@get@fontclan\f@family\relax}
+\def\@get@fontclan#1-#2\@nil{#1}
+\newcommand*{\fontclan}{\expandafter\@get@fontclan\f@family\@nil}
 \makeatother
 
 \DeclareRobustCommand{\proportionalliningfigures}{\fontfamily{\fontclan-LF}\selectfont}
@@ -587,7 +587,7 @@
                 {\end{tcolorbox}}
 
 \newcommand*{\synthslantlogo}
-            {{\sf
+            {{\sffamily
               S\hspace{-.06em}\synthslantbox{.15}{y}\hspace{.04em}nth%
               \hspace{-.02em}%
               Slant}}
@@ -738,7 +738,13 @@ quote             '!'
 %
 %  \pagenumbering{roman}
 %
-%  \title{\synthslantlogo{} -- Synthetically Slanted Glyphs}
+%  \title{\vspace{-40pt}%
+%         {\sffamily
+%          \elseries\fontsize{72}{0}\selectfont
+%          \textls[-25]{\synthslantlogo}  \\[10pt]
+%          \elseries\fontsize{26}{0}\selectfont
+%          \textls[-5]{Synthetically Slanted Glyphs}}  \\[22pt]
+%         \large A \LaTeX{} Package for Artificial Text Slanting}
 %  \author{Ch.~L.~Spiel\footnote{\quarterspace\texttt{cspiel@users.sourceforge.org}}}
 %  \date{\fileversion\qquad \filedate}
 %  \maketitle
@@ -746,12 +752,13 @@ quote             '!'
 %
 %
 %  \begingroup
+%    \renewcommand*{\abstractname}{{\sffamily Abstract}}
 %    \let\small=\normalsize
 %    \begin{abstract}
 %      \noindent
-%      Package~\packagename{synthslant} provides macros to slant arbitrary glyphs in both
-%      directions.  It can be used to fake a real slanted font for \emph{short} pieces of text
-%      and it can generate startling effects, like, for example, upright italics.
+%      The \packagename{synthslant} package provides macros to slant arbitrary glyphs in both
+%      directions.  It can be used to simulate a real slanted font for \textsynthslant{short}
+%      pieces of text and can generate effects like upright italics.
 %    \end{abstract}
 %  \endgroup
 %
@@ -809,6 +816,7 @@ end
 %</title>
 %  \fi
 %
+%  \vfill
 %
 %  \begin{center}
 %    \includegraphics{title.mps}
@@ -928,12 +936,11 @@ end
 %
 %  \subsection{Appeal for Artificially Slanted Type}\label{sec:appleal-for-artificially-slanted}
 %
-%  Artificially slanted type have a lousy reputation.  Whenever there is an order to round up
-%  the usual font suspects synthetically slanted, bolded\footnote{Package~\packagename{amsbsy}
-%  defines a \doublequotes{Poor Man's Bold} macro~\cs{pmb} that works by
-%  \singlequotes{overprinting}.  The authors of \packagename{amsbsy} recommend to prefer
-%  package~\packagename{bm} for bold mathematical symbols, though.}\!, and condensed type along
-%  with artificial small-caps swiftly are stuffed into the black Maria.\!\footnote{See for example
+%  Artificially slanted type have a bad reputation along with artificially
+%  bolded\footnote{Package~\packagename{amsbsy} defines a \doublequotes{Poor Man's Bold}
+%  macro~\cs{pmb} that works by \singlequotes{overprinting}.  The authors of
+%  \packagename{amsbsy} recommend to prefer package~\packagename{bm} for bold mathematical
+%  symbols, though.}\!, and condensed type.\!\footnote{See for example
 %  Ref.~\citenum{strizver:2014}, p.~97, but compare with p.~142 and also
 %  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  We can retrace this
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
@@ -991,16 +998,24 @@ end
 %  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
 %  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
 %  upright italics\footnote{Only a few font families come with upright italics as,
-%  e.\,g., FF~Seria, Joanna, Literata, Odile, or Romanée.}\!.\relax
+%  e.\,g., Anona, Auto~3, Coline Extrême, FF~Seria, Goudy Old Style (well, almost upright),
+%  Joanna, Literata, Odile, Romanée, Seria and Seria Sans.}\!.\relax
+%  \index{font>typeface>Anona|userman}\relax
+%  \index{font>typeface>Auto 3|userman}\relax
+%  \index{font>typeface>Coline Extrême|userman}\relax
 %  \index{font>typeface>FF Seria=\acronym{FF}~Seria|userman}\relax
+%  \index{font>typeface>Goudy Old Style|userman}\relax
 %  \index{font>typeface>Joanna|userman}\relax
 %  \index{font>typeface>Literata|userman}\relax
 %  \index{font>typeface>Odile|userman}\relax
-%  \index{font>typeface>Romanée|userman}
+%  \index{font>typeface>Romanée|userman}\relax
+%  \index{font>typeface>Seria|userman}\relax
+%  \index{font>typeface>Seria Sans|userman}
 %  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
 %  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
 %  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
 %
+%  \enlargethispage{2\baselineskip}
 %  \begin{wraptable}{r}{.382\textwidth}
 %    \renewcommand*{\floatcaptionwidth}{\textwidth}
 %    \small
@@ -1013,12 +1028,15 @@ end
 %      \toprule
 %      Font  \\
 %      \midrule
+%      Adapter\index{font>typeface>Adapter|userman}  \\
+%      Armoire\index{font>typeface>Armoire|userman}  \\
 %      Cairo\index{font>typeface>Cairo|userman}  \\
 %      Commissioner\index{font>typeface>Commissioner|userman}  \\
 %      Geologica\index{font>typeface>Geologica|userman}  \\
 %      Gluten\index{font>typeface>Gluten|userman}  \\
 %      Inter\index{font>typeface>Inter|userman}  \\
 %      Recursive\index{font>typeface>Recursive|userman}   \\
+%      Ritualist\index{font>typeface>Ritualist|userman}  \\
 %      Roboto Flex\index{font>typeface>Roboto Flex|userman}  \\
 %      \bottomrule
 %    \end{tabular}
