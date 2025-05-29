@@ -58,7 +58,6 @@
 \usepackage{titlesec}
 \usepackage[most]{tcolorbox}
 \usepackage{titlesec}
-\usepackage{wrapfig}
 \usepackage{xcolor}
 
 
@@ -997,53 +996,68 @@ end
 %  Roman}\index{font>typeface>CM Roman=\acronym{CM} Roman|userman} --~nowadays member of the
 %  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
 %  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
-%  upright italics\footnote{Only a few font families come with upright italics as,
-%  e.\,g., Anona, Auto~3, Coline Extrême, FF~Seria, Goudy Old Style (well, almost upright),
-%  Joanna, Literata, Odile, Romanée, Seria and Seria Sans.}\!.\relax
-%  \index{font>typeface>Anona|userman}\relax
-%  \index{font>typeface>Auto 3|userman}\relax
-%  \index{font>typeface>Coline Extrême|userman}\relax
-%  \index{font>typeface>FF Seria=\acronym{FF}~Seria|userman}\relax
-%  \index{font>typeface>Goudy Old Style|userman}\relax
-%  \index{font>typeface>Joanna|userman}\relax
-%  \index{font>typeface>Literata|userman}\relax
-%  \index{font>typeface>Odile|userman}\relax
-%  \index{font>typeface>Romanée|userman}\relax
-%  \index{font>typeface>Seria|userman}\relax
-%  \index{font>typeface>Seria Sans|userman}
-%  Furthermore, the \LaTeXe{} font selection scheme provisions \singlequotes{\code{sl}} for
-%  slanted shapes and \singlequotes{\code{ui}} for upright italics~\cite{fntguide}.  The former
-%  is accompanied by the macros~\cs{slshape} and~\cs{textsl}.
+%  upright italics.  Only a few font families come with upright italics; see
+%  \cref{tab:upright-italics}.  Furthermore, the \LaTeXe{} font selection scheme provisions
+%  \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for upright
+%  italics~\cite{fntguide}.  The former is accompanied by the macros~\cs{slshape}
+%  and~\cs{textsl}.
 %
-%  \enlargethispage{2\baselineskip}
-%  \begin{wraptable}{r}{.382\textwidth}
-%    \renewcommand*{\floatcaptionwidth}{\textwidth}
-%    \small
-%    \centering
-%    \caption[Variable fonts with slant-axis]
-%            {A short list of some variable fonts with a slant axis (\code{slnt}).}
-%    \label{tab:open-type-slant-feature}
+%  \begingroup
+%    \captionsetup[table]{width=.36\textwidth}
+%    \begin{table}\hfill
+%      \begin{minipage}{.36\textwidth}
+%        \centering
+%        \small
+%        \caption[Fonts with upright italics]
+%                {Some font families or fonts that come with upright italics.}
+%        \label{tab:upright-italics}
 %
-%    \begin{tabular}{@{}l@{}}
-%      \toprule
-%      Font  \\
-%      \midrule
-%      Adapter\index{font>typeface>Adapter|userman}  \\
-%      Armoire\index{font>typeface>Armoire|userman}  \\
-%      Cairo\index{font>typeface>Cairo|userman}  \\
-%      Commissioner\index{font>typeface>Commissioner|userman}  \\
-%      Geologica\index{font>typeface>Geologica|userman}  \\
-%      Gluten\index{font>typeface>Gluten|userman}  \\
-%      Inter\index{font>typeface>Inter|userman}  \\
-%      Recursive\index{font>typeface>Recursive|userman}   \\
-%      Ritualist\index{font>typeface>Ritualist|userman}  \\
-%      Roboto Flex\index{font>typeface>Roboto Flex|userman}  \\
-%      \bottomrule
-%    \end{tabular}
-%  \end{wraptable}
+%        \begin{tabular}{@{}l@{}}
+%          \toprule
+%          Font  \\
+%          \midrule
+%          Anona\index{font>typeface>Anona|userman}  \\
+%          Auto~3\index{font>typeface>Auto 3|userman}  \\
+%          Coline Extrême\index{font>typeface>Coline Extrême|userman}  \\
+%          FF Seria\index{font>typeface>FF Seria=\acronym{FF}~Seria|userman}  \\
+%          Goudy Old Style\index{font>typeface>Goudy Old Style|userman}  \\
+%          Joanna\index{font>typeface>Joanna|userman}  \\
+%          Literata\index{font>typeface>Literata|userman}  \\
+%          Odile\index{font>typeface>Odile|userman}  \\
+%          Romanée\index{font>typeface>Romanée|userman}  \\
+%          Seria\index{font>typeface>Seria|userman}  \\
+%          \bottomrule
+%        \end{tabular}
+%      \end{minipage}\hfill
+%      \begin{minipage}{.36\textwidth}
+%        \centering
+%        \small
+%        \caption[Variable fonts with slant-axis]
+%                {A short list of some variable fonts with a slant axis (\code{slnt}).}
+%        \label{tab:open-type-slant-feature}
 %
-%  Refer to \cref{tab:open-type-slant-feature} on the right for a brief list of variable
-%  fonts\footnote{See also the \LaTeX~Font Catalogue for
+%        \begin{tabular}{@{}l@{}}
+%          \toprule
+%          Font  \\
+%          \midrule
+%          Adapter\index{font>typeface>Adapter|userman}  \\
+%          Armoire\index{font>typeface>Armoire|userman}  \\
+%          Cairo\index{font>typeface>Cairo|userman}  \\
+%          Commissioner\index{font>typeface>Commissioner|userman}  \\
+%          Geologica\index{font>typeface>Geologica|userman}  \\
+%          Gluten\index{font>typeface>Gluten|userman}  \\
+%          Inter\index{font>typeface>Inter|userman}  \\
+%          Recursive\index{font>typeface>Recursive|userman}   \\
+%          Ritualist\index{font>typeface>Ritualist|userman}  \\
+%          Roboto Flex\index{font>typeface>Roboto Flex|userman}  \\
+%          \bottomrule
+%        \end{tabular}
+%      \end{minipage}\hfill\mbox{}
+%    \end{table}
+%  \endgroup
+%
+%  Refer to \cref{tab:open-type-slant-feature} for a brief list of variable fonts\footnote{See
+%  also the \LaTeX~Font Catalogue for
 %  \href{https://tug.org/FontCatalogue/opentypefonts.html}%
 %       {Fonts with \propername{OpenType} or \propername{TrueType}~Support}
 %  and search \href{https://fonts.google.com/}{Google Fonts} for families of
@@ -1062,17 +1076,15 @@ end
 %  \begin{table}
 %    \small
 %    \centering
-%    \caption[Fonts with slanted series]
-%            {Selected fonts that come with their own slanted series.~\visualpar{} The table on
-%             the left-hand side shows serif fonts, the one on the right-hand side sans-serif
-%             fonts.}
+%    \caption[Font families with slanted series]
+%            {Selected font families that come with their own slanted series.}
 %    \label{tab:slanted-series-fonts}
 %
 %    \newcommand*{\itshapemark}{\tablenotemark{\dag}}%
 %
 %    \begin{tabular}[t]{@{}p{12em}@{}}
 %      \toprule
-%      Font  \\
+%      Serif Font  \\
 %      \midrule
 %      Arvo\index{font>typeface>Arvo|userman}  \\
 %      \acronym{CM} Roman\index{font>typeface>CM Roman=\acronym{CM} Roman|userman}  \\
@@ -1089,7 +1101,7 @@ end
 %    \qquad
 %    \begin{tabular}[t]{@{}p{12em}@{}}
 %      \toprule
-%      Font  \\
+%      Sans-Serif Font  \\
 %      \midrule
 %      Cabin\index{font>typeface>Cabin|userman}  \\
 %      Clear Sans\index{font>typeface>Clear Sans|userman}  \\
