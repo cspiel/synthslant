@@ -18,7 +18,6 @@
 
 \tracingonline=0
 
-%--\OnlyDescription
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -396,8 +395,11 @@
              \framebox{\rule{#1}{0pt}\rule{0pt}{#2}}}
 \newcommand*{\hollowsquare}[1]{\hollowrectangle{#1}{#1}}
 
+\NewMarkClass{IndexGroup}
+\newcommand*{\indexgroup}[1]{\InsertMark{IndexGroup}{#1}#1}
+
 \apptocmd{\IndexParms}
-         {\RaggedRight\small}
+         {\setstretch{1}\RaggedRight\small}
          {\relax}
          {\AppendingFailed}
 
@@ -587,7 +589,7 @@
 
 \newcommand*{\synthslantlogo}
             {{\sffamily
-              S\hspace{-.06em}\synthslantbox{.15}{y}\hspace{.04em}nth%
+              S\hspace{-.05em}\synthslantbox{.15}{y}\hspace{.07em}nth%
               \hspace{-.02em}%
               Slant}}
 
@@ -679,7 +681,7 @@ actual            '='
 delim_0           "\\nobreak\\enspace"
 delim_1           "\\nobreak\\enspace"
 delim_2           "\\nobreak\\enspace"
-heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large "
+heading_prefix    "\\pagebreak[3]\\smallskip\n\n{\\sffamily\\bfseries\\large\\indexgroup "
 heading_suffix    "}\\nopagebreak\n"
 headings_flag     1
 level             '>'
@@ -945,7 +947,7 @@ end
 %  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
 %  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
 %  problems are somewhat minor and we wonder how far one could get with an
-%  \propername{OpenType}~font that supports a
+%  \propername{OpenType}\detoxindex{OpenType=\propername{OpenType}|userman}~font that supports a
 %  \code{size}~axis\index{font>axis>size=\code{size}|userman} as well as an
 %  \code{opsz}~axis\index{font>axis>opsz=\code{opsz}|userman} in the necessary ranges to
 %  construct convincing small-caps out of the multiple-master
@@ -982,11 +984,13 @@ end
 %
 %  \subsection{Some History}\label{sec:history}
 %
-%  Italics accompanying a roman font date back to one of the earliest print shops, namely that
-%  of \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
-%  1500\:A.\,C\@.  Artificially slanted, also known as \singlequotes{oblique}, versions of
-%  upright fonts appear in the twentieth century, when type designers and foundries start to
-%  save time and money by automatically constructing a slanted version of a given roman
+%  Italics\index{italics|userman} accompanying a roman font date back to one of the earliest
+%  print shops, namely that of
+%  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
+%  1500\:A.\,C\@.  Artificially slanted, also known as
+%  \singlequotes{oblique},\index{oblique|userman} versions of upright fonts appear in the
+%  twentieth century, when type designers and foundries start to save time and money by
+%  automatically constructing a slanted version of a given roman
 %  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} closely follows on their
 %  steps.
 %
@@ -1003,11 +1007,10 @@ end
 %  and~\cs{textsl}.
 %
 %  \begingroup
-%    \captionsetup[table]{width=.36\textwidth}
+%    \captionsetup[table]{width=.4\textwidth}
 %    \begin{table}\hfill
-%      \begin{minipage}{.36\textwidth}
+%      \begin{minipage}{.4\textwidth}
 %        \centering
-%        \small
 %        \caption[Fonts with upright italics]
 %                {Some font families or fonts that come with upright italics.}
 %        \label{tab:upright-italics}
@@ -1029,9 +1032,8 @@ end
 %          \bottomrule
 %        \end{tabular}
 %      \end{minipage}\hfill
-%      \begin{minipage}{.36\textwidth}
+%      \begin{minipage}{.4\textwidth}
 %        \centering
-%        \small
 %        \caption[Variable fonts with slant-axis]
 %                {A short list of some variable fonts with a slant axis (\code{slnt}).}
 %        \label{tab:open-type-slant-feature}
@@ -1059,13 +1061,14 @@ end
 %  Refer to \cref{tab:open-type-slant-feature} for a brief list of variable fonts\footnote{See
 %  also the \LaTeX~Font Catalogue for
 %  \href{https://tug.org/FontCatalogue/opentypefonts.html}%
-%       {Fonts with \propername{OpenType} or \propername{TrueType}~Support}
+%       {Fonts with \propername{OpenType}\detoxindex{OpenType=\propername{OpenType}|userman} or
+%        \propername{TrueType}~Support}
 %  and search \href{https://fonts.google.com/}{Google Fonts} for families of
 %  \href{https://fonts.google.com/variablefonts?vfaxis=slnt}{variable fonts with a
 %  \code{slnt}-axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
 %  \href{https://v-fonts.com/}{Variable Fonts}.}  that offer a slant-axis\footnote{The
 %  registered axis is called \code{slnt} and it is not to be confused with the
-%  \code{ital}~axis.}\index{font>axis>slant=\code{slant}|userman}\index{font>axis>ital=\code{ital}|userman}
+%  \code{ital}~axis.}\index{font>axis>slnt=\code{slnt}|userman}\index{font>axis>ital=\code{ital}|userman}
 %  that can be controlled with
 %  \packagename{fontspec}'s\index{package>fontspec=\packagename{fontspec}|userman}
 %  \code{Slant}\footnote{Since \packagename{fontspec} version~2.9a as of 2024/2/13.}~key and
@@ -1074,13 +1077,12 @@ end
 %  e.\,g.~they also come with an italics shape that is to be typeset upright.
 %
 %  \begin{table}
-%    \small
 %    \centering
 %    \caption[Font families with slanted series]
 %            {Selected font families that come with their own slanted series.}
 %    \label{tab:slanted-series-fonts}
 %
-%    \newcommand*{\itshapemark}{\tablenotemark{\dag}}%
+%    \newcommand*{\itshapemark}{\tablenotemark{\dag}}\relax
 %
 %    \begin{tabular}[t]{@{}p{12em}@{}}
 %      \toprule
@@ -1122,13 +1124,15 @@ end
 %  \end{table}
 %
 %  It seems that the original idea of automatically shearing text in \LaTeX{} to simulate a
-%  slanted shape goes back to \propername{David Carlisle} who suggested to use the
-%  \pdfTeX-primitive \cs{pdfliteral} for shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly
-%  thereafter \propername{Bruno Le Floch} pointed to another \pdfTeX-primitive, namely
-%  \cs{pdfsetmatrix}, available with (in 2013) more recent
-%  \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the transformation
-%  matrix has been part of the \acronym{PDF}-standard since its initial publication in
-%  1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
+%  slanted shape goes back to
+%  \propername{David Carlisle}\index{Carlisle=\propername{Carlisle, David}|userman}
+%  who suggested to use the \pdfTeX-primitive \cs{pdfliteral} for
+%  shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly thereafter
+%  \propername{Bruno Le Floch}\index{Floch=\propername{Le Floch, Bruno}|userman}
+%  pointed to another \pdfTeX-primitive, namely \cs{pdfsetmatrix}, available with (in 2013) more
+%  recent \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the
+%  transformation matrix has been part of the \acronym{PDF}-standard since its initial
+%  publication in 1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
 %  (\singlequotes{concat}~-- concatenate matrix to current transformation matrix).~\visualpar{}
 %  The primitive~\cs{pdfliteral} was implemented already in the first release of \pdfTeX{}
 %  in~1998~\cite{baskerville-pdftex-8-1:1998} and the primitive~\cs{pdfsetmatrix} joined 2007 in
@@ -1323,7 +1327,7 @@ end
 %  \begin{enumerate}
 %  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
 %    Generate a slanted serif in the unfortunate situation when a serif font comes without
-%    italics such as
+%    italics\index{italics|userman} such as
 %    \singlequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
 %
 %    Here, the user is relatively free to choose a \meta{slant}, for there are no italics whose
@@ -1353,8 +1357,10 @@ end
 %    pages~\pageref{sec:alternative}--\pageref{secend:alternative} may be warranted.
 %
 %  \item\label{it:generate-sole-obliques}
-%    Generate an oblique sans-serif if a sans-serif font comes without an oblique shape as,
-%    e.\,g., \singlequotes{\acronym{URW}~Grotesk}.\index{font>typeface>URW Grotesk=\acronym{URW} Grotesk|userman}
+%    Generate an oblique sans-serif if a sans-serif font comes without an
+%    oblique\index{oblique|userman} shape as, e.\,g.,
+%    \singlequotes{\acronym{URW}~Grotesk}.\index{font>typeface>URW Grotesk=\acronym{URW}
+%    Grotesk|userman}
 %
 %  \item\label{it:generate-extra-obliques}
 %    Supply a slanted sans-serif shape for sans-serif fonts with designed, this is \emph{true}
@@ -1422,9 +1428,10 @@ end
 %    \indexpackageoption{auto}
 %    Let the package choose a slant engine.  This is the default.
 %
-%    For \pdfLaTeX{} package \packagename{synthslant} selects the \acronym{PDF}-engine, for
-%    \LuaLaTeX{} the \packagename{fontspec}-engine, and in all other cases the
-%    \packagename{l3draw}-layer handles the shear transformation.
+%    For \pdfLaTeX\index{pdflatex=\pdfLaTeX|userman} package \packagename{synthslant} selects
+%    the \acronym{PDF}-engine, for \LuaLaTeX\index{lualatex=\LuaLaTeX|userman} the
+%    \packagename{fontspec}-engine, and in all other cases the \packagename{l3draw}-layer
+%    handles the shear transformation.
 %
 %  \item[|disable|]\label{item:disable}
 %    \indexpackageoption{disable}
@@ -1439,8 +1446,8 @@ end
 %  \item[|l3draw|]\label{item:l3draw}
 %    \indexpackageoption{l3draw}
 %    Select the \singlequotes{draw} layer\index{package>l3draw=\packagename{l3draw}|userman} of
-%    \LaTeXIII{} as base for the slanting engine.\!\footnote{This option requires
-%    \filesystem{l3draw.sty.}}
+%    \LaTeXIII\index{latex3=\LaTeXIII|userman} as base for the slanting engine.\!\footnote{This
+%    option requires \filesystem{l3draw.sty.}}
 %
 %    \begin{caution}
 %      This engine is experimental and the \singlequotes{draw} layer of \LaTeXIII{} itself is
@@ -1457,7 +1464,7 @@ end
 %  \item[|PDF|, |pdf|]\label{item:pdf}
 %    \indexpackageoption{pdf}
 %    Select the \acronym{PDF}-slant engine.  This option requires that the document is
-%    translated with \pdfLaTeX{} or a compatible program.
+%    translated with \pdfLaTeX\index{pdflatex=\pdfLaTeX|userman} or a compatible program.
 %
 %  \item[|posslant=|\meta{slant-expr}]\label{item:posslant}
 %    \indexpackageoption{posslant}
@@ -1535,7 +1542,6 @@ end
 %  \Cref{tab:slant-values} summarizes some suggested slant values for selected fonts.
 %
 %  \begin{table}
-%    \small
 %    \centering
 %    \caption[Suggested slant values]
 %            {Suggested slant values for selected \emph{serif} fonts.  The \meta{slant} shown in
@@ -1742,7 +1748,7 @@ end
 %  \end{usecases}
 %
 %  \DescribeMacro{\textsynthuprightitalic}
-%  Backward slant some italics or oblique glyphs.
+%  Backward slant some italics\index{italics|userman} or oblique\index{italics|userman} glyphs.
 %
 %  \begin{synopsis}\label{syn:textsynthuprightitalic}
 %    \cs{textsynthuprightitalic}\marg{text}
@@ -1916,8 +1922,9 @@ end
 %  \clearpage
 %  \section{How to Determine And Match Slant}\label{sec:determine-slant}
 %
-%  If a synthetically slanted piece of text needs to match to an existing italics or oblique
-%  font the question arises how to determine the slant angle~\(\alpha\) or~\meta{slant}.
+%  If a synthetically slanted piece of text needs to match to an existing
+%  italics\index{italics|userman} or oblique\index{oblique|userman} font the question arises how
+%  to determine the slant angle~\(\alpha\) or~\meta{slant}.
 %
 %  \begin{note}
 %    The slant angles of different italics or oblique glyphs in the same font may slightly
@@ -1978,8 +1985,8 @@ end
 %
 %  \subsubsection{Slanted Upright \& Graphics Program}\label{sec:slanted-upright-plus-graphics-program}
 %
-%  Compare the italics or oblique shapes of a font with the synthetically slanted upright shapes
-%  in a graphics program.
+%  Compare the italics\index{italics|userman} or oblique\index{oblique|userman} shapes of a font
+%  with the synthetically slanted upright shapes in a graphics program.
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item In file~\filesystem{synthslant-gauge.tex} --~which comes with the
@@ -2068,7 +2075,7 @@ end
 %  \begin{description}
 %  \item[All except \packagename{fontspec}.]
 %    \packagename{Syntslant}~manipulations may not survive
-%    (pre-)\discretionary{}{}{}processing by \MP.
+%    (pre-)\discretionary{}{}{}processing by \MP.\index{MetaPost=\MP|userman}
 %
 %  \item[\packagename{l3draw} engine.]\index{package>l3draw=\packagename{l3draw}|userman}\mbox{}
 %    \begin{itemize}
@@ -2248,7 +2255,8 @@ end
 %
 %
 %  \clearpage
-%  \subsection{Directly Use \LuaLaTeX{} and Package \packagename{fontspec}\label{sec:alternative-lualatex}}
+%  \subsection{Directly Use \LuaLaTeX{} and Package
+%              \packagename{fontspec}\label{sec:alternative-lualatex}}\index{lualatex=\LuaLaTeX|userman}
 %
 %  The \LuaTeX{} engine can be coaxed to transform glyphs similar to \pdfTeX.  With the support
 %  of package~\packagename{fontspec}~\cite{package:fontspec}\relax
@@ -2282,8 +2290,9 @@ end
 %  wrong for the slanted versions of the selected glyphs.
 %
 %  When exporting the changed font from a font editor users of \pdfTeX{} and \LuaTeX{} may
-%  choose different formats, think of \acronym{PFB} vs.~\acronym{TTF}.  If \MP{} will be a
-%  consumer of the newly created font, \acronym{PFB} must be used.
+%  choose different formats, think of \acronym{PFB} vs.~\acronym{TTF}.  If
+%  \MP\index{MetaPost=\MP|userman} will be a consumer of the newly created font, \acronym{PFB}
+%  must be used.
 %
 %  Finally, install the font e.\,g.~with \application{autoinst} which is part of
 %  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.
@@ -2484,8 +2493,8 @@ end
 %  \addtocontents{toc}{\tocsquashedsubsections}
 %  \addtocontents{toc}{\protect\begin{multicols}{2}}
 %  \addtocontents{toc}{\protect\raggedcolumns}
-%  \index{package code|userman}
-%  \index{code reference|userman}
+%  \index{package code|(userman}
+%  \index{code reference|(userman}
 %
 %  This is the \doublequotes{Reference Manual} section of the documentation
 %  where we describe the package's code
@@ -3122,6 +3131,8 @@ end
 
 %    \end{macrocode}
 %  \end{macro}
+%  \index{package code|)userman}
+%  \index{code reference|)(userman}
 %
 %
 %
