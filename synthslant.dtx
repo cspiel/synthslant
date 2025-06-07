@@ -1653,11 +1653,12 @@ end
 %  \noindent
 %  Both macros provide \emph{simplistic} support for slanting hyphenatable words and
 %  space-separated phrases for a given \meta{text}.  The fundamental shear transformation would
-%  produce an single unbreakable horizontal box.  We have added two provisions to re-enable at
+%  produce an single unbreakable horizontal box.  We have added some provisions to re-enable at
 %  least some breakability.
 %
 %  \begin{enumerate}
-%  \item Spaces introduce breakpoint,\index{breakpoint at space|userman} e.\,g.
+%  \item Spaces (literal \singlequotes{\textvisiblespace} or \cs{space}) introduce
+%    breakpoints,\index{breakpoint at space|userman} e.\,g.
 %    \begin{codeexample}
 %      \cs{textsynthslant}\{topological dual space\}
 %    \end{codeexample}
@@ -1665,18 +1666,55 @@ end
 %    second word (producing another horizontal box) and so on.  \TeX{} sees three (unbreakable)
 %    boxes and a discardable space when it comes to linebreaking.
 %
-%  \item Discretionary hyphens\index{discretionary hyphen|userman} in the form of
+%  \item Discretionary hyphens\index{discretionary hyphen (\cs{-})|userman} in the form of
 %    \singlequotes{\cs{-}} get propagated.  So, we could improve on our above example by saying
 %    \begin{codeexample}
 %      \cs{textsynthslant}\{topo\cs{-}log\cs{-}i\cs{-}cal dual space\}
 %    \end{codeexample}
 %    to \singlequotes{recover} hyphenation of the first word.
+%
+%  \item Explicit \cs{discretionary} primitives\index{discretionary=\cs{discretionary}|userman}
+%    are honored.  The full glory of \cs{discretionary} is required for example to typeset the
+%    German compound nouns \singlequotes{Balle\discretionary{tt-}{t}{tt}änzer},
+%    \singlequotes{Be\discretionary{tt-}{t}{tt}uch},
+%    \singlequotes{Bre\discretionary{nn-}{n}{nn}essel}, and
+%    \singlequotes{Schi\discretionary{ff-}{f}{f\kern.0333pt f}ahrt} while sticking to the
+%    \doublequotes{old orthography}.  Also see the example below.
 %  \end{enumerate}
 %
 %  \noindent
-%  This neither is a complete nor an elegant solution but it will take us quite far.
+%  This is neither a complete nor an elegant solution but it will take us quite far.
 %
 %  \medskip
+%
+%  \begin{note}
+%    \packagename{Synthslant} splits \meta{text} at spaces.  This leads to some inconvenient
+%    interactions with \TeX- or \LaTeX-constructions that themselves need white space as
+%    terminators, e.\,g.~\cs{kern} or \cs{skip} or starred macros that normally consume white
+%    space on their right-hand sides with the help of \cs{ignorespaces}.
+%
+%    A workaround in these cases is to terminate the constructions with \cs{relax} as white
+%    space after \cs{relax} is handled the usual way.  Also see the following example.
+%  \end{note}
+%
+%  \begin{example}[Manually breaking ligatures]
+%    If a ligature is broken inside of \cs{textsynthslant} with an explicit kern, the \cs{kern}
+%    must immediately be followed with a \cs{relax} otherwise the space that normally is used as
+%    macro-argument terminator gets picked up by the gearing inside of \cs{textsynthslant}.
+%
+%    \begin{codeexample}
+%      1234\=\kill
+%      \cs{textsynthslant}\{\%  \\
+%             \>Schi\cs{discretionary}\=\{ff-\}\textit{\% ligature ok here}  \\
+%             \>                      \>\{f\}  \\
+%             \>                      \>\{f\cs{kern}.0333pt\cs{relax} f\}ahrt\%  \\
+%      \}
+%    \end{codeexample}
+%
+%    This problem can be circumnavigated by wrapping the \cs{kern} in a parameterless macro; a
+%    simpler way would be using macro~\cs{nolig} of
+%    package~\packagename{typog}~\cite{spiel:2024} right from the beginning.
+%  \end{example}
 %
 %  \DescribeMacro{\textsynthslant}
 %  Forward slant some upright glyphs.
@@ -2435,6 +2473,12 @@ end
 %              2007,
 %              \biburl{https://tug.org/mail-archives/pdftex/2007-January/006910.html}.
 %
+%      \bibitem{spiel:2024}
+%              \bibauthor{Spiel, Chris}.
+%              \bibtitle{Package~\packagename{typog}}.
+%              2024,
+%              \biburl{https://ctan.org/pkg/typog}.
+%
 %      \bibitem{stamm:2020}
 %              \bibauthor{Stamm, Philipp}.
 %              \bibtitle{Schrifttypen -- Verstehen Kombinieren:
@@ -2911,6 +2955,28 @@ end
 %  \end{macro}
 %
 %
+%  \begin{macro}{\synthslantbox@discretionary}
+%    Honor explicit \cs{discretionary} primitives.
+%
+%    \changes{v0.2}{2025-6-5}{New macro that allows parsing \cs{discretionary} primitives.}
+%    \begin{macrocode}
+\def\synthslantbox@discretionary#1\discretionary#2#3#4#5\@nil{%
+  \synthslant@shear@box{\synthslant@slant@value}{#1}%
+  \ifx\relax#5%
+    \relax
+  \else
+    \synthslant@nolinebreak
+    \setbox0=\hbox{\synthslant@shear@box{\synthslant@slant@value}{#2}}%
+    \setbox1=\hbox{\synthslant@shear@box{\synthslant@slant@value}{#3}}%
+    \setbox2=\hbox{\synthslant@shear@box{\synthslant@slant@value}{#4}}%
+    \discretionary{\box0}{\box1}{\box2}%
+    \synthslantbox@discretionary#5\@nil
+  \fi
+}
+
+%    \end{macrocode}
+%  \end{macro}
+%
 %  \begin{macro}{\synthslantbox@soft@hyphen}
 %    Allow for line breaks at hyphenation opportunities~(\singlequotes{\cs{-}}).
 %
@@ -2918,7 +2984,7 @@ end
 %    \changes{v0.2}{2025-5-22}{Also slant discretionary hyphens at the end of a line.}
 %    \begin{macrocode}
 \def\synthslantbox@soft@hyphen#1\-#2\@nil{%
-  \synthslant@shear@box{\synthslant@slant@value}{#1}%
+  \synthslantbox@discretionary#1\discretionary{}{}{}\@nil
   \ifx\relax#2%
     \relax
   \else
@@ -2953,18 +3019,41 @@ end
 %    \end{macrocode}
 %  \end{macro}
 %
-%  \begin{macro}{\synthslantbox@space}
-%    Allow for line breaks at embedded spaces~(\singlequotes{\textvisiblespace}).
+%  \begin{macro}{\synthslantbox@space@codesequence}
+%    This stage lets as cope with the macro~\cs{space} in contrast to
+%    \cs{synthslantbox@literalspace}, which handles literal
+%    spaces~\singlequotes{\textvisiblespace}.
 %
-%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
+%    \changes{v0.2}{2025-6-6}{New macro to handle explicit \cs{space} --~in addition to literal
+%    spaces~-- in \meta{text}.}
 %    \begin{macrocode}
-\def\synthslantbox@space#1 #2\@nil{%
+\def\synthslantbox@space@codesequence#1\space#2\@nil{%
   \synthslantbox@hard@hyphen#1-\@nil
   \ifx\relax#2%
     \relax
   \else
     \space
-    \synthslantbox@space#2\@nil
+    \synthslantbox@space@codesequence#2\@nil
+  \fi
+}
+
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{\synthslantbox@literal@space}
+%    Allow for line breaks at embedded spaces~(\singlequotes{\textvisiblespace}).
+%
+%    \changes{v0.1b}{2025-5-16}{Replace \cs{relax} with \cs{@nil} as end marker.}
+%    \changes{v0.2}{2025-6-6}{Rename from \cs{synthslantbox@\-space} to distinguish from new
+%    macro~\cs{synthslantbox@\-space@\-codesequence}.}
+%    \begin{macrocode}
+\def\synthslantbox@literal@space#1 #2\@nil{%
+  \synthslantbox@space@codesequence#1\space\@nil
+  \ifx\relax#2%
+    \relax
+  \else
+    \space
+    \synthslantbox@literal@space#2\@nil
   \fi
 }
 
@@ -3002,9 +3091,9 @@ end
   \newrobustcmd*{\synthslantbox}[2]{%
     \edef\synthslant@slant@value{#1}%
 %    \end{macrocode}
-%    The space in front of \cs{@nil} is crucial to initiate the chain of macro calls.
+%    The literal space in front of \cs{@nil} is crucial to initiate the chain of macro calls.
 %    \begin{macrocode}
-    \expandafter\synthslantbox@space#2 \@nil
+    \expandafter\synthslantbox@literal@space#2 \@nil
   }
 \fi
 
@@ -5792,6 +5881,17 @@ right: \code{\cs{textsynthslant}\{Show line-break\cs{-}ing with a sen\cs{-}tence
   \begin{minipage}[t]{0pt}Show line-breaking with a sentence.\end{minipage}%
   \hspace*{100pt}%
   \begin{minipage}[t]{0pt}\textsynthslant{Show line-break\-ing with a sen\-tence.}\end{minipage}
+\end{center}
+
+\noindent
+Left: \code{Schi\cs{discretionary}\{ff-\}\{f\}\{ff\}ahrt},  \\
+right: \code{\cs{textsynthslant}\{Schi\cs{discretionary}\{ff-\}\{f\}\{ff\}ahrt\}}
+
+\begin{center}
+  \setlength{\overfullrule}{0pt}
+  \begin{minipage}[t]{0pt}Schi\discretionary{ff-}{f}{ff}ahrt\end{minipage}%
+  \hspace*{100pt}%
+  \begin{minipage}[t]{0pt}\textsynthslant{Schi\discretionary{ff-}{f}{ff}ahrt}\end{minipage}
 \end{center}
 
 
