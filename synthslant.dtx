@@ -399,7 +399,7 @@
 \newcommand*{\indexgroup}[1]{\InsertMark{IndexGroup}{#1}#1}
 
 \apptocmd{\IndexParms}
-         {\setstretch{1}\RaggedRight\small}
+         {\RaggedRight\small}
          {\relax}
          {\AppendingFailed}
 
@@ -758,8 +758,8 @@ quote             '!'
 %    \begin{abstract}
 %      \noindent
 %      The \packagename{synthslant} package provides macros to slant arbitrary glyphs in both
-%      directions.  It can be used to simulate a real slanted font for \textsynthslant{short}
-%      pieces of text and can generate effects like upright italics.
+%      directions.  It can be used to simulate a slanted font for \textsynthslant{short} pieces
+%      of text and generate effects like upright italics.
 %    \end{abstract}
 %  \endgroup
 %
@@ -937,16 +937,16 @@ end
 %
 %  \subsection{Appeal for Artificially Slanted Type}\label{sec:appleal-for-artificially-slanted}
 %
-%  Artificially slanted type have a bad reputation along with artificially
-%  bolded\footnote{Package~\packagename{amsbsy} defines a \doublequotes{Poor Man's Bold}
+%  Artificially slanted typefaces have a poor reputation, much like artificial
+%  bold\footnote{Package~\packagename{amsbsy} defines a \doublequotes{Poor Man's Bold}
 %  macro~\cs{pmb} that works by \singlequotes{overprinting}.  The authors of
 %  \packagename{amsbsy} recommend to prefer package~\packagename{bm} for bold mathematical
-%  symbols, though.}\!, and condensed type.\!\footnote{See for example
-%  Ref.~\citenum{strizver:2014}, p.~97, but compare with p.~142 and also
-%  Ref.~\citenum{middendorp:2014}, p.~68n, for a more nuanced assessment.}  We can retrace this
-%  condescension for synthetic bold and condensed variants.  They spoil the glyphs' outline
-%  because they do not (and cannot) conserve the necessary proportions.  For small-caps the
-%  problems are somewhat minor and we wonder how far one could get with an
+%  symbols, though.} or condensed ones.\!\footnote{See for example Ref.~\citenum{strizver:2014},
+%  p.~97, but compare with p.~142 and also Ref.~\citenum{middendorp:2014}, p.~68n, for a more
+%  nuanced assessment.}  We can retrace this condescension for synthetic bold and condensed
+%  variants.  They spoil the glyphs' outline because they do not (and cannot) conserve the
+%  necessary proportions.  For small-caps the problems are somewhat minor; it is worth testing
+%  how far you can go using an
 %  \propername{OpenType}\detoxindex{OpenType=\propername{OpenType}|userman}~font that supports a
 %  \code{size}~axis\index{font>axis>size=\code{size}|userman} as well as an
 %  \code{opsz}~axis\index{font>axis>opsz=\code{opsz}|userman} in the necessary ranges to
@@ -957,22 +957,21 @@ end
 %  Element~> Style~> Add Small Capitals, script function: \code{SmallCaps}, and Python method:
 %  \code{addSmallCaps}.}
 %
-%  In our view artificial slanting keeps much of the font's character intact.  In fact one
-%  accusation of synthetically slanted type is that is creates less contrast than a proper
-%  italic~\cite[p.~141]{strizver:2014} to which we object that less contrast can in fact be
-%  enough contrast in a particular setting.  Moreover, small contrast with respect to the main
-%  type is a problem of second order.  It does not devalue the shape \foreignphrase{per se} as
-%  is true for artificial bold and condensed fonts.
+%  A common criticism of synthetically slanted type is that it lacks the contrast of true
+%  italics~\cite[p.~141]{strizver:2014}.  However, we argue that in many settings, this reduced
+%  contrast is sufficient.  Also, a slight contrast with the main typeface is a secondary
+%  concern.  It does not devalue the shape \foreignphrase{per se} as is true for artificial bold
+%  and condensed fonts.
 %
 %  What seems to have gotten lost in the discussion is the shapes of true italics that were
-%  designed alongside with the roman type.  If we have an unbiased look at it --~for example at
-%  the title~page of this manual~-- the italic versions of the upright characters are markedly
-%  different that we would like to ask whether they match the upright shape in a strict sense.
-%  For the double-storey~\sample{a} becomes single-storey, the start of the loop of~\sample{g}
-%  moves from the far left to the middle.  Alongside, the aspect ratio of both of the counters
-%  change.  These defy the common guidelines~\cite[Ch.~6]{stamm:2020} of font pairing.  We can
-%  make sense of the seeming contradiction by recognizing that the italics shape is not simply
-%  slanted, but creates tension in respect to the upright type by a variety of additional design
+%  designed alongside roman type.  If we have an unbiased look at it --~for example at the
+%  title~page of this manual~-- the italic versions of the upright characters are so markedly
+%  different that it is worth asking whether they truly match the upright forms.  For the
+%  double-storey~\sample{a} becomes single-storey, the start of the loop of~\sample{g} moves
+%  from the far left to the middle.  Besides, the aspect ratio of both counters change.  These
+%  differences challenge the common guidelines~\cite[Ch.~6]{stamm:2020} for font pairing.  This
+%  apparent contradiction makes sense when we recognize that italics are not just slanted
+%  versions of roman letters.  They introduce tension through several additional design
 %  features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once again:
 %
 %  \begin{quote}\small\samepage
@@ -991,8 +990,7 @@ end
 %  \singlequotes{oblique},\index{oblique|userman} versions of upright fonts appear in the
 %  twentieth century, when type designers and foundries start to save time and money by
 %  automatically constructing a slanted version of a given roman
-%  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} closely follows on their
-%  steps.
+%  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} follows in their footsteps.
 %
 %  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.
 %  \foreignphrase{Eureka!}  In particular the oldest (and once upon a time the only) font family
@@ -1326,7 +1324,7 @@ end
 %
 %  \begin{enumerate}
 %  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
-%    Generate a slanted serif in the unfortunate situation when a serif font comes without
+%    Generate a slanted serif in the unfortunate situation when a serif font lacks
 %    italics\index{italics|userman} such as
 %    \singlequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
 %
@@ -1344,16 +1342,16 @@ end
 %  \item\label{it:upright-italics}
 %    Augment a serif font that features an italics shape with upright italics.
 %
-%    In nearly all cases it is desirable not to remove all forward-slant of the italics but
-%    retain some 1\textdegree{} to~2\textdegree{} of residual angle.
+%    In nearly all cases it is desirable to retain a slight forward slant of 1\textdegree{}
+%    to~2\textdegree\!.
 %
 %  \item\label{it:correct-italics-angle}
 %    An italics shape that has an excessive slant angle, as
 %    e.\,g.~\singlequotes{Libre~Caslon}\index{font>typeface>Libre Caslon|userman} may be corrected,
 %    i.\,e., partially un-slanted.
 %
-%    Here, and generally if a font as a whole needs to be corrected, an alternative approach
-%    like the ones sketched in \cref{sec:alternative} on
+%    Here, and generally if the entire font needs correction, alternative approaches like the
+%    ones sketched in \cref{sec:alternative} on
 %    pages~\pageref{sec:alternative}--\pageref{secend:alternative} may be warranted.
 %
 %  \item\label{it:generate-sole-obliques}
@@ -1931,8 +1929,8 @@ end
 %  \end{note}
 %
 %  \begin{example}
-%    Upright italics often look somewhat tight.  We like to add some extra tracking to them.  So,
-%    we simply define the context~\code{synthnegslant}:
+%    Upright italics often look somewhat tight.  We like to add some extra tracking to them.
+%    So, we define a \packagename{microtype}~context named \code{synthnegslant}:
 %
 %    \begin{codeexample}
 %      \cs{SetTracking}\=[context = synthnegslant]  \\
@@ -2007,7 +2005,7 @@ end
 %
 %  \item Convert the desired angle~\(\alpha\) to a \meta{slant} by calculating \(\sin \alpha\).
 %
-%    If no computer is available, the following formula might help:
+%    If no computer is available, the following approximation might help:
 %    \begin{equation*}
 %        \meta{slant} = \sin \alpha \approx \frac{11}{630\degree} \: \alpha,
 %    \end{equation*}
@@ -2136,8 +2134,8 @@ end
 %  \clearpage
 %  \section{Alternative Solutions}\label{sec:alternative}
 %
-%  Here is an alternative to \packagename{synthslant} that we am aware of.  It changes the slant
-%  of a font as a whole and it is impossible to undo the change within the document.
+%  Here is an alternative to \packagename{synthslant} that we are aware of.  It changes the
+%  slant of a font as a whole and it is impossible to undo the change within the document.
 %
 %
 %  \subsection{Use \pdfTeX}\label{sec:alternative-pdftex}
@@ -2179,10 +2177,10 @@ end
 %  We are particularly interested in the \meta{special}~part that allows us to slant the whole
 %  font with a single instruction.
 %
-%  We want to elaborate the example given in \cref{sec:usage-ideas},
+%  Let us to elaborate the example given in \cref{sec:usage-ideas},
 %  \cref{it:correct-italics-angle} and generate less-angled italics for
-%  Libre~Caslon.\index{font>typeface>Libre Caslon|userman} Here is a suitable map line taken from
-%  \filesystem{pdftex.map} on our system:
+%  Libre~Caslon.\index{font>typeface>Libre Caslon|userman} Here is a suitable map line taken
+%  from \filesystem{pdftex.map} on our system:
 %
 %  \begin{multilinecodeexample}
 %    LibreCsln-Italic-osf-t1--base LibreCsln-Italic  \\
@@ -2328,9 +2326,9 @@ end
 %  wrong for the slanted versions of the selected glyphs.
 %
 %  When exporting the changed font from a font editor users of \pdfTeX{} and \LuaTeX{} may
-%  choose different formats, think of \acronym{PFB} vs.~\acronym{TTF}.  If
-%  \MP\index{MetaPost=\MP|userman} will be a consumer of the newly created font, \acronym{PFB}
-%  must be used.
+%  choose different formats~-- for example \acronym{PFB} \foreignphrase{versus} \acronym{TTF}.
+%  If you plan to use the new font with \MP,\index{MetaPost=\MP|userman} you must export it in
+%  \acronym{PFB}~format.
 %
 %  Finally, install the font e.\,g.~with \application{autoinst} which is part of
 %  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.

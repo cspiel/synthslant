@@ -34,7 +34,7 @@ needed to recover the graphics file stored as printable ASCII characters inside 
 
         make tool-check
 
-ahead to verify that the required utilities are installed and working.
+beforehand to verify that the required utilities are installed and working.
 For an overview over the most important *Makefile* targets use
 
         make help
