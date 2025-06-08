@@ -758,8 +758,8 @@ quote             '!'
 %    \begin{abstract}
 %      \noindent
 %      The \packagename{synthslant} package provides macros to slant arbitrary glyphs in both
-%      directions.  It can be used to simulate a slanted font for \textsynthslant{short} pieces
-%      of text and generate effects like upright italics.
+%      directions, useful for simulating slanted fonts for \textsynthslant{short} text pieces
+%      and generating effects like upright italics.
 %    \end{abstract}
 %  \endgroup
 %
@@ -792,7 +792,7 @@ pair loc[];
 loc[1] := (0, 0);               % roman
 loc[2] := (1.9u, 0);            % italics
 loc[3] := (2.03u, 1.1u);        % slanted roman
-loc[4] := (-.1u, -1.1u);       % upright italics
+loc[4] := (-.1u, -1.1u);        % upright italics
 
 picture roman;
 roman := thelabel.rt(sample_text infont roman_font scaled font_scale, loc[1]);
@@ -935,7 +935,42 @@ end
 %  glyph manipulation.
 %
 %
-%  \subsection{Appeal for Artificially Slanted Type}\label{sec:appleal-for-artificially-slanted}
+%  \subsection{Technical Terms: Italic -- Oblique -- Slanted}\label{sec:italic-slanted}
+%
+%  We shall use several technical terms that describe the type or shape of a font.  To avoid any
+%  confusion we define them right here.
+%
+%  \begin{description}
+%  \item[Italic:]\index{italic|userman} An italic font is a complement to a given
+%  serif\footnote{Called \singlequotes{roman} in \TeX's technical terms.} font.  It is drawn by
+%  a human, a font designer, who interprets the orginal serif font in a fundamentally artistic
+%  way.
+%
+%  The title page already shows an example:
+%  \acronym{URW}~Palladio\index{font>typeface>URW Palladio=\acronym{URW} Palladio|userman}
+%  upright and italic in light gray, artificially slanted in black.
+%
+%  \item[Oblique:]\index{oblique|userman} An oblique font is a complement to a given sans-serif
+%  font.  Some oblique fonts are designed in a similar tradition as italic fonts.  These may
+%  feature for example single-story~\singlequotes{a}s, whereas the original sans-serif fonts
+%  have double-story~\singlequotes{a}s.  Oblique fonts that are artificially slanted versions of
+%  upright fonts also exist.
+%
+%  \item[Slanted:]\index{slanted|userman} A slanted font always is created in a mechanical way
+%  by applying a shear-transform (explained in \cref{sec:shear-transformation} on
+%  \cpageref{sec:shear-transformation}) to the glyphs of a given font.  The original font can be
+%  serif, sans-serif, upright, italic, oblique, or mathematical.
+%
+%  To be clear, we sometimes add the adverbs \singlequotes{artificially} or
+%  \singlequotes{synthetically} to the term \singlequotes{slanted}.
+%  \end{description}
+%
+%  In real life these terms are used in a sloppy way, for example, calling an oblique
+%  sans-serif font \singlequotes{italic} or mixing up the notions of \singlequotes{oblique} and
+%  \singlequotes{slanted} altogether.  We strive to be precise in this document, though.
+%
+%
+%  \subsection{Appeal for Slanted Type}\label{sec:appleal-for-slanted}
 %
 %  Artificially slanted typefaces have a poor reputation, much like artificial
 %  bold\footnote{Package~\packagename{amsbsy} defines a \doublequotes{Poor Man's Bold}
@@ -943,8 +978,8 @@ end
 %  \packagename{amsbsy} recommend to prefer package~\packagename{bm} for bold mathematical
 %  symbols, though.} or condensed ones.\!\footnote{See for example Ref.~\citenum{strizver:2014},
 %  p.~97, but compare with p.~142 and also Ref.~\citenum{middendorp:2014}, p.~68n, for a more
-%  nuanced assessment.}  We can retrace this condescension for synthetic bold and condensed
-%  variants.  They spoil the glyphs' outline because they do not (and cannot) conserve the
+%  nuanced assessment.}  We can retrace this criticism for synthetic bold and condensed
+%  variants.  They spoil the glyphs' outlines because they do not (and cannot) conserve the
 %  necessary proportions.  For small-caps the problems are somewhat minor; it is worth testing
 %  how far you can go using an
 %  \propername{OpenType}\detoxindex{OpenType=\propername{OpenType}|userman}~font that supports a
@@ -959,7 +994,7 @@ end
 %
 %  A common criticism of synthetically slanted type is that it lacks the contrast of true
 %  italics~\cite[p.~141]{strizver:2014}.  However, we argue that in many settings, this reduced
-%  contrast is sufficient.  Also, a slight contrast with the main typeface is a secondary
+%  contrast is sufficient.  Also, a slight contrast with the main typeface is of secondary
 %  concern.  It does not devalue the shape \foreignphrase{per se} as is true for artificial bold
 %  and condensed fonts.
 %
@@ -983,20 +1018,21 @@ end
 %
 %  \subsection{Some History}\label{sec:history}
 %
-%  Italics\index{italics|userman} accompanying a roman font date back to one of the earliest
+%  Italics\index{italic|userman} accompanying a roman font date back to one of the earliest
 %  print shops, namely that of
 %  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
 %  1500\:A.\,C\@.  Artificially slanted, also known as
 %  \singlequotes{oblique},\index{oblique|userman} versions of upright fonts appear in the
 %  twentieth century, when type designers and foundries start to save time and money by
 %  automatically constructing a slanted version of a given roman
-%  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} follows in their footsteps.
+%  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} follows in their footsteps,
+%  offering similar functionality.
 %
-%  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.
-%  \foreignphrase{Eureka!}  In particular the oldest (and once upon a time the only) font family
-%  shipping with \TeX, \href{https://tug.org/FontCatalogue/cmrfonts.html}{\acronym{CM}
-%  Roman}\index{font>typeface>CM Roman=\acronym{CM} Roman|userman} --~nowadays member of the
-%  \acronym{CM}-Super family~-- is available in a deluge of almost thirty shapes.  It covers not
+%  Some fonts in current \LaTeX{} distributions offer slanted series right out of the box.  In
+%  particular, the oldest (and once upon a time the only) font family shipping with \TeX,
+%  \href{https://tug.org/FontCatalogue/cmrfonts.html}{\acronym{CM} Roman}\index{font>typeface>CM
+%  Roman=\acronym{CM} Roman|userman} --~nowadays member of the \acronym{CM}-Super family~-- is
+%  available in a variety of almost thirty shapes, which is quite remarkable.  It covers not
 %  just slanted roman or slanted smallcaps but also slanted typewriter and somewhat surprisingly
 %  upright italics.  Only a few font families come with upright italics; see
 %  \cref{tab:upright-italics}.  Furthermore, the \LaTeXe{} font selection scheme provisions
@@ -1303,30 +1339,30 @@ end
 %
 %
 %  For \(\alpha = 0\) the shear matrix becomes the identity matrix.  Throughout of
-%  \packagename{synthslant} we work with the \meta{slant} which is \(\sin \alpha\) in
-%  \cref{equ:shear-transformation} and avoid converting back and forth to the
-%  \index{shear>angle|userman}shear angle~\(\alpha\).\!\footnote{At least one slant engine currently
-%  requires such a conversion, namely~\pstrickslogo.  The math is hidden from the user, though.}
-%  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)}, \mbox{\(\sin 11.5\degree
-%  \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx .3\)}.\!\footnote{For small
-%  angles~\(\lvert\alpha\rvert\) measured in radians the sine is approximately linear: \(\sin
-%  \alpha \approx \alpha\).}  For real-life serif fonts \meta{slant} is in the range of~\(.1\)
-%  to~\(.45\) and a value of~\(.2\) seems to be quite common.  Our \filesystem{pdftex.map} lists
-%  negative \meta{slant} values in the range~\(-.4\) to~\(-.05\) and positive \meta{slant}
-%  values in the range~\(.14\) up to~\(.45\).  See \Cref{tab:slant-values} on
-%  \cpageref{tab:slant-values} for some actual values of serif fonts in \LaTeX.
+%  \packagename{synthslant}, we use the \meta{slant}, which is \(\sin \alpha\) in
+%  \Cref{equ:shear-transformation}, avoiding the need to convert back and forth to the
+%  \index{shear>angle|userman}shear angle~\(\alpha\).\!\footnote{At least one slant engine
+%  currently requires such a conversion, namely~\pstrickslogo.  The math is hidden from the
+%  user, though.}  Some values for orientation: \mbox{\(\sin 5.74\degree \approx .1\)},
+%  \mbox{\(\sin 11.5\degree \approx .2\)}, and \mbox{\(\sin 17.5\degree \approx
+%  .3\)}.\!\footnote{For small angles~\(\lvert\alpha\rvert\) measured in radians the sine is
+%  approximately linear: \(\sin \alpha \approx \alpha\).}  For real-life serif fonts
+%  \meta{slant} is in the range of~\(.1\) to~\(.45\) and a value of~\(.2\) seems to be quite
+%  common.  Our \filesystem{pdftex.map} lists negative \meta{slant} values in the range~\(-.4\)
+%  to~\(-.05\) and positive \meta{slant} values in the range~\(.14\) up to~\(.45\).  See
+%  \Cref{tab:slant-values} on \cpageref{tab:slant-values} for some actual values of serif fonts
+%  in \LaTeX.
 %
 %
 %  \subsection{Usage Ideas}\label{sec:usage-ideas}
 %
 %  Automatic slanting both forward and reverse can be applied in a variety of typographic
-%  occasions.  Here are some ideas.
+%  occasions.  Here are some usage ideas.
 %
 %  \begin{enumerate}
 %  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
-%    Generate a slanted serif in the unfortunate situation when a serif font lacks
-%    italics\index{italics|userman} such as
-%    \singlequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
+%    Generate a slanted serif font when a serif font lacks italics\index{italic|userman}, such
+%    as \doublequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
 %
 %    Here, the user is relatively free to choose a \meta{slant}, for there are no italics whose
 %    angle must be matched.  \packagename{Synthslant}'s default of~.2 should be a good starting
@@ -1404,12 +1440,12 @@ end
 %    |\usepackage[|\meta{option}\dots|]{synthslant}|
 %  \end{synopsis}
 %
-%  This is a list of \meta{option}s that \packagename{synthslant} understands.  The package
-%  options allow to predefine the forward and backward slant angles as well as the selection of
-%  a particular slanting engine.
+%  This section lists the \meta{option}s that the \packagename{SynthSlant} package understands.
+%  The package options allow to predefine the forward and backward slant angles as well as the
+%  selection of a particular slanting engine.
 %
-%  If no \meta{option}s are given, \packagename{synthslant} assumes \code{auto} and
-%  \code{slant=.2}.
+%  If no \meta{option}s are specified, \packagename{synthslant} defaults to \code{auto} with a
+%  slant value of~\code{slant=.2}.
 %
 %  \begingroup
 %  \newcommand*{\indexpackageoption}[1]
@@ -1639,8 +1675,8 @@ end
 %
 %  \subsection{Basic Interface}\label{sec:basic-interface}
 %
-%  Package \packagename{synthslant} provides two easy-to-use macros for slanting glyphs.  For a
-%  more flexible and powerful interface, see~\cref{sec:advanced-interface}.
+%  The \packagename{synthslant} package provides two easy-to-use macros for slanting glyphs.
+%  For a more flexible and powerful interface, see~\cref{sec:advanced-interface}.
 %
 %  \begin{note}
 %    The following restrictions and workarounds to get line-breaking and \TeX's automatic
@@ -1649,10 +1685,10 @@ end
 %  \end{note}
 %
 %  \noindent
-%  Both macros provide \emph{simplistic} support for slanting hyphenatable words and
-%  space-separated phrases for a given \meta{text}.  The fundamental shear transformation would
-%  produce an single unbreakable horizontal box.  We have added some provisions to re-enable at
-%  least some breakability.
+%  Both macros offer basic support for slanting hyphenatable words and space-separated phrases
+%  within a given \meta{text}.  The fundamental shear transformation would produce an single
+%  unbreakable horizontal box.  We have added some provisions to re-enable at least some
+%  breakability.
 %
 %  \begin{enumerate}
 %  \item Spaces (literal \singlequotes{\textvisiblespace} or \cs{space}) introduce
@@ -1784,7 +1820,7 @@ end
 %  \end{usecases}
 %
 %  \DescribeMacro{\textsynthuprightitalic}
-%  Backward slant some italics\index{italics|userman} or oblique\index{italics|userman} glyphs.
+%  Backward slant some italics\index{italic|userman} or oblique\index{oblique|userman} glyphs.
 %
 %  \begin{synopsis}\label{syn:textsynthuprightitalic}
 %    \cs{textsynthuprightitalic}\marg{text}
@@ -1958,16 +1994,16 @@ end
 %  \clearpage
 %  \section{How to Determine And Match Slant}\label{sec:determine-slant}
 %
-%  If a synthetically slanted piece of text needs to match to an existing
-%  italics\index{italics|userman} or oblique\index{oblique|userman} font the question arises how
-%  to determine the slant angle~\(\alpha\) or~\meta{slant}.
+%  When matching a synthetically slanted piece of text to an existing
+%  italic\index{italic|userman} or oblique\index{oblique|userman} font, it is important to
+%  determine the slant angle~\(\alpha\) or~\meta{slant}.
 %
 %  \begin{note}
 %    The slant angles of different italics or oblique glyphs in the same font may slightly
 %    differ from each other.  Usually, longer shapes have less slant than shorter shapes.
 %
-%    Look for a representative \meta{slant}, a kind of average that achieves a visual match with
-%    the italics or obliques.
+%    Seek a representative slant value, an average that achieves a visual match with the italics
+%    or obliques.
 %  \end{note}
 %
 %  In the following, we suggest three techniques to determine or match the slant of a glyph with
@@ -2021,7 +2057,7 @@ end
 %
 %  \subsubsection{Slanted Upright \& Graphics Program}\label{sec:slanted-upright-plus-graphics-program}
 %
-%  Compare the italics\index{italics|userman} or oblique\index{oblique|userman} shapes of a font
+%  Compare the italic\index{italic|userman} or oblique\index{oblique|userman} shapes of a font
 %  with the synthetically slanted upright shapes in a graphics program.
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
@@ -2105,8 +2141,8 @@ end
 %
 %  \index{limitations|userman}
 %  \index{known problems|userman}
-%  Here we list some of the known problems of \packagename{syntslant}.  Conceivably there are
-%  more.
+%  This section lists some known limitations and issues with \packagename{syntslant}.  There may
+%  be additional issues not listed here.
 %
 %  \begin{description}
 %  \item[All except \packagename{fontspec}.]
@@ -2134,8 +2170,8 @@ end
 %  \clearpage
 %  \section{Alternative Solutions}\label{sec:alternative}
 %
-%  Here is an alternative to \packagename{synthslant} that we are aware of.  It changes the
-%  slant of a font as a whole and it is impossible to undo the change within the document.
+%  Here are some alternative solutions to \packagename{synthslant} that we are aware of.  All of
+%  them change the slant of a font as a whole.
 %
 %
 %  \subsection{Use \pdfTeX}\label{sec:alternative-pdftex}
