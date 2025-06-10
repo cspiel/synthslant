@@ -321,6 +321,8 @@
 
 
 
+\renewcommand*{\abstractname}{{\sffamily Abstract}}
+
 \newrobustcmd*{\acronym}[1]{\mbox{\scshape\MakeLowercase{#1}}}
 
 \newcommand*{\application}[1]{\mbox{\sffamily #1}}
@@ -464,6 +466,8 @@
             {\addtocontents{toc}{\protect\needspace{#1\baselineskip}}}
 
 \newcommand*{\numberset}[1]{\mathbb{#1}}
+
+\let\newpagetofixtoc=\newpage
 
 \newcommand*{\packagename}[1]{\mbox{\textsf{#1}}}
 \newcommand*{\programname}[1]{\mbox{\textbf{#1}}}
@@ -672,6 +676,10 @@
 \fi
 
 
+\DeclareMathOperator*{\slantedsum}{\synthslantbox{.15}{$\displaystyle\sum$}}
+\DeclareMathOperator*{\uprightint}{\synthslantbox{-.15}{$\displaystyle\int\negthickspace$}}
+
+
 \begin{document}
   \DocInput{synthslant.dtx}
 \end{document}
@@ -749,16 +757,16 @@ quote             '!'
 %  \thispagestyle{empty}
 %
 %
-%  \begingroup
-%    \renewcommand*{\abstractname}{{\sffamily Abstract}}
-%    \let\small=\normalsize
-%    \begin{abstract}
-%      \noindent
-%      The \packagename{synthslant} package provides macros to slant arbitrary glyphs in both
-%      directions, useful for simulating slanted fonts for \textsynthslant{short} text pieces
-%      and generating effects like upright italics.
-%    \end{abstract}
-%  \endgroup
+%  \begin{abstract}
+%    \noindent
+%    The \packagename{synthslant} package allows for the artificial slanting of text.  It is
+%    designed to simulate slanted fonts for \textsynthslant{short} text segments and can create
+%    effects such as upright italics.  It includes macros and environments to control the
+%    slanting process, enabling both forward and backward slanting of glyphs.
+%
+%    The manual also discusses how to determine and match the slant of existing italic fonts,
+%    facilitating integration with existing document typography.
+%  \end{abstract}
 %
 %
 %  \iffalse
@@ -861,7 +869,7 @@ end
 %  \addtocontents{toc}{\medskip}
 %  \section*{Quick Reference}
 %  \markboth{\sf\letterspacedsmallcaps{Quick Reference}}{\sf\letterspacedsmallcaps{Quick Reference}}
-%  \index{quick reference|userman}
+%  \index{quick>reference|userman}
 %
 %  This is an alphabetically sorted list of all user macros and environments defined by
 %  package~\packagename{synthslant} along with the page numbers of their descriptions.  The list
@@ -913,6 +921,53 @@ end
 %
 %
 %  \clearpage
+%  \phantomsection
+%  \addcontentsline{toc}{section}{\numberline{}Quick Start}
+%  \addtocontents{toc}{\medskip}
+%  \section*{Quick Start}
+%  \markboth{\sf\letterspacedsmallcaps{Quick Start}}{\sf\letterspacedsmallcaps{Quick Start}}
+%  \index{quick>start|userman}
+%
+%  For all users who want just the functionality not the explanations, here is a example that
+%  shows how to use the most important macros.
+%
+%  \medskip
+%
+%  \begin{codeexample}
+%    \cs{documentclass}\{article\}  \\
+%    \\
+%    \cs{usepackage}\{mlmodern\}\% \textit{example font}  \\
+%    \\
+%    \% \textit{\hyperref[sec:package-options]{Package Options}, \cpageref{sec:package-options}}  \\
+%    \cs{usepackage}[posslant=.23, negslant=-.21]\{synthslant\}  \\
+%    \\
+%    \cs{begin}\{document\}  \\
+%    \% \textit{\hyperref[sec:variables]{Variable-Like Macros}, \cpageref{sec:variables}}  \\
+%    \cs{renewcommand*}\{\cs{synthslant}\}\{.23\}  \\
+%    \cs{renewcommand*}\{\cs{synthnegslant}\}\{-.21\}  \\
+%    \% \textit{redundant re-definitions because \code{posslant} and}  \\
+%    \% \textit{\code{negslant} were passed as package options, but}  \\
+%    \% \textit{they are possible anywhere;}  \\
+%    \\
+%    \% \textit{\hyperref[sec:basic-interface]{Basic Interface}, \cpageref{sec:basic-interface}}  \\
+%    \% \textit{slant upright shape to the right by \cs{synthslant}}  \\
+%    \cs{textsynthslant}\{Generierter schräger Schriftschnitt,\}  \\
+%    \cs{textsynthslant}\{Antiqua-Schrift,\}  \\
+%    \cs{textsynthslant}\{Sauer\cs{-}stoff\cs{-}fla\cs{-}sche,\}  \\
+%    \cs{textsynthslant}\{Be\cs{discretionary}\{tt-\}\{t\}\{tt\}uch.\}  \\
+%    \% \textit{slant italic shape to the left by \textminus\cs{synthnegslant}}  \\
+%    \cs{textsynthuprightitalic}\{Aufrechte kursive Schriftlage.\}  \\
+%    \\
+%    \% \textit{\hyperref[sec:advanced-interface]{Advanced Interface}, \cpageref{sec:advanced-interface}}  \\
+%    \% \textit{separate slants for each box}  \\
+%    \cs{synthslantbox}\{-.25\}\{H\}  \\
+%    \cs{synthslantbox}\{0\}\{H\}  \\
+%    \cs{synthslantbox}\{.25\}\{H\}  \\
+%    \cs{end}\{document\}
+%  \end{codeexample}
+%
+%
+%  \clearpage
 %  \pagenumbering{arabic}
 %  \section{Introduction}\label{sec:introduction}
 %
@@ -938,7 +993,7 @@ end
 %  confusion we define them right here.
 %
 %  \begin{description}
-%  \item[Italic:]\index{italic|userman} An italic font is a complement to a given
+%  \item[Italic.]\index{italic|userman} An italic font is a complement to a given
 %  serif\footnote{Called \singlequotes{roman} in \TeX's technical terms.} font.  It is drawn by
 %  a human, a font designer, who interprets the orginal serif font in a fundamentally artistic
 %  way.
@@ -947,13 +1002,18 @@ end
 %  \acronym{URW}~Palladio\index{font>typeface>URW Palladio=\acronym{URW} Palladio|userman}
 %  upright and italic in light gray, artificially slanted in black.
 %
-%  \item[Oblique:]\index{oblique|userman} An oblique font is a complement to a given sans-serif
+%  \item[Oblique.]\index{oblique|userman} An oblique font is a complement to a given sans-serif
 %  font.  Some oblique fonts are designed in a similar tradition as italic fonts.  These may
 %  feature for example single-story~\singlequotes{a}s, whereas the original sans-serif fonts
-%  have double-story~\singlequotes{a}s.  Oblique fonts that are artificially slanted versions of
-%  upright fonts also exist.
+%  have double-story~\singlequotes{a}s.\!\footnote{An oblique font's characteristics even may
+%  vary for different releases, e.\,g., for Frutiger
+%  Italic\detoxindex{font>typeface>Frutiger Italic|userman} (1976) compared to Frutiger Next
+%  Italic\detoxindex{font>typeface>Frutiger Next Italic|userman} (2000) or Neue Frutiger
+%  Italic\detoxindex{font>typeface>Neue Frutiger Italic|userman}
+%  (2009)~\cite[p.~69]{middendorp:2014}.}  Oblique fonts that are artificially slanted versions
+%  of upright fonts also exist.
 %
-%  \item[Slanted:]\index{slanted|userman} A slanted font always is created in a mechanical way
+%  \item[Slanted.]\index{slanted|userman} A slanted font always is created in a mechanical way
 %  by applying a shear-transform (explained in \cref{sec:shear-transformation} on
 %  \cpageref{sec:shear-transformation}) to the glyphs of a given font.  The original font can be
 %  serif, sans-serif, upright, italic, oblique, or mathematical.
@@ -1018,8 +1078,9 @@ end
 %  Italics\index{italic|userman} accompanying a roman font date back to one of the earliest
 %  print shops, namely that of
 %  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldus Manutius}} around
-%  1500\:A.\,C\@.  Artificially slanted, also known as
-%  \singlequotes{oblique},\index{oblique|userman} versions of upright fonts appear in the
+%  1500\:A.\,C\@.  Maybe the first sans-serif font shipped with an oblique version has been
+%  Futura\index{font>typeface>Futura} devised in 1927--1930.  Artificially slanted, also known
+%  as \singlequotes{oblique},\index{oblique|userman} versions of upright fonts appear in the
 %  twentieth century, when type designers and foundries start to save time and money by
 %  automatically constructing a slanted version of a given roman
 %  type~\cite[p.~68n]{middendorp:2014}.  \packagename{Synthslant} follows in their footsteps,
@@ -1849,6 +1910,61 @@ end
 %    bring \cs{DeclareMathOperator} into scope.
 %  \end{example}
 %
+%  \begin{tip}[Display Style Math Operators]
+%    Slanted or unslanted display style mathematical operators are best pre-defined with
+%    \cs{DeclareMathOperator}~\cite{package:amsmath}.
+%
+%    \begin{codeexample}
+%      12\=34\=\kill
+%      \cs{DeclareMathOperator*}\{\cs{slantedsum}\}  \\
+%        \>\{\cs{synthslantbox}\=\{.15\}\{\$\cs{displaystyle}\cs{sum}\$\}\}  \\
+%      \cs{DeclareMathOperator*}\{\cs{uprightint}\}  \\
+%        \>\{\cs{synthslantbox}\{-.15\}  \\
+%        \>                    \>\{\$\cs{displaystyle}\cs{int}\cs{negthickspace}\$\}\}
+%    \end{codeexample}
+%
+%    \noindent
+%    Now compare the pairs \cs{sum} \cs{slantedsum} and \cs{int} \cs{uprightint}:
+%    \begin{equation}
+%      \sum \quad \slantedsum
+%      \qquad \text{and} \qquad
+%      \int \quad \uprightint
+%    \end{equation}
+%
+%    In the following equation we used \cs{uprightint} and \cs{slantedsum} like
+%
+%    \begin{codeexample}
+%      |\uprightint_{\negthickspace 0}^{\;\;1}|
+%    \end{codeexample}
+%
+%    \noindent
+%    for the integral,
+%
+%    \begin{codeexample}
+%      |\slantedsum_{j=0}^{\;\;m}|
+%    \end{codeexample}
+%
+%    \noindent
+%    for the first summation-sign, and
+%
+%    \begin{codeexample}
+%      |\slantedsum_{s=1}^{\;\;l}{\vphantom{\slantedsum}}''|
+%    \end{codeexample}
+%
+%    \noindent
+%    for the second summation-sign:
+%    \begin{equation*}
+%      \uprightint_{\negthickspace 0}^{\;\;1} f(x) \, dx =
+%      \frac{1}{m} \,  \slantedsum_{j=0}^{\;\;m} f(j/m) -
+%      \slantedsum_{s=1}^{\;\;l}{\vphantom{\slantedsum}}''
+%      \frac{B_{2s}}{2s!} \frac{f^{(2s - 1)}(1) - f^{(2s - 1)}(0)}{m^{2s}} +
+%      O\bigl(m^{-2l-2}\bigr).
+%    \end{equation*}
+%
+%    The aesthetic appeal of this solution is doubtful, however it demonstrates the capabilities
+%    of \packagename{synthslant} in math mode.
+%  \end{tip}
+%
 %
 %  \subsection{Advanced Interface}\label{sec:advanced-interface}
 %
@@ -2165,6 +2281,7 @@ end
 %
 %
 %  \clearpage
+%  \toccontinuesonnextpage
 %  \section{Alternative Solutions}\label{sec:alternative}
 %
 %  Here are some alternative solutions to \packagename{synthslant} that we are aware of.  All of
@@ -2372,7 +2489,6 @@ end
 %
 %  \clearpage
 %  \appendix
-%  \toccontinuesonnextpage
 %
 %
 %
@@ -2582,7 +2698,7 @@ end
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2025/05/22  v0.2  Synthetically Slant glyphs]
+                [2025/06/08  v0.2  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
