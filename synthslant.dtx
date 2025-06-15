@@ -495,6 +495,8 @@
 
 \newcommand*{\singlequotes}[1]{\mbox{`#1'}}
 
+\newcommand*{\spacedemdash}{---}% anticipate the use of "typog.sty"
+
 \definecolor{customred1}{rgb}{.890, .282, .282}%-- https://paletton.com/
 \definecolor{customred2}{rgb}{.831, .110, .110}
 \definecolor{customred3}{rgb}{.686, .043, .043}
@@ -840,8 +842,8 @@ end
 %    This package is copyright \textcopyright~2024, 2025 Ch.~L.~Spiel.  It may be distributed
 %    and/or modified under the conditions of the
 %    \href{https://www.latex-project.org/lppl.txt}{\LaTeX{} Project Public License}
-%    \acronym{(LPPL)}, either version~1.3c of this license or --~at your option~-- any later
-%    version.  This work has the \acronym{LPPL} maintenance status
+%    \acronym{(LPPL)}, either version~1.3c of this license or\spacedemdash at your
+%    option\spacedemdash any later version.  This work has the \acronym{LPPL} maintenance status
 %    \doublequotes{author-maintained}.\par
 %  \endgroup
 %
@@ -975,14 +977,14 @@ end
 %  \pagenumbering{arabic}
 %  \section{Introduction}\label{sec:introduction}
 %
-%  The \packagename{synthslant} package provides a translator-independent way (e.\,g.~\LaTeX,
-%  \pdfLaTeX, or \LuaLaTeX) to shear glyphs.  It implements a generic operation where a short
-%  piece of text gets slanted forward or backward.  Moreover, specialized macros for the two
-%  most important use cases are provided, namely slanting an upright font forward and making an
-%  italics font upright.  Unbeknownst to some users, \pdfTeX{} performs a similar operation
-%  under the hood: of the 40\thousandsseparator210~map lines in our \filesystem{pdftex.map},
-%  currently 1\thousandsseparator236 instruct \pdfTeX{} to artificially slant a font.  This
-%  means approximately three percent of the shapes are generated this way.
+%  The \packagename{synthslant} package provides a translator-independent way to shear glyphs.
+%  This means it works with \LaTeX, \pdfLaTeX, and \LuaLaTeX.  It implements a generic operation
+%  where a short piece of text gets slanted forward or backward.  Moreover, specialized macros
+%  for the two most important use cases are provided, namely slanting an upright font forward
+%  and making an italics font upright.  Unbeknownst to some users, \pdfTeX{} performs a similar
+%  operation under the hood: of the 40\thousandsseparator210~map lines in our
+%  \filesystem{pdftex.map}, currently 1\thousandsseparator236 instruct \pdfTeX{} to artificially
+%  slant a font.  This means approximately three percent of the shapes are generated this way.
 %
 %  Similar transformations can be achieved by other means; we elaborate on some of the
 %  alternatives in \cref{sec:alternative} on
@@ -1058,16 +1060,16 @@ end
 %  condensed fonts.
 %
 %  What seems to have been lost in the discussion is the fact that true italics, designed
-%  alongside roman type, exhibit markedly different shapes.  If we have an unbiased look at it
-%  --~for example at the title~page of this manual~-- the italic versions of the upright
-%  characters are so markedly different that it is worth asking whether they truly match the
-%  upright forms.  For the double-storey~\sample{a} becomes single-storey, the start of the loop
-%  of~\sample{g} moves from the far left to the middle.  Besides, the aspect ratio of both
-%  counters change.  These differences challenge the common guidelines~\cite[Ch.~6]{stamm:2020}
-%  for font pairing.  The apparent contradiction makes sense when we recognize that italics are
-%  not just slanted versions of roman letters.  They introduce tension through several
-%  additional design features.  A famous quote of \propername{Zuzana Li\v{c}ko} applies once
-%  again:
+%  alongside roman type, exhibit markedly different shapes.  If we have an unbiased look at
+%  it\spacedemdash for example at the title~page of this manual\spacedemdash the italic versions
+%  of the upright characters are so markedly different that it is worth asking whether they
+%  truly match the upright forms.  For the double-storey~\sample{a} becomes single-storey, the
+%  start of the loop of~\sample{g} moves from the far left to the middle.  Besides, the aspect
+%  ratio of both counters change.  These differences challenge the common
+%  guidelines~\cite[Ch.~6]{stamm:2020} for font pairing.  The apparent contradiction makes sense
+%  when we recognize that italics are not just slanted versions of roman letters.  They
+%  introduce tension through several additional design features.  A famous quote of
+%  \propername{Zuzana Li\v{c}ko} applies once again:
 %
 %  \begin{quote}\small\samepage
 %    The most popular typefaces are the easiest to read; their popularity has made them
@@ -1094,13 +1096,13 @@ end
 %  Some fonts in current \LaTeX{} distributions offer slanted series out of the box.  In
 %  particular, the oldest (and once upon a time the only) font family shipping with \TeX,
 %  \href{https://tug.org/FontCatalogue/cmrfonts.html}{\acronym{CM} Roman}\index{font>typeface>CM
-%  Roman=\acronym{CM} Roman|userman} --~nowadays member of the \acronym{CM}-Super family~-- is
-%  available in a variety of almost thirty shapes, which is quite remarkable.  It covers not
-%  just slanted roman or slanted small caps, but also slanted typewriter and, somewhat
-%  surprisingly, upright italics.  Only a few font families come with upright italics; see
-%  \Cref{tab:upright-italics}.  Furthermore, the \LaTeXe{} font selection scheme provides
-%  \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for upright
-%  italics~\cite{fntguide}.  The former is associated with the macros~\cs{slshape}
+%  Roman=\acronym{CM} Roman|userman}\spacedemdash nowadays member of the \acronym{CM}-Super
+%  family\spacedemdash is available in a variety of almost thirty shapes, which is quite
+%  remarkable.  It covers not just slanted roman or slanted small caps, but also slanted
+%  typewriter and, somewhat surprisingly, upright italics.  Only a few font families come with
+%  upright italics; see \Cref{tab:upright-italics}.  Furthermore, the \LaTeXe{} font selection
+%  scheme provides \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for
+%  upright italics~\cite{fntguide}.  The former is associated with the macros~\cs{slshape}
 %  and~\cs{textsl}.
 %
 %  \begingroup
@@ -1230,12 +1232,13 @@ end
 %  recent \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the
 %  transformation matrix has been part of the \acronym{PDF}-standard since its initial
 %  publication in 1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
-%  (\singlequotes{concat}~-- concatenate matrix to current transformation matrix).~\visualpar{}
-%  The primitive~\cs{pdfliteral} was implemented already in the first release of \pdfTeX{}
-%  in~1998~\cite{baskerville-pdftex-8-1:1998} and the primitive~\cs{pdfsetmatrix} joined 2007 in
-%  \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}  With the help of the latter affine
-%  transformations of arbitrary content can be coded directly by setting the transformation
-%  matrix.  A slight variant of his code is used in this package for the \acronym{PDF}- and
+%  (\singlequotes{concat}\spacedemdash concatenate matrix to current transformation
+%  matrix).~\visualpar{} The primitive~\cs{pdfliteral} was implemented already in the first
+%  release of \pdfTeX{} in~1998~\cite{baskerville-pdftex-8-1:1998} and the
+%  primitive~\cs{pdfsetmatrix} joined 2007 in \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}
+%  With the help of the latter affine transformations of arbitrary content can be coded directly
+%  by setting the transformation matrix.  A slight variant of his code is used in this package
+%  for the \acronym{PDF}- and
 %  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman}-slant~engines.  The
 %  implementations for \pstrickslogo\index{package>pstricks=\packagename{pstricks}|userman},
 %  \tikzlogo\index{package>tikz=\packagename{tikz}|userman}, and
@@ -1433,10 +1436,10 @@ end
 %    point.
 %
 %  \item[\number\value{enumi}b.\refstepcounter{enumi}]\label{it:paired-with-no-italics}
-%    If a secondary serif font --~again assumed to have no italics or obliques~-- is paired with
-%    a primary serif font which has italics, the slant angle of the former can be matched to
-%    that of the primary font.  An example of such a constellation is
-%    \doublequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
+%    If a secondary serif font\spacedemdash again assumed to have no italics or
+%    obliques\spacedemdash is paired with a primary serif font which has italics, the slant
+%    angle of the former can be matched to that of the primary font.  An example of such a
+%    constellation is \doublequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
 %    \doublequotes{Eczar}\index{font>typeface>Eczar|userman}.
 %
 %  \item\label{it:upright-italics}
@@ -1447,7 +1450,7 @@ end
 %
 %  \item\label{it:correct-italics-angle}
 %    An italic shape that has an excessive slant angle, such as
-%    \doublequotes{Libre Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected~--
+%    \doublequotes{Libre Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected\spacedemdash
 %    i.\,e., partially un-slanted.
 %
 %    Here, and generally if the entire font needs correction, alternative approaches such as
@@ -1465,8 +1468,8 @@ end
 %    obliques such as e.\,g.~\doublequotes{Open Sans}.\index{font>typeface>Open Sans|userman}
 %
 %  \item\label{it:slant-typewriter}
-%    Fixed-width --~also called \singlequotes{typewriter} or \singlequotes{teletype}~-- fonts
-%    without obliques (Yes, I am looking at you,
+%    Fixed-width\spacedemdash also called \singlequotes{typewriter} or
+%    \singlequotes{teletype}\spacedemdash fonts without obliques (Yes, I am looking at you,
 %    Inconsolata!)\index{font>typeface>Inconsolata|userman} finally get an oblique shape.
 %
 %  \item\label{it:slant-selected-glyphs}
@@ -1828,8 +1831,8 @@ end
 %
 %  In horizontal mode switch to an upright shape, slant \meta{text} with the slant value stored
 %  in \hyperref[syn:synthslant]{\cs{synthslant}} and apply \doublequotes{slant
-%  correction}\index{slant>correction|userman} --~the equivalent of italic correction~-- at the
-%  right-hand side of~\meta{text}.
+%  correction}\index{slant>correction|userman}\spacedemdash the equivalent of italic
+%  correction\spacedemdash at the right-hand side of~\meta{text}.
 %
 %  In math mode just slant \meta{text} with the slant value stored in
 %  \hyperref[syn:synthslant]{\cs{synthslant}}.
@@ -2024,9 +2027,9 @@ end
 %    \cs{end}|{slantenvironment}|
 %  \end{synopsis}
 %
-%  Switch to an upright font shape and --~if
+%  Switch to an upright font shape and\spacedemdash if
 %  package~\packagename{microtype}~\cite{package:microtype}\index{package>microtype=\packagename{microtype}|userman}
-%  has been loaded~-- enter the Microtype-context defined by
+%  has been loaded\spacedemdash enter the Microtype-context defined by
 %  macro~\hyperref[syn:slantcontext]{\cs{slantcontext}}.  At the end add some slant correction,
 %  which is the equivalent of italic correction.
 %
@@ -2046,9 +2049,9 @@ end
 %    \cs{end}|{negslantenvironment}|
 %  \end{synopsis}
 %
-%  Switch to an italics font shape and --~if
-%  package~\packagename{microtype}~\cite{package:microtype} has been loaded~-- enter the
-%  Microtype-context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
+%  Switch to an italics font shape and\spacedemdash if
+%  package~\packagename{microtype}~\cite{package:microtype} has been loaded\spacedemdash enter
+%  the Microtype-context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
 %
 %  \DescribeMacro{\slantcontext}
 %  Name of the \packagename{microtype} context used when typesetting slanted text.
@@ -2132,13 +2135,13 @@ end
 %
 %  In the following, we suggest three techniques to determine or match the slant of a glyph with
 %  sufficient accuracy.  Direct measurements of the slant angle (\cref{sec:direct-measurement})
-%  pretend to be the most precise.  However --~as the previous Note indicated~-- its accuracy is
-%  limited by the differing slant angles of the letterforms.  The visual comparison of shapes
-%  (\cref{sec:shape-comparison}) appeals to the user's judgment of matching angles for several
-%  letters, thus inherently incorporating some kind of averaging.  Two variants of this method
-%  are conceivable.  One is to overlay italic letters with appropriately slanted versions of
-%  the regular font's letters in a graphics program
-%  (\cref{sec:slanted-upright-plus-graphics-program}), another is to find upright italic
+%  pretend to be the most precise.  However\spacedemdash as the previous Note
+%  indicated\spacedemdash its accuracy is limited by the differing slant angles of the
+%  letterforms.  The visual comparison of shapes (\cref{sec:shape-comparison}) appeals to the
+%  user's judgment of matching angles for several letters, thus inherently incorporating some
+%  kind of averaging.  Two variants of this method are conceivable.  One is to overlay italic
+%  letters with appropriately slanted versions of the regular font's letters in a graphics
+%  program (\cref{sec:slanted-upright-plus-graphics-program}), another is to find upright italic
 %  (\cref{sec:upright-italics-plus-document-viewer}) and in that way determine the negative
 %  slant value, which is equally useful.  All \meta{slant} values of \Cref{tab:slant-values} on
 %  \cpageref{tab:slant-values} were determined with the former method.  The latter method is
@@ -2185,8 +2188,9 @@ end
 %  with the synthetically slanted upright shapes in a graphics program.
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
-%  \item In file~\filesystem{synthslant-gauge.tex} --~which comes with the
-%    \packagename{synthslant}~package~-- insert the code to load your font-of-interest.
+%  \item In file~\filesystem{synthslant-gauge.tex}\spacedemdash which comes with the
+%    \packagename{synthslant}~package\spacedemdash insert the code to load your
+%    font-of-interest.
 %
 %  \item Render the document as PostScript or as~\acronym{PDF}.
 %
@@ -2230,8 +2234,9 @@ end
 %  Assess synthetically upright italics with any document viewer.
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
-%  \item In file~\filesystem{synthslant-gauge.tex} --~which comes with the
-%    \packagename{synthslant}~package~-- insert the code to load your font-of-interest.
+%  \item In file~\filesystem{synthslant-gauge.tex}\spacedemdash which comes with the
+%    \packagename{synthslant}~package\spacedemdash insert the code to load your
+%    font-of-interest.
 %
 %  \item Render the document as PostScript or as~\acronym{PDF}.
 %
@@ -2248,8 +2253,8 @@ end
 %  \subsection{Exploring Further}\label{sec:exploring-further}
 %
 %  Once a usable slant value has been found it can be fed into \filesystem{synthslant-gauge.tex}
-%  and --~after recompiling with the appropriate \LaTeX-engine~-- used to examine the details of
-%  the slant operations.
+%  and\spacedemdash after recompiling with the appropriate \LaTeX-engine\spacedemdash used to
+%  examine the details of the slant operations.
 %
 %  Page~3, Sec.~2.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
 %  synthesized ones.  Here, the slanted glyphs as well as the upright italics should blend well
@@ -2487,9 +2492,9 @@ end
 %  or wrong for the slanted versions of the selected glyphs.
 %
 %  When exporting the changed font from a font editor, users of \pdfTeX{} and \LuaTeX{} may
-%  choose different formats~-- for example, \acronym{PFB} \foreignphrase{versus} \acronym{TTF}.
-%  If you plan to use the new font with \MP,\index{MetaPost=\MP|userman} you must export it in
-%  \acronym{PFB}~format.
+%  choose different formats\spacedemdash for example, \acronym{PFB} \foreignphrase{versus}
+%  \acronym{TTF}.  If you plan to use the new font with \MP,\index{MetaPost=\MP|userman} you
+%  must export it in \acronym{PFB}~format.
 %
 %  Finally, install the font e.\,g.~with \application{autoinst} which is part of
 %  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.
@@ -2951,7 +2956,8 @@ end
 %    \end{macrocode}
 %
 %   Force the baseline of the payload (\#2) to coincide with the baseline of the surrounding
-%   text.  This --~of course~-- screws up our bounding box at least vertically.
+%   text.  This\spacedemdash of course\spacedemdash screws up our bounding box at least
+%   vertically.
 %
 %    \begin{macrocode}
       \box_set_dp:Nn \l_tmpa_box {\z@}
@@ -3080,8 +3086,8 @@ end
 %
 %  \subsubsection{Null Implementation}
 %
-%  The null implementation --~which does exactly what its name implies~-- can be useful for
-%  debugging or to get rid of the effect temporarily.
+%  The null implementation\spacedemdash which does exactly what its name implies\spacedemdash
+%  can be useful for debugging or to get rid of the effect temporarily.
 %
 %    \begin{macrocode}
 \else%  >=5: Null implementation
@@ -3194,8 +3200,8 @@ end
 %    \cs{synthslantbox@literalspace}, which handles literal
 %    spaces~\singlequotes{\textvisiblespace}.
 %
-%    \changes{v0.2}{2025-6-6}{New macro to handle explicit \cs{space} --~in addition to literal
-%    spaces~-- in \meta{text}.}
+%    \changes{v0.2}{2025-6-6}{New macro to handle explicit \cs{space}\spacedemdash in addition
+%    to literal spaces\spacedemdash in \meta{text}.}
 %    \begin{macrocode}
 \def\synthslantbox@space@codesequence#1\space#2\@nil{%
   \synthslantbox@hard@hyphen#1-\@nil
