@@ -361,7 +361,7 @@
 
 \newcommand*{\detoxindex}[1]{\index{\detokenize{#1}}}
 
-\newcommand*{\doublequotes}[1]{\guillemetright\kern-.03333em #1\guillemetleft}
+\newcommand*{\doublequotes}[1]{``#1''}
 
 \newcommand*{\dumpmacro}[1]{\texttt{\detokenize\expandafter{#1}\unskip}}
 
@@ -493,7 +493,7 @@
   \ignorespaces
 }
 
-\newcommand*{\singlequotes}[1]{\mbox{\guilsinglright #1\guilsinglleft}}
+\newcommand*{\singlequotes}[1]{\mbox{`#1'}}
 
 \definecolor{customred1}{rgb}{.890, .282, .282}%-- https://paletton.com/
 \definecolor{customred2}{rgb}{.831, .110, .110}
@@ -1425,7 +1425,8 @@ end
 %  \begin{enumerate}
 %  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
 %    Generate a slanted serif font when a serif font lacks italics\index{italic|userman}, such
-%    as \doublequotes{\acronym{URW}~Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW} Antiqua|userman}.
+%    as \doublequotes{\acronym{URW} Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW}
+%    Antiqua|userman}.
 %
 %    Here, the user is relatively free to choose a \meta{slant} value, as there are no italics whose
 %    angle must be matched.  \packagename{Synthslant}'s default of~0.2 should be a good starting
@@ -1435,8 +1436,8 @@ end
 %    If a secondary serif font --~again assumed to have no italics or obliques~-- is paired with
 %    a primary serif font which has italics, the slant angle of the former can be matched to
 %    that of the primary font.  An example of such a constellation is
-%    \singlequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
-%    \singlequotes{Eczar}\index{font>typeface>Eczar|userman}.
+%    \doublequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
+%    \doublequotes{Eczar}\index{font>typeface>Eczar|userman}.
 %
 %  \item\label{it:upright-italics}
 %    Augment a serif font that features an italic shape with upright italics.
@@ -1446,7 +1447,7 @@ end
 %
 %  \item\label{it:correct-italics-angle}
 %    An italic shape that has an excessive slant angle, such as
-%    \singlequotes{Libre~Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected~--
+%    \doublequotes{Libre Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected~--
 %    i.\,e., partially un-slanted.
 %
 %    Here, and generally if the entire font needs correction, alternative approaches such as
@@ -1456,12 +1457,12 @@ end
 %  \item\label{it:generate-sole-obliques}
 %    Generate an oblique sans-serif if a sans-serif font comes without an
 %    oblique\index{oblique|userman} shape as, e.\,g.,
-%    \singlequotes{\acronym{URW}~Grotesk}.\index{font>typeface>URW Grotesk=\acronym{URW}
+%    \doublequotes{\acronym{URW}~Grotesk}.\index{font>typeface>URW Grotesk=\acronym{URW}
 %    Grotesk|userman}
 %
 %  \item\label{it:generate-extra-obliques}
 %    Supply a slanted sans-serif shape for sans-serif fonts with designed, with \emph{true}
-%    obliques such as e.\,g.~\singlequotes{Open Sans}.\index{font>typeface>Open Sans|userman}
+%    obliques such as e.\,g.~\doublequotes{Open Sans}.\index{font>typeface>Open Sans|userman}
 %
 %  \item\label{it:slant-typewriter}
 %    Fixed-width --~also called \singlequotes{typewriter} or \singlequotes{teletype}~-- fonts
