@@ -41,9 +41,9 @@
 \usepackage{mathtools}
 \iftrue
   \usepackage[letterspace=0, shrink=10, stretch=10, tracking=true]{microtype}
-  \DeclareMicrotypeSet[tracking]{italics}
+  \DeclareMicrotypeSet[tracking]{italic}
                       {encoding=*, font={SourceSerifPro-LF/m/it/*}}
-  \UseMicrotypeSet[tracking]{italics}
+  \UseMicrotypeSet[tracking]{italic}
   \SetTracking[context=synthnegslant, no ligatures={f}, spacing={10*,,}]
               {encoding=*, shape=it}{10}
 \else
@@ -408,11 +408,11 @@
 \makeatletter
 \IndexPrologue{\section*{Index}%
                \markboth{\sf\letterspacedsmallcaps{Index}}{\sf\letterspacedsmallcaps{Index}}%
-               Numbers written in italics refer to definitions;
+               Numbers written in italic style refer to definitions;
                numbers in regular style refer to pages where an entry is used.
                \ifx\special@index\HD@codeline@wrindex
                  References to code lines are prefixed with~\singlequotes{\codelineindicator}.
-                 Again italics refer to definitions and regular style to lines where the code is used.
+                 Again italic style refers to definitions and regular style to lines where the code is used.
                \fi}
 
 \newcommand*{\linenumberdecoration}
@@ -767,7 +767,7 @@ quote             '!'
 %    \noindent
 %    The \packagename{synthslant} package allows for the artificial slanting of text.  It is
 %    designed to simulate slanted fonts for \textsynthslant{short} text segments and create
-%    effects such as upright italics.  It includes macros and environments to control the
+%    effects such as upright italic.  It includes macros and environments to control the
 %    slanting process, enabling both forward and backward slanting of glyphs.
 %
 %    The manual also discusses how to determine and match the slant of italic fonts,
@@ -782,8 +782,8 @@ prologues := 3;
 string roman_font;
 roman_font := "pplr8r";         % URW Palladio L - Roman
 
-string italics_font;
-italics_font := "pplri8r";      % URW Palladio L - Italic
+string italic_font;
+italic_font := "pplri8r";      % URW Palladio L - Italic
 
 string sample_text;
 sample_text := "fga";
@@ -801,28 +801,28 @@ slanted_color := black;
 
 pair loc[];
 loc[1] := (0, 0);               % roman
-loc[2] := (1.9u, 0);            % italics
+loc[2] := (1.9u, 0);            % italic
 loc[3] := (2.03u, 1.1u);        % slanted roman
-loc[4] := (-.1u, -1.1u);        % upright italics
+loc[4] := (-.1u, -1.1u);        % upright italic
 
 picture roman;
 roman := thelabel.rt(sample_text infont roman_font scaled font_scale, loc[1]);
 
-picture italics;
-italics := thelabel.rt(sample_text infont italics_font scaled font_scale, loc[2]);
+picture italic;
+italic := thelabel.rt(sample_text infont italic_font scaled font_scale, loc[2]);
 
 picture slanted_roman;
 slanted_roman := thelabel.rt(sample_text infont roman_font scaled font_scale slanted .2, loc[3]);
 
-picture upright_italics;
-upright_italics := thelabel.rt(sample_text infont italics_font scaled font_scale slanted -.2, loc[4]);
+picture upright_italic;
+upright_italic := thelabel.rt(sample_text infont italic_font scaled font_scale slanted -.2, loc[4]);
 
 
 beginfig(1);
   draw roman withcolor original_color;
-  draw italics withcolor original_color;
+  draw italic withcolor original_color;
   draw slanted_roman withcolor slanted_color;
-  draw upright_italics withcolor slanted_color;
+  draw upright_italic withcolor slanted_color;
 endfig;
 end
 %</title>
@@ -855,7 +855,7 @@ end
 %    help of \MP{} using \doublequotes{\acronym{URW} Palladio} in styles~\singlequotes{roman}
 %    and~\singlequotes{italic}.  The affine transformations were\enspace \code{slanted
 %    .2}\enspace for the slanted roman and\enspace \code{slanted -.2}\enspace for the upright
-%    italics.}
+%    italic.}
 %  \setcounter{tocdepth}{2}
 %  \tableofcontents
 %
@@ -981,7 +981,7 @@ end
 %  This means it works with \LaTeX, \pdfLaTeX, and \LuaLaTeX.  It implements a generic operation
 %  where a short piece of text gets slanted forward or backward.  Moreover, specialized macros
 %  for the two most important use cases are provided, namely slanting an upright font forward
-%  and making an italics font upright.  Unbeknownst to some users, \pdfTeX{} performs a similar
+%  and making an italic font upright.  Unbeknownst to some users, \pdfTeX{} performs a similar
 %  operation under the hood: of the 40\thousandsseparator210~map lines in our
 %  \filesystem{pdftex.map}, currently 1\thousandsseparator236 instruct \pdfTeX{} to artificially
 %  slant a font.  This means approximately three percent of the shapes are generated this way.
@@ -1054,12 +1054,12 @@ end
 %  \code{SmallCaps}, and Python method: \code{addSmallCaps}.}
 %
 %  A common criticism of synthetically slanted type is that it lacks the contrast of true
-%  italics~\cite[p.~141]{strizver:2014}.  However, in many settings, this reduced contrast is
+%  italic~\cite[p.~141]{strizver:2014}.  However, in many settings, this reduced contrast is
 %  sufficient.  Furthermore, a slight contrast with the main typeface is of secondary concern;
 %  it does not devalue the shape \foreignphrase{per se} as is the case for artificial bold and
 %  condensed fonts.
 %
-%  What seems to have been lost in the discussion is the fact that true italics, designed
+%  What seems to have been lost in the discussion is the fact that true italic, designed
 %  alongside roman type, exhibit markedly different shapes.  If we have an unbiased look at
 %  it\spacedemdash for example at the title~page of this manual\spacedemdash the italic versions
 %  of the upright characters are so markedly different that it is worth asking whether they
@@ -1067,7 +1067,7 @@ end
 %  start of the loop of~\sample{g} moves from the far left to the middle.  Besides, the aspect
 %  ratio of both counters change.  These differences challenge the common
 %  guidelines~\cite[Ch.~6]{stamm:2020} for font pairing.  The apparent contradiction makes sense
-%  when we recognize that italics are not just slanted versions of roman letters.  They
+%  when we recognize that italic are not just slanted versions of roman letters.  They
 %  introduce tension through several additional design features.  A famous quote of
 %  \propername{Zuzana Li\v{c}ko} applies once again:
 %
@@ -1080,13 +1080,13 @@ end
 %
 %  \subsection{Some History}\label{sec:history}
 %
-%  Italics\index{italic|userman} accompanying a roman font date back to one of the earliest
+%  Italic\index{italic|userman} accompanying a roman font date back to one of the earliest
 %  print shops, namely that of
 %  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldo Manuzio}}\relax
 %  \index{Manuzio=\propername{Manuzio, Aldo}|userman} (lat.~\propername{Aldus Manutius}) around
 %  1500.  Probably the first sans-serif font with an oblique version was
 %  Venus\index{font>typeface>Venus}, released as an upright family of fonts in 1907 and
-%  accompanied by italics (ger.~\foreignphrase{kursiv}) since
+%  accompanied by italic (ger.~\foreignphrase{kursiv}) since
 %  1910~\cite{klingspor-museum-venus}.  Artificially slanted versions of upright fonts, also
 %  known as \singlequotes{oblique},\index{oblique|userman} appear in the twentieth century, when
 %  type designers and foundries start to save time and money by automatically constructing
@@ -1099,10 +1099,10 @@ end
 %  Roman=\acronym{CM} Roman|userman}\spacedemdash nowadays member of the \acronym{CM}-Super
 %  family\spacedemdash is available in a variety of almost thirty shapes, which is quite
 %  remarkable.  It covers not just slanted roman or slanted small caps, but also slanted
-%  typewriter and, somewhat surprisingly, upright italics.  Only a few font families come with
-%  upright italics; see \Cref{tab:upright-italics}.  Furthermore, the \LaTeXe{} font selection
+%  typewriter and, somewhat surprisingly, upright italic.  Only a few font families come with
+%  upright italic; see \Cref{tab:upright-italic}.  Furthermore, the \LaTeXe{} font selection
 %  scheme provides \singlequotes{\code{sl}} for slanted shapes and \singlequotes{\code{ui}} for
-%  upright italics~\cite{fntguide}.  The former is associated with the macros~\cs{slshape}
+%  upright italic~\cite{fntguide}.  The former is associated with the macros~\cs{slshape}
 %  and~\cs{textsl}.
 %
 %  \begingroup
@@ -1110,9 +1110,9 @@ end
 %    \begin{table}\hfill
 %      \begin{minipage}{.4\textwidth}
 %        \centering
-%        \caption[Fonts with upright italics]
-%                {Some font families with upright italics.}
-%        \label{tab:upright-italics}
+%        \caption[Fonts with upright italic]
+%                {Some font families with upright italic.}
+%        \label{tab:upright-italic}
 %
 %        \begin{tabular}{@{}l@{}}
 %          \toprule
@@ -1426,29 +1426,29 @@ end
 %  situations.  Here are some usage ideas.
 %
 %  \begin{enumerate}
-%  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italics}
-%    Generate a slanted serif font when a serif font lacks italics\index{italic|userman}, such
+%  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italic}
+%    Generate a slanted serif font when a serif font lacks italic\index{italic|userman}, such
 %    as \doublequotes{\acronym{URW} Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW}
 %    Antiqua|userman}.
 %
-%    Here, the user is relatively free to choose a \meta{slant} value, as there are no italics whose
+%    Here, the user is relatively free to choose a \meta{slant} value, as there are no italic whose
 %    angle must be matched.  \packagename{Synthslant}'s default of~0.2 should be a good starting
 %    point.
 %
-%  \item[\number\value{enumi}b.\refstepcounter{enumi}]\label{it:paired-with-no-italics}
-%    If a secondary serif font\spacedemdash again assumed to have no italics or
-%    obliques\spacedemdash is paired with a primary serif font which has italics, the slant
+%  \item[\number\value{enumi}b.\refstepcounter{enumi}]\label{it:paired-with-no-italic}
+%    If a secondary serif font\spacedemdash again assumed to have no italic or
+%    obliques\spacedemdash is paired with a primary serif font which has italic, the slant
 %    angle of the former can be matched to that of the primary font.  An example of such a
 %    constellation is \doublequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
 %    \doublequotes{Eczar}\index{font>typeface>Eczar|userman}.
 %
-%  \item\label{it:upright-italics}
-%    Augment a serif font that features an italic shape with upright italics.
+%  \item\label{it:upright-italic}
+%    Augment a serif font that features an italic shape with upright italic.
 %
 %    In nearly all cases, it is desirable to retain a slight forward slant of 1\textdegree{}
 %    to~2\textdegree\!.
 %
-%  \item\label{it:correct-italics-angle}
+%  \item\label{it:correct-italic-angle}
 %    An italic shape that has an excessive slant angle, such as
 %    \doublequotes{Libre Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected\spacedemdash
 %    i.\,e., partially un-slanted.
@@ -1478,14 +1478,14 @@ end
 %    the italic font's natural angle.
 %
 %  \item\label{it:slanted-small-caps}
-%    Small caps without accompanying italics can be slanted, too.
+%    Small caps without accompanying italic can be slanted, too.
 %
 %  \item\label{it:slant-in-math-mode}
 %    As \packagename{synthslant} also works in \TeX's math-mode, it is possible to give
-%    math-italics even more of a heeling.
+%    math-italic even more of a heeling.
 %
 %  \item\label{it:correct-math-script}
-%    If the slant of the math script font is at odds with the slant of the usual math~italics,
+%    If the slant of the math script font is at odds with the slant of the usual math~italic,
 %    it may be possible to apply \packagename{synthslant} on the script symbols for matching
 %    angles.
 %
@@ -1496,7 +1496,7 @@ end
 %
 %  It is possible to obtain slants that run against the reading direction, so called
 %  \singlequotes{backslanted} glyphs, but we have rarely seen an
-%  \href{https://fontsinuse.com/tags/2044/left-leaning-italics-backslanted}{example} where the
+%  \href{https://fontsinuse.com/tags/2044/left-leaning-italic-backslanted}{example} where the
 %  typography of a document could benefit from that.
 %
 %
@@ -1646,7 +1646,7 @@ end
 %    \centering
 %    \caption[Suggested slant values]
 %            {Suggested slant values for selected \emph{serif} fonts.  The \meta{slant} shown in
-%             the tables is not necessarily the one closest to the font's italics.  Also compare
+%             the tables is not necessarily the one closest to the font's italic.  Also compare
 %             with the left-hand table of \cref{tab:slanted-series-fonts}.}
 %    \label{tab:slant-values}
 %
@@ -1863,12 +1863,12 @@ end
 %    \end{center}
 %
 %    \noindent
-%    This is similar advice as for italics and also holds for \cs{textsynthuprightitalic} as
+%    This is similar advice as for italic and also holds for \cs{textsynthuprightitalic} as
 %    well as any other slanting macro.
 %  \end{tip}
 %
 %  \begin{usecases}
-%    If italics seem to be too intrusive in the body we can substitute slanted text for example
+%    If italic seem to be too intrusive in the body we can substitute slanted text for example
 %    for foreign phrases like \singlequotes{et\,al.} and \singlequotes{etc.}:
 %
 %    \begin{codeexample}
@@ -1892,7 +1892,7 @@ end
 %  \end{usecases}
 %
 %  \DescribeMacro{\textsynthuprightitalic}
-%  Backward slant some italics\index{italic|userman} or oblique\index{oblique|userman} glyphs.
+%  Backward slant some italic\index{italic|userman} or oblique\index{oblique|userman} glyphs.
 %
 %  \begin{synopsis}\label{syn:textsynthuprightitalic}
 %    \cs{textsynthuprightitalic}\marg{text}
@@ -1905,7 +1905,7 @@ end
 %
 %  \begin{example}
 %    To set apart operators in an algebra like, e.\,g., the radical, we could use upright
-%    italics
+%    italic
 %
 %    \begin{codeexample}
 %      \cs{newcommand*}\=\{\cs{algebraoperator}\}[1]  \\
@@ -2034,7 +2034,7 @@ end
 %  which is the equivalent of italic correction.
 %
 %  \begin{usecases}[\doublequotes{Patch Cases}]
-%    Left-italics correction.~\visualpar{}
+%    Left-italic correction.~\visualpar{}
 %    Simultaneous left-italic and right-italic correction for a shift-left effect.
 %  \end{usecases}
 %
@@ -2049,7 +2049,7 @@ end
 %    \cs{end}|{negslantenvironment}|
 %  \end{synopsis}
 %
-%  Switch to an italics font shape and\spacedemdash if
+%  Switch to an italic font shape and\spacedemdash if
 %  package~\packagename{microtype}~\cite{package:microtype} has been loaded\spacedemdash enter
 %  the Microtype-context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
 %
@@ -2092,7 +2092,7 @@ end
 %  \end{note}
 %
 %  \begin{example}
-%    Upright italics often look somewhat tight.  We like to add some extra tracking to them.
+%    Upright italic often look somewhat tight.  We like to add some extra tracking to them.
 %    So, we define a \packagename{microtype}~context named \code{synthnegslant}:
 %
 %    \begin{codeexample}
@@ -2103,7 +2103,7 @@ end
 %  \end{example}
 %
 %  \begin{tip}
-%    When the tracking of upright italics is changed
+%    When the tracking of upright italic is changed
 %    it may be advisable
 %
 %    \begin{itemize}
@@ -2126,10 +2126,10 @@ end
 %  determine the slant angle~\(\alpha\) or~\meta{slant}.
 %
 %  \begin{note}
-%    The slant angles of different italics or oblique glyphs in the same font may slightly
+%    The slant angles of different italic or oblique glyphs in the same font may slightly
 %    differ from each other.  Usually, longer shapes have less slant than shorter shapes.
 %
-%    Seek a representative slant value, an average that achieves a visual match with the italics
+%    Seek a representative slant value, an average that achieves a visual match with the italic
 %    or obliques.
 %  \end{note}
 %
@@ -2142,7 +2142,7 @@ end
 %  kind of averaging.  Two variants of this method are conceivable.  One is to overlay italic
 %  letters with appropriately slanted versions of the regular font's letters in a graphics
 %  program (\cref{sec:slanted-upright-plus-graphics-program}), another is to find upright italic
-%  (\cref{sec:upright-italics-plus-document-viewer}) and in that way determine the negative
+%  (\cref{sec:upright-italic-plus-document-viewer}) and in that way determine the negative
 %  slant value, which is equally useful.  All \meta{slant} values of \Cref{tab:slant-values} on
 %  \cpageref{tab:slant-values} were determined with the former method.  The latter method is
 %  faster, does not require an extra application just a previewer, and it yields surprisingly
@@ -2197,7 +2197,7 @@ end
 %  \item Load the first page (\doublequotes{Slanted Samples}) at a resolution of 600\,dpi
 %    to~900\,dpi into your favourite graphics editor.
 %
-%  \item Cut the italics sample at the top allowing for generous white-space around it as a
+%  \item Cut the italic sample at the top allowing for generous white-space around it as a
 %    rectangle
 %
 %  \item Paste the rectangle in a new layer called e.\,g.~\singlequotes{sample}.
@@ -2219,7 +2219,7 @@ end
 %                    {compare-with-the-gimp}
 %
 %    \caption[Compare slant angles]
-%            {Compare italics and slanted samples with \application{The Gimp}.~\visualpar{} For
+%            {Compare italic and slanted samples with \application{The Gimp}.~\visualpar{} For
 %             this screendump we loaded the samples on the first page of
 %             \filesystem{synthslant-gauge.pdf} at a resolution of~600\,dpi into
 %             \application{The Gimp}.  The \singlequotes{sample}~layer is aligned to the
@@ -2229,9 +2229,9 @@ end
 %  \end{figure}
 %
 %
-%  \subsubsection{Upright Italics \& Document Viewer}\label{sec:upright-italics-plus-document-viewer}
+%  \subsubsection{Upright Italic \& Document Viewer}\label{sec:upright-italic-plus-document-viewer}
 %
-%  Assess synthetically upright italics with any document viewer.
+%  Assess synthetically upright italic with any document viewer.
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item In file~\filesystem{synthslant-gauge.tex}\spacedemdash which comes with the
@@ -2240,9 +2240,9 @@ end
 %
 %  \item Render the document as PostScript or as~\acronym{PDF}.
 %
-%  \item Go to the second page (\doublequotes{Upright Italics Samples}).
+%  \item Go to the second page (\doublequotes{Upright Italic Samples}).
 %
-%  \item Magnify the page as necessary and look for a line where the italics look upright or
+%  \item Magnify the page as necessary and look for a line where the italic look upright or
 %  leaning to the right ever so slightly.
 %
 %  \item Read the slant value at the left-hand side of the line.  The sought after \meta{slant}
@@ -2257,8 +2257,8 @@ end
 %  examine the details of the slant operations.
 %
 %  Page~3, Sec.~2.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
-%  synthesized ones.  Here, the slanted glyphs as well as the upright italics should blend well
-%  with the native italics/obliques and with the normal font.
+%  synthesized ones.  Here, the slanted glyphs as well as the upright italic should blend well
+%  with the native italic/obliques and with the normal font.
 %
 %  Page~4, Sec.~2.2 and following sub-sections, examine the coupling of \packagename{synthslant}
 %  with the \TeX{}~system and some of its extensions.  If a slant engine malfunctions, it will
@@ -2344,7 +2344,7 @@ end
 %  font with a single instruction.
 %
 %  Let us to elaborate the example given in \cref{sec:usage-ideas},
-%  \cref{it:correct-italics-angle} and generate less-angled italics for
+%  \cref{it:correct-italic-angle} and generate less-angled italic for
 %  Libre~Caslon.\index{font>typeface>Libre Caslon|userman} Here is a suitable map line taken
 %  from \filesystem{pdftex.map} on our system:
 %
@@ -2359,7 +2359,7 @@ end
 %  \noindent
 %  which we had to break into three lines to make it fit this page.  The
 %  \singlequotes{{\ttfamily\ttdots\,}} indicate parts of the identifiers that we left out beyond
-%  that.  There are in fact four map lines for \code{T1}-encoded Libre~Caslon italics: those for
+%  that.  There are in fact four map lines for \code{T1}-encoded Libre~Caslon italic: those for
 %  lining figures~\singlequotes{\code{lf}}, oldstyle figures~\singlequotes{\code{osf}}, tabular
 %  lining figures~\singlequotes{\code{tlf}}, and tabular oldstyle
 %  figures~\singlequotes{\code{tosf}}.
@@ -2401,13 +2401,13 @@ end
 %    \begin{center}
 %      \def\sample{White Handgloves}
 %      \begin{tabular}{@{}ll@{}}
-%        Uncorrected, original italics  &  {\usefont{T1}{LibreCsln-LF}{regular}{it}\sample}  \\
+%        Uncorrected, original italic  &  {\usefont{T1}{LibreCsln-LF}{regular}{it}\sample}  \\
 %        Less angled version  &  {\usefont{T1}{LibreCsln-OsF}{regular}{it}\sample}
 %      \end{tabular}
 %    \end{center}
 %
 %    \noindent
-%    The only trick we have to reveal is that for the \doublequotes{original italics} we used
+%    The only trick we have to reveal is that for the \doublequotes{original italic} we used
 %    the lining figures~\singlequotes{\code{lf}} version of the font, whereas the
 %    \doublequotes{less angled} version shows the oldstyle figures~\singlequotes{\code{osf}}
 %    version.
@@ -2477,7 +2477,7 @@ end
 %
 %  An alternative outside of the typical \LaTeX{}~toolchain is to harness a font editor as, for
 %  example, \application{FontForge}~\cite{fontforge} to create a slanted version of an upright
-%  font or upright italics.  Here, the first step is to check the font's license to see whether
+%  font or upright italic.  Here, the first step is to check the font's license to see whether
 %  the generation of a variant is permitted, and what restrictions apply to its use.
 %
 %  \detoxindex{FontForge=\application{FontForge}|userman}\application{FontForge} can generate
@@ -2752,7 +2752,7 @@ end
 %
 %  \begin{macro}{\synthnegslant}
 %    Also introduce a reasonable default for the negative slant, which is used for upright
-%    italics.
+%    italic.
 %
 %    \begin{macrocode}
 \providecommand*{\synthnegslant}{-.2}
@@ -3363,7 +3363,7 @@ end
 %    We use this environment as a pair of hooks that are called right before and right after the
 %    actual un-slanting code runs.
 %
-%    The default sets up an italics shape before un-slanting and adds some negative italic
+%    The default sets up an italic shape before un-slanting and adds some negative italic
 %    correction after un-slanting.
 %
 %    \begin{macrocode}
@@ -3382,7 +3382,7 @@ end
 %  \end{environment}
 %
 %  \begin{macro}{\textsynthuprightitalic}
-%    User-level macro to un-slant some italics or oblique text.
+%    User-level macro to un-slant some italic or oblique text.
 %
 %    \begin{macrocode}
 \NewDocumentCommand{\textsynthuprightitalic}{m}
@@ -5721,7 +5721,7 @@ Font name: {\makeatletter\edef\@tempa{\fontname\font}\tt\@tempa\makeatother}.
     \midrule
     Normal  &
     \cs{normalfont}  &  {\normalfont\fontsample}  &  {\normalfont\FontSample}  &  {\normalfont\FONTSAMPLE}  \\
-    Italics  &
+    Italic  &
     \cs{itshape}  &  {\itshape\fontsample}  &  {\itshape\FontSample}  &  {\itshape\FONTSAMPLE}  \\
     \bottomrule
   \end{tabular}
@@ -5777,7 +5777,7 @@ Font name: {\makeatletter\edef\@tempa{\fontname\font}\tt\@tempa\makeatother}.
 
 
 \clearpage
-\section{Upright Italics Samples}
+\section{Upright Italic Samples}
 
 \begin{center}
   \renewcommand*{\arraystretch}{.85}
@@ -5847,7 +5847,7 @@ package~\packagename{microtype} being active.
 \setlength{\columnsep}{20pt}
 \begin{multicols}{2}\fussy
   \setlength{\overfullrule}{3pt}
-  \paragraph{Roman/Italics.}\leavevmode
+  \paragraph{Roman/Italic.}\leavevmode
 
   \r{Grumpy} \i{wizards} \r{make} \i{toxic} \r{brew} \i{for} \r{the} \i{evil} \r{Queen} \i{and} \r{Jack.}
   \r{One} \i{morning,} \r{when} \i{Gregor} \r{Samsa} \i{woke} \r{from} \i{troubled} \r{dreams,}
@@ -5879,7 +5879,7 @@ package~\packagename{microtype} being active.
   \r{waved} \y{about} \r{helplessly} \y{as} \r{he} \y{looked.}
 
 
-  \paragraph{Italics/Slanted Roman.}\leavevmode
+  \paragraph{Italic/Slanted Roman.}\leavevmode
 
   \i{Grumpy} \y{wizards} \i{make} \y{toxic} \i{brew} \y{for} \i{the} \y{evil} \i{Queen} \y{and} \i{Jack.}
   \i{One} \y{morn\-ing,} \i{when} \y{Gregor} \i{Samsa} \y{woke} \i{from} \y{trou\-bled} \i{dreams,}
@@ -5895,7 +5895,7 @@ package~\packagename{microtype} being active.
   \i{waved} \y{about} \i{helplessly} \y{as} \i{he} \y{looked.}
 
 
-  \paragraph{Roman/Italics/Slanted Roman.}\leavevmode
+  \paragraph{Roman/Italic/Slanted Roman.}\leavevmode
 
   \r{Grumpy} \i{wizards} \y{make} \r{toxic} \i{brew} \y{for} \r{the} \i{evil} \y{Queen} \r{and} \i{Jack.}
   \r{One} \i{morning,} \y{when} \r{Gregor} \i{Samsa} \y{woke} \r{from} \i{troubled} \y{dreams,}
@@ -5911,7 +5911,7 @@ package~\packagename{microtype} being active.
   \r{waved} \i{about} \y{helplessly} \r{as} \r{he} \y{looked.}
 
 
-  \paragraph{Roman/Upright Italics.}\leavevmode
+  \paragraph{Roman/Upright Italic.}\leavevmode
 
   \r{Grumpy} \u{wizards} \r{make} \u{toxic} \r{brew} \u{for} \r{the} \u{evil} \r{Queen} \u{and} \r{Jack.}
   \r{One} \u{morn\-ing,} \r{when} \u{Gregor} \r{Samsa} \u{woke} \r{from} \u{trou\-bled} \r{dreams,}
@@ -6005,8 +6005,8 @@ value of all deltas should be much less than 3pt.
     \bottomrule
   \end{tabular}
   \qquad
-  \newlength{\abcplainitalics}\settowidth{\abcplainitalics}{\itshape\doublealphabet}
-  \newlength{\abchypitalics}\settowidth{\abchypitalics}{\itshape\doublealphabethyp}
+  \newlength{\abcplainitalic}\settowidth{\abcplainitalic}{\itshape\doublealphabet}
+  \newlength{\abchypitalic}\settowidth{\abchypitalic}{\itshape\doublealphabethyp}
   \begin{tabular}[t]{@{}lrll@{}}
     \toprule
     \cs{itshape}  &  Slant  &  Width  &  Delta  \\
@@ -6017,31 +6017,31 @@ value of all deltas should be much less than 3pt.
     %
     ABC  &  0  &
     \thewidthof{\synthslantbox{0}{\itshape\doublealphabet}}  &
-    \thewidthdiffof{\abcplainitalics}{\synthslantbox{0}{\itshape\doublealphabet}}  \\
+    \thewidthdiffof{\abcplainitalic}{\synthslantbox{0}{\itshape\doublealphabet}}  \\
     ABC hyp  &  0  &
     \thewidthof{\synthslantbox{0}{\itshape\doublealphabethyp}}  &
-    \thewidthdiffof{\abchypitalics}{\synthslantbox{0}{\itshape\doublealphabethyp}}  \\
+    \thewidthdiffof{\abchypitalic}{\synthslantbox{0}{\itshape\doublealphabethyp}}  \\
     %
     ABC  &  -.1  &
     \thewidthof{\synthslantbox{-.1}{\itshape\doublealphabet}}  &
-    \thewidthdiffof{\abcplainitalics}{\synthslantbox{-.1}{\itshape\doublealphabet}}  \\
+    \thewidthdiffof{\abcplainitalic}{\synthslantbox{-.1}{\itshape\doublealphabet}}  \\
     ABC hyp  &  -.1  &
     \thewidthof{\synthslantbox{-.1}{\itshape\doublealphabethyp}}  &
-    \thewidthdiffof{\abchypitalics}{\synthslantbox{-.1}{\itshape\doublealphabethyp}}  \\
+    \thewidthdiffof{\abchypitalic}{\synthslantbox{-.1}{\itshape\doublealphabethyp}}  \\
     %
     ABC  &  -.2  &
     \thewidthof{\synthslantbox{-.2}{\itshape\doublealphabet}}  &
-    \thewidthdiffof{\abcplainitalics}{\synthslantbox{-.2}{\itshape\doublealphabet}}  \\
+    \thewidthdiffof{\abcplainitalic}{\synthslantbox{-.2}{\itshape\doublealphabet}}  \\
     ABC hyp  &  -.2  &
     \thewidthof{\synthslantbox{-.2}{\itshape\doublealphabethyp}}  &
-    \thewidthdiffof{\abchypitalics}{\synthslantbox{-.2}{\itshape\doublealphabethyp}}  \\
+    \thewidthdiffof{\abchypitalic}{\synthslantbox{-.2}{\itshape\doublealphabethyp}}  \\
     %
     ABC  &  -.3  &
     \thewidthof{\synthslantbox{-.3}{\itshape\doublealphabet}}  &
-    \thewidthdiffof{\abcplainitalics}{\synthslantbox{-.3}{\itshape\doublealphabet}}  \\
+    \thewidthdiffof{\abcplainitalic}{\synthslantbox{-.3}{\itshape\doublealphabet}}  \\
     ABC hyp  &  -.3  &
     \thewidthof{\synthslantbox{-.3}{\itshape\doublealphabethyp}}  &
-    \thewidthdiffof{\abchypitalics}{\synthslantbox{-.3}{\itshape\doublealphabethyp}}  \\
+    \thewidthdiffof{\abchypitalic}{\synthslantbox{-.3}{\itshape\doublealphabethyp}}  \\
     \bottomrule
   \end{tabular}
 \end{center}
