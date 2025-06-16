@@ -19,7 +19,7 @@ jobs:
       - name: Install Extra Tools
         run: |
           sudo apt-get update &&
-          sudo apt-get install imagemagick make
+          sudo apt-get install imagemagick make texlive-binaries
 
       - name: Run Tool Check
         run: make tool-check
