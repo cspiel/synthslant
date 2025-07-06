@@ -335,6 +335,14 @@
 
 \newcommand*{\bottomstrut}{\rule[-.5em]{0pt}{0pt}}
 
+\newenvironment*{codeexample*}
+                {\vspace{.5\smallskipamount}
+                 \par
+                 \ttfamily
+                 \begin{tabbing}}
+                {\end{tabbing}
+                 \par
+                 \vspace{.5\smallskipamount}}
 \newenvironment*{codeexample}
                 {\vspace{.5\smallskipamount}
                  \par
@@ -412,7 +420,7 @@
                numbers in regular style refer to pages where an entry is used.
                \ifx\special@index\HD@codeline@wrindex
                  References to code lines are prefixed with~\singlequotes{\codelineindicator}.
-                 Again italic style refers to definitions and regular style to lines where the code is used.
+                 Again, italic style refers to definitions and regular style to lines where the code is used.
                \fi}
 
 \newcommand*{\linenumberdecoration}
@@ -641,7 +649,7 @@
 
 \newcommand*{\userman}[1]{\textbf{\hyperpage{#1}}}
 
-\newcommand*{\visualpar}{\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
+\newcommand*{\visualpar}{~\textcolor{\markercolor}{\P}\linebreak[1]\enspace}
 
 \newenvironment*{widecodeexample}
                 {\begin{widebody}
@@ -913,16 +921,16 @@ end
 %    Slant value used by \cs{textsynthuprightitalic}.\qrref
 %
 %  \qritem{syn:synthslantbox}{\cs{synthslantbox}}[\marg{slant}\marg{text}]
-%    Slant \meta{text} (forward or backward) with \meta{slant}.\qrref
+%    Slant \meta{text} (forward or backward) by \meta{slant}.\qrref
 %
 %  \qritem{syn:synthslant}{\cs{synthslant}}
 %    Slant value used by \cs{textsynthslant}.\qrref
 %
 %  \qritem{syn:textsynthslant}{\cs{textsynthslant}}[\marg{text}]
-%    Forward slant \meta{text}.\qrref
+%    Forward slant roman, i.\,e., upright \meta{text}.\qrref
 %
 %  \qritem{syn:textsynthuprightitalic}{\cs{textsynthuprightitalic}}[\marg{text}]
-%    Backward slant \meta{text}.\qrref
+%    Backward slant italic \meta{text}.\qrref
 %  \end{list}
 %
 %
@@ -934,43 +942,79 @@ end
 %  \markboth{\sf\letterspacedsmallcaps{Quick Start}}{\sf\letterspacedsmallcaps{Quick Start}}
 %  \index{quick>start|userman}
 %
-%  For all users who want just the functionality not the explanations, here is a example that
+%  For all users who want just the functionality, not the explanations, here is an example that
 %  shows how to use the most important macros.
 %
 %  \medskip
 %
-%  \begin{codeexample}
-%    \cs{documentclass}\{article\}  \\
-%    \\
-%    \cs{usepackage}\{mlmodern\}\% \textit{example font}  \\
-%    \\
-%    \% \textit{\hyperref[sec:package-options]{Package Options}, \cpageref{sec:package-options}}  \\
-%    \cs{usepackage}[posslant=.23, negslant=-.21]\{synthslant\}  \\
-%    \\
-%    \cs{begin}\{document\}  \\
-%    \% \textit{\hyperref[sec:variables]{Variable-Like Macros}, \cpageref{sec:variables}}  \\
-%    \cs{renewcommand*}\{\cs{synthslant}\}\{.23\}  \\
-%    \cs{renewcommand*}\{\cs{synthnegslant}\}\{-.21\}  \\
-%    \% \textit{redundant re-definitions because \code{posslant} and}  \\
-%    \% \textit{\code{negslant} were passed as package options, but}  \\
-%    \% \textit{they are possible anywhere;}  \\
-%    \\
-%    \% \textit{\hyperref[sec:basic-interface]{Basic Interface}, \cpageref{sec:basic-interface}}  \\
-%    \% \textit{slant upright shape to the right by \cs{synthslant}}  \\
-%    \cs{textsynthslant}\{Generierter schräger Schriftschnitt,\}  \\
-%    \cs{textsynthslant}\{Antiqua-Schrift,\}  \\
-%    \cs{textsynthslant}\{Sauer\cs{-}stoff\cs{-}fla\cs{-}sche,\}  \\
-%    \cs{textsynthslant}\{Be\cs{discretionary}\{tt-\}\{t\}\{tt\}uch.\}  \\
-%    \% \textit{slant italic shape to the left by \textminus\cs{synthnegslant}}  \\
-%    \cs{textsynthuprightitalic}\{Aufrechte kursive Schriftlage.\}  \\
-%    \\
-%    \% \textit{\hyperref[sec:advanced-interface]{Advanced Interface}, \cpageref{sec:advanced-interface}}  \\
-%    \% \textit{separate slants for each box}  \\
-%    \cs{synthslantbox}\{-.25\}\{H\}  \\
-%    \cs{synthslantbox}\{0\}\{H\}  \\
-%    \cs{synthslantbox}\{.25\}\{H\}  \\
-%    \cs{end}\{document\}
-%  \end{codeexample}
+%  \begingroup
+%    \small
+%    \begin{codeexample}
+%      \cs{documentclass}\{article\}  \\
+%      \\
+%      \cs{usepackage}\{mlmodern\}\% \textit{load an example font}  \\
+%      \\
+%      \% \textit{\hyperref[sec:package-options]{Package Options}, \cpageref{sec:package-options}}  \\
+%      \index{font>typeface>ML Modern=\acronym{ML} Modern|userman}\relax
+%      \% \textit{Slant values are suitable for \href{https://tug.org/FontCatalogue/mlmodern/}{ML Modern}.}  \\
+%      \detoxindex{package option>posslant=\code{posslant}|userman}\relax
+%      \detoxindex{posslant=\code{posslant}~(option)|userman}\relax
+%      \detoxindex{package option>negslant=\code{negslant}|userman}\relax
+%      \detoxindex{negslant=\code{negslant}~(option)|userman}\relax
+%      \cs{usepackage}[posslant=.23, negslant=-.21]\{synthslant\}  \\
+%      \\
+%      \cs{begin}\{document\}  \\
+%      \% \textit{\hyperref[sec:variables]{Variable-Like Macros}, \cpageref{sec:variables}}  \\
+%      \% \textit{The redefinitions are unnecessary since \code{posslant} and}  \\
+%      \% \textit{\code{negslant} have already been specified as package options,}  \\
+%      \% \textit{but they can be used anywhere in the document.}  \\
+%      \cs{renewcommand*}\{\cs{synthslant}\}\{.23\}\index{synthslant=\verb!*+\synthslant+|userman}  \\
+%      \cs{renewcommand*}\{\cs{synthnegslant}\}\{-.21\}\index{synthnegslant=\verb!*+\synthnegslant+|userman}  \\
+%      \\
+%      \% \textit{\hyperref[sec:basic-interface]{Basic Interface}, \cpageref{sec:basic-interface}}  \\
+%      \% \textit{Slant upright shape to the right by \cs{synthslant}.}  \\
+%      \index{textsynthslant=\verb!*+\textsynthslant+|userman}\relax
+%      \cs{textsynthslant}\{Generierter schräger Schriftschnitt,\}\%\quad\=\textit{(1)}  \\
+%      \cs{textsynthslant}\{Antiqua-Schrift,\}\%\>\textit{(2)}  \\
+%      \cs{textsynthslant}\{Sauer\cs{-}stoff\cs{-}fla\cs{-}sche,\}\%\>\textit{(3)}  \\
+%      \cs{textsynthslant}\{Be\cs{discretionary}\{tt-\}\{t\}\{tt\}uch.\}\%\>\textit{(4)}  \\
+%      \\
+%      \% \textit{Slant italic shape to the left by \textminus\cs{synthnegslant}.}  \\
+%      \index{textsynthuprightitalic=\verb!*+\textsynthuprightitalic+|userman}\relax
+%      \cs{textsynthuprightitalic}\{Aufrechte kursive Schriftlage.\}  \\
+%      \\
+%      \% \textit{\hyperref[sec:advanced-interface]{Advanced Interface}, \cpageref{sec:advanced-interface}}  \\
+%      \% \textit{Use separate slants for each box.}  \\
+%      \index{synthslantbox=\verb!*+\synthslantbox+|userman}\relax
+%      \cs{synthslantbox}\{-.25\}\{H\}\index{synthslantbox=\verb!*+\synthslantbox+|userman}  \\
+%      \cs{synthslantbox}\{0\}\{H\}  \\
+%      \cs{synthslantbox}\{.25\}\{H\}  \\
+%      \cs{end}\{document\}
+%    \end{codeexample}
+%  \endgroup
+%
+%  \medskip
+%
+%  \noindent
+%  The macros \hyperref[syn:textsynthslant]{\cs{textsynthslant}},
+%  \hyperref[syn:textsynthuprightitalic]{\cs{textsynthuprightitalic}}, and
+%  \hyperref[syn:synthslantbox]{\cs{synthslantbox}} basically typeset their arguments in
+%  \acronym{LR}~mode, i.\,e., as if wrapped in an \cs{mbox}.  \packagename{Synthslant}
+%  reintroduces line breakability at spaces, hyphens, discretionary hyphens, and
+%  \cs{discretionary} primitives.  The tagged lines in the above example thus present the
+%  following line breaking opportunities:
+%
+%  \begin{enumerate}[label*=(\tabularliningfigures\arabic*), nosep]
+%  \item Two breakpoints at the spaces.
+%  \item One breakpoint after the hyphen.
+%  \item Three breakpoints at the discretionary hyphens.
+%  \item One breakpoint at the \cs{discretionary}.
+%  \end{enumerate}
+%
+%  \smallskip
+%
+%  For an example in math mode see the \hyperref[tip:display-style-math-operators]{tip} on
+%  \Cpageref{tip:display-style-math-operators}.
 %
 %
 %  \clearpage
@@ -1021,7 +1065,7 @@ end
 %  \item[Slanted:]\index{slanted|userman} A slanted font is always created mechanically by
 %  applying a shear-transform (explained in \cref{sec:shear-transformation} on
 %  \cpageref{sec:shear-transformation}) to the glyphs of a given font.  The original font can be
-%  serif, sans-serif, upright, italic, oblique, or mathematical.
+%  serif, sans serif, upright, italic, oblique, or mathematical.
 %
 %  To be clear, we sometimes add the adverbs \singlequotes{artificially} or
 %  \singlequotes{synthetically} to the term \singlequotes{slanted}.
@@ -1038,8 +1082,8 @@ end
 %  bold\footnote{Package~\packagename{amsbsy} defines a \doublequotes{Poor Man's Bold}
 %  macro~\cs{pmb} that works by \singlequotes{overprinting}.  The authors of
 %  \packagename{amsbsy} recommend to prefer package~\packagename{bm} for bold mathematical
-%  symbols, though.} or condensed ones.\!\footnote{See for example Ref.~\citenum{strizver:2014},
-%  p.~97, but compare with p.~142 and also Ref.~\citenum{middendorp:2014}, p.~68n, for a more
+%  symbols, though.} or condensed ones.\!\footnote{See for example reference~\citenum{strizver:2014},
+%  p.~97, but compare with p.~142 and also reference~\citenum{middendorp:2014}, p.~68n, for a more
 %  nuanced assessment.}  This criticism can be traced for synthetic bold and condensed variants.
 %  They spoil the glyphs' outlines because they do not (and cannot) conserve the necessary
 %  proportions.  For small caps the problems are somewhat minor; it is worth testing how far one
@@ -1050,7 +1094,7 @@ end
 %  font.\!\footnote{\detoxindex{FontForge=\application{FontForge}|userman}\relax
 %  \application{FontForge}~\cite{fontforge} provides a means to generate small caps of any given
 %  glyphs, which allows to control the \(x\)-scale and \(y\)-scale factors and the widths of the
-%  stems.  \acronym{GUI}-sequence: Element~> Style~> Add Small Capitals, script function:
+%  stems.  \acronym{GUI}~sequence: Element~> Style~> Add Small Capitals, script function:
 %  \code{SmallCaps}, and Python method: \code{addSmallCaps}.}
 %
 %  A common criticism of synthetically slanted type is that it lacks the contrast of true
@@ -1063,13 +1107,13 @@ end
 %  alongside roman type, exhibit markedly different shapes.  If we have an unbiased look at
 %  it\spacedemdash for example at the title~page of this manual\spacedemdash the italic versions
 %  of the upright characters are so markedly different that it is worth asking whether they
-%  truly match the upright forms.  For the double-storey~\sample{a} becomes single-storey, the
+%  truly match the upright forms.  For the double-storey~\sample{a} becomes single storey, the
 %  start of the loop of~\sample{g} moves from the far left to the middle.  Besides, the aspect
 %  ratio of both counters change.  These differences challenge the common
 %  guidelines~\cite[Ch.~6]{stamm:2020} for font pairing.  The apparent contradiction makes sense
-%  when we recognize that italic are not just slanted versions of roman letters.  They
-%  introduce tension through several additional design features.  A famous quote of
-%  \propername{Zuzana Li\v{c}ko} applies once again:
+%  when we recognize that italic are not just slanted versions of roman letters.  They introduce
+%  tension through several additional design features.  A famous quote of \propername{Zuzana
+%  Li\v{c}ko} applies once again:
 %
 %  \begin{quote}\small\samepage
 %    The most popular typefaces are the easiest to read; their popularity has made them
@@ -1133,7 +1177,7 @@ end
 %      \end{minipage}\hfill
 %      \begin{minipage}{.4\textwidth}
 %        \centering
-%        \caption[Variable fonts with slant-axis]
+%        \caption[Variable fonts with slant axis]
 %                {A short list of some variable fonts with a slant axis (\code{slnt}).}
 %        \label{tab:open-type-slant-feature}
 %
@@ -1164,7 +1208,7 @@ end
 %        \propername{TrueType}~Support}
 %  and search \href{https://fonts.google.com/}{Google Fonts} for families of
 %  \href{https://fonts.google.com/variablefonts?vfaxis=slnt}{variable fonts with a
-%  \code{slnt}-axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
+%  \code{slnt}~axis} or fonts with an \href{https://v-fonts.com/tags/C5}{unusual variation} at
 %  \href{https://v-fonts.com/}{Variable Fonts}.}  that offer a slant-axis\footnote{The
 %  registered axis is called \code{slnt} and it is not to be confused with the
 %  \code{ital}~axis.}\index{font>axis>slnt=\code{slnt}|userman}\index{font>axis>ital=\code{ital}|userman}
@@ -1225,21 +1269,21 @@ end
 %  It seems that the original idea of automatically shearing text in \LaTeX{} to simulate a
 %  slanted shape goes back to
 %  \propername{David Carlisle}\index{Carlisle=\propername{Carlisle, David}|userman}
-%  who suggested to use the \pdfTeX-primitive \cs{pdfliteral} for
+%  who suggested to use the \pdfTeX~primitive \cs{pdfliteral} for
 %  shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly thereafter
 %  \propername{Bruno Le Floch}\index{Floch=\propername{Le Floch, Bruno}|userman}
-%  pointed to another \pdfTeX-primitive, namely \cs{pdfsetmatrix}, available with (in 2013) more
+%  pointed to another \pdfTeX~primitive, namely \cs{pdfsetmatrix}, available with (in 2013) more
 %  recent \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the
-%  transformation matrix has been part of the \acronym{PDF}-standard since its initial
+%  transformation matrix has been part of the \acronym{PDF}~standard since its initial
 %  publication in 1993~\cite[Secs.~3.8 and~3.9]{adobe-pdf-1.0} in the form of operator~\code{cm}
 %  (\singlequotes{concat}\spacedemdash concatenate matrix to current transformation
-%  matrix).~\visualpar{} The primitive~\cs{pdfliteral} was implemented already in the first
+%  matrix).\visualpar The primitive~\cs{pdfliteral} was implemented already in the first
 %  release of \pdfTeX{} in~1998~\cite{baskerville-pdftex-8-1:1998} and the
 %  primitive~\cs{pdfsetmatrix} joined 2007 in \pdfTeX~version~1.40.0~\cite{schroeder:2007}.}
 %  With the help of the latter affine transformations of arbitrary content can be coded directly
 %  by setting the transformation matrix.  A slight variant of his code is used in this package
-%  for the \acronym{PDF}- and
-%  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman}-slant~engines.  The
+%  for the \acronym{PDF} and
+%  \packagename{l3draw}\index{package>l3draw=\packagename{l3draw}|userman} slant engines.  The
 %  implementations for \pstrickslogo\index{package>pstricks=\packagename{pstricks}|userman},
 %  \tikzlogo\index{package>tikz=\packagename{tikz}|userman}, and
 %  \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}userman} are trivial as
@@ -1451,14 +1495,14 @@ end
 %  \item\label{it:correct-italic-angle}
 %    An italic shape that has an excessive slant angle, such as
 %    \doublequotes{Libre Caslon}\index{font>typeface>Libre Caslon|userman}, may be corrected\spacedemdash
-%    i.\,e., partially un-slanted.
+%    i.\,e., partially unslanted.
 %
 %    Here, and generally if the entire font needs correction, alternative approaches such as
 %    those discussed in \cref{sec:alternative}
 %    (\pageref{sec:alternative}--\pageref{secend:alternative}) may be warranted.
 %
 %  \item\label{it:generate-sole-obliques}
-%    Generate an oblique sans-serif if a sans-serif font comes without an
+%    Generate an oblique sans serif if a sans-serif font comes without an
 %    oblique\index{oblique|userman} shape as, e.\,g.,
 %    \doublequotes{\acronym{URW}~Grotesk}.\index{font>typeface>URW Grotesk=\acronym{URW}
 %    Grotesk|userman}
@@ -1468,7 +1512,7 @@ end
 %    obliques such as e.\,g.~\doublequotes{Open Sans}.\index{font>typeface>Open Sans|userman}
 %
 %  \item\label{it:slant-typewriter}
-%    Fixed-width\spacedemdash also called \singlequotes{typewriter} or
+%    Fixed width\spacedemdash also called \singlequotes{typewriter} or
 %    \singlequotes{teletype}\spacedemdash fonts without obliques (Yes, I am looking at you,
 %    Inconsolata!)\index{font>typeface>Inconsolata|userman} finally get an oblique shape.
 %
@@ -1530,8 +1574,8 @@ end
 %    Let the package choose a slant engine.  This is the default.
 %
 %    For \pdfLaTeX\index{pdflatex=\pdfLaTeX|userman} package \packagename{synthslant} selects
-%    the \acronym{PDF}-engine, for \LuaLaTeX\index{lualatex=\LuaLaTeX|userman} the
-%    \packagename{fontspec}-engine, and in all other cases the \packagename{l3draw}-layer
+%    the \acronym{PDF}~engine, for \LuaLaTeX\index{lualatex=\LuaLaTeX|userman} the
+%    \packagename{fontspec}~engine, and in all other cases the \packagename{l3draw}~layer
 %    handles the shear transformation.
 %
 %  \item[|disable|]\label{item:disable}
@@ -1542,7 +1586,7 @@ end
 %    \indexpackageoption{fontspec}
 %    Use \packagename{fontspec}~\cite{package:fontspec}\relax
 %    \index{package>fontspec=\packagename{fontspec}|userman} as
-%    slanting back-end.\!\footnote{Requires \LuaTeX{} and \filesystem{fontspec.sty.}}
+%    slanting back end.\!\footnote{Requires \LuaTeX{} and \filesystem{fontspec.sty.}}
 %
 %  \item[|l3draw|]\label{item:l3draw}
 %    \indexpackageoption{l3draw}
@@ -1607,7 +1651,7 @@ end
 %
 %  The package options \code{slant}, \code{posslant}, and \code{negslant} all accept
 %  floating-point \emph{expressions} as their arguments not just plain floating-point literals.
-%  See Ref.~\citenum{latex3-interfaces}, Ch.~29, \doublequotes{The \textsf{l3fp}~module~--
+%  See reference~\citenum{latex3-interfaces}, Ch.~29, \doublequotes{The \textsf{l3fp}~module~--
 %  Floating points} for a description of the floating-point expression syntax and the available
 %  functions.\label{secend:package-options}
 %
@@ -1746,9 +1790,9 @@ end
 %  For a more flexible and powerful interface, see~\cref{sec:advanced-interface}.
 %
 %  \begin{note}
-%    The following restrictions and workarounds to get line-breaking and \TeX's automatic
+%    The following restrictions and workarounds to get line breaking and \TeX's automatic
 %    hyphenation working again do \emph{not} apply to the
-%    \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}|userman} back-end.
+%    \packagename{fontspec}\index{package>fontspec=\packagename{fontspec}|userman} back end.
 %  \end{note}
 %
 %  \noindent
@@ -1795,7 +1839,7 @@ end
 %
 %  \begin{note}
 %    \packagename{Synthslant} splits \meta{text} at spaces.  This leads to some inconvenient
-%    interactions with \TeX- or \LaTeX-constructions that themselves need white space as
+%    interactions with \TeX{} or \LaTeX~constructions that themselves need white space as
 %    terminators, e.\,g.~\cs{kern} or \cs{skip} or starred macros that normally consume white
 %    space on their right-hand sides with the help of \cs{ignorespaces}.
 %
@@ -1834,7 +1878,7 @@ end
 %  correction}\index{slant>correction|userman}\spacedemdash the equivalent of italic
 %  correction\spacedemdash at the right-hand side of~\meta{text}.
 %
-%  In math mode just slant \meta{text} with the slant value stored in
+%  In math mode, just slant \meta{text} with the slant value stored in
 %  \hyperref[syn:synthslant]{\cs{synthslant}}.
 %
 %  \begin{tip}
@@ -1868,8 +1912,8 @@ end
 %  \end{tip}
 %
 %  \begin{usecases}
-%    If italic seem to be too intrusive in the body we can substitute slanted text for example
-%    for foreign phrases like \singlequotes{et\,al.} and \singlequotes{etc.}:
+%    If italics seem to be too intrusive in the body, we can substitute slanted text, for
+%    example, for foreign phrases like \singlequotes{et\,al.} and \singlequotes{etc.}:
 %
 %    \begin{codeexample}
 %      \cs{newcommand*}\=\{\cs{foreignphrase}\}[2][USenglish]  \\
@@ -1879,10 +1923,10 @@ end
 %    \noindent
 %    where we show the font modification in conjunction with the
 %    \packagename{babel}~macro\index{package>babel=\packagename{babel}|userman}
-%    \cs{foreignlanguage}~\cite{package:babel}.~\visualpar
+%    \cs{foreignlanguage}~\cite{package:babel}.\visualpar
 %
-%    In math-mode you cannot have enough fonts, symbols, and most of the gizmos over there!  We
-%    like to mark up automorphism groups associated with a given group with a slanted-roman
+%    In math mode, you cannot have enough fonts, symbols, and most of the gizmos over there!  We
+%    like to mark up automorphism groups associated with a given group with a slanted roman
 %    typeface, though our macro has a more general name.
 %
 %    \begin{codeexample}
@@ -1901,10 +1945,10 @@ end
 %  In horizontal mode switch to an italic shape,
 %  slant \meta{text} with the slant value stored in \cs{synthnegslant}.
 %
-%  In math mode just un-slant \meta{text} with the slant value stored in \cs{synthnegslant}.
+%  In math mode, just unslant \meta{text} with the slant value stored in \cs{synthnegslant}.
 %
 %  \begin{example}
-%    To set apart operators in an algebra like, e.\,g., the radical, we could use upright
+%    To set apart operators in an algebra, like, e.\,g., the radical, we could use upright
 %    italic
 %
 %    \begin{codeexample}
@@ -1924,7 +1968,7 @@ end
 %    bring \cs{DeclareMathOperator} into scope.
 %  \end{example}
 %
-%  \begin{tip}[Display Style Math Operators]
+%  \begin{tip}[Display Style Math Operators]\label{tip:display-style-math-operators}
 %    Slanted or unslanted display style mathematical operators are best pre-defined with
 %    \cs{DeclareMathOperator}~\cite{package:amsmath}.
 %
@@ -1945,7 +1989,7 @@ end
 %      \int \quad \uprightint
 %    \end{equation}
 %
-%    In the following equation we used \cs{uprightint} and \cs{slantedsum} like
+%    In the following equation, we used \cs{uprightint} and \cs{slantedsum} like
 %
 %    \begin{codeexample}
 %      |\uprightint_{\negthickspace 0}^{\;\;1}|
@@ -1959,31 +2003,32 @@ end
 %    \end{codeexample}
 %
 %    \noindent
-%    for the first summation-sign, and
+%    for the first summation sign, and
 %
 %    \begin{codeexample}
 %      |\slantedsum_{s=1}^{\;\;l}{\vphantom{\slantedsum}}''|
 %    \end{codeexample}
 %
 %    \noindent
-%    for the second summation-sign:
+%    for the second summation sign:
 %    \begin{equation*}
 %      \uprightint_{\negthickspace 0}^{\;\;1} f(x) \, dx =
-%      \frac{1}{m} \,  \slantedsum_{j=0}^{\;\;m} f(j/m) -
+%      \frac{1}{m} \, \slantedsum_{j=0}^{\;\;m} f(j/m) -
 %      \slantedsum_{s=1}^{\;\;l}{\vphantom{\slantedsum}}''
 %      \frac{B_{2s}}{2s!} \frac{f^{(2s - 1)}(1) - f^{(2s - 1)}(0)}{m^{2s}} +
 %      O\bigl(m^{-2l-2}\bigr).
 %    \end{equation*}
 %
-%    The aesthetic appeal of this solution is doubtful, however it demonstrates the capabilities
-%    of \packagename{synthslant} in math mode.
+%    The aesthetic appeal of this solution is doubtful; however, it demonstrates the
+%    capabilities of \packagename{synthslant} in math mode.
 %  \end{tip}
 %
 %
+%  \newpagetofixtoc
 %  \subsection{Advanced Interface}\label{sec:advanced-interface}
 %
 %  \DescribeMacro{\synthslantbox}
-%  Slant \meta{text} with an amount of \meta{slant} that can be positive, negative or zero.
+%  Slant \meta{text} with an amount of \meta{slant} that can be positive, negative, or zero.
 %
 %  \begin{synopsis}\label{syn:synthslantbox}
 %    \cs{synthslantbox}\marg{slant}\marg{text}
@@ -2013,12 +2058,12 @@ end
 %  \end{example}
 %
 %  The following two environments are responsible for setting up everything before the actual
-%  slant or un-slant code runs and what happens after the slant-engine finishes.  They can be
+%  slant or unslant code runs and what happens after the slant engine finishes.  They can be
 %  redefined or patched to meet different needs.
 %
 %  \DescribeEnv{slantenvironment}
 %  This environment is a wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is
-%  called for every forward-slanting operation
+%  called for every forward slanting operation
 %  with~\hyperref[syn:textsynthslant]{\cs{textsynthslant}}.
 %
 %  \begin{synopsis}\label{syn:slantenvironment}
@@ -2028,19 +2073,20 @@ end
 %  \end{synopsis}
 %
 %  Switch to an upright font shape and\spacedemdash if
-%  package~\packagename{microtype}~\cite{package:microtype}\index{package>microtype=\packagename{microtype}|userman}
-%  has been loaded\spacedemdash enter the Microtype-context defined by
-%  macro~\hyperref[syn:slantcontext]{\cs{slantcontext}}.  At the end add some slant correction,
+%  package~\packagename{microtype}~\cite{package:microtype}\relax
+%  \index{package>microtype=\packagename{microtype}|userman}
+%  has been loaded\spacedemdash enter the Microtype context defined by
+%  macro~\hyperref[syn:slantcontext]{\cs{slantcontext}}.  At the end, add some slant correction,
 %  which is the equivalent of italic correction.
 %
 %  \begin{usecases}[\doublequotes{Patch Cases}]
-%    Left-italic correction.~\visualpar{}
+%    Left-italic correction.\visualpar
 %    Simultaneous left-italic and right-italic correction for a shift-left effect.
 %  \end{usecases}
 %
 %  \DescribeEnv{negslantenvironment}
 %  This environment is a wrapper around \hyperref[syn:synthslantbox]{\cs{synthslantbox}} that is
-%  called for every backward-slanting operation
+%  called for every backward slanting operation
 %  with~\hyperref[syn:textsynthuprightitalic]{\cs{textsynthuprightitalic}}.
 %
 %  \begin{synopsis}\label{syn:negslantenvironment}
@@ -2051,7 +2097,7 @@ end
 %
 %  Switch to an italic font shape and\spacedemdash if
 %  package~\packagename{microtype}~\cite{package:microtype} has been loaded\spacedemdash enter
-%  the Microtype-context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
+%  the Microtype context defined by macro~\hyperref[syn:negslantcontext]{\cs{negslantcontext}}.
 %
 %  \DescribeMacro{\slantcontext}
 %  Name of the \packagename{microtype} context used when typesetting slanted text.
@@ -2069,7 +2115,7 @@ end
 %
 %  \begin{note}
 %    The tracking context~\code{synthslant} is \emph{not} defined by \packagename{synthslant}.
-%    And \packagename{microtype} ignores undefined contexts.
+%    And Microtype ignores undefined contexts.
 %  \end{note}
 %
 %  \DescribeMacro{\negslantcontext}
@@ -2088,11 +2134,11 @@ end
 %
 %  \begin{note}
 %    The tracking context~\code{synthnegslant} is \emph{not} defined by
-%    \packagename{synthslant}.  And \packagename{microtype} ignores undefined contexts.
+%    \packagename{synthslant}.  And Microtype ignores undefined contexts.
 %  \end{note}
 %
 %  \begin{example}
-%    Upright italic often look somewhat tight.  We like to add some extra tracking to them.
+%    Upright italic often looks somewhat tight.  We like to add some extra tracking to them.
 %    So, we define a \packagename{microtype}~context named \code{synthnegslant}:
 %
 %    \begin{codeexample}
@@ -2103,13 +2149,12 @@ end
 %  \end{example}
 %
 %  \begin{tip}
-%    When the tracking of upright italic is changed
-%    it may be advisable
+%    When the tracking of upright italic is changed, it may be advisable
 %
 %    \begin{itemize}
-%    \item to break ligatures, e.\,g.~\code{no ligatures = \{f\}},
-%    \item to adjust the outer kerning, e.\,g.~\code{outer~kerning = \{0, 0\}} and
-%    \item to adapt the inter-word spacing, e.\,g.~\code{spacing = \{100,,\}}.
+%    \item to break ligatures, e.\,g., \code{no ligatures = \{f\}},
+%    \item to adjust the outer kerning, e.\,g., \code{outer~kerning = \{0, 0\}}, and
+%    \item to adapt the inter-word spacing, e.\,g., \code{spacing = \{100,,\}}.
 %    \end{itemize}
 %
 %    The document \filesystem{synthslant-gauge.tex}, which comes with
@@ -2129,24 +2174,24 @@ end
 %    The slant angles of different italic or oblique glyphs in the same font may slightly
 %    differ from each other.  Usually, longer shapes have less slant than shorter shapes.
 %
-%    Seek a representative slant value, an average that achieves a visual match with the italic
+%    Seek a representative slant value, an average that achieves a visual match with the italics
 %    or obliques.
 %  \end{note}
 %
 %  In the following, we suggest three techniques to determine or match the slant of a glyph with
 %  sufficient accuracy.  Direct measurements of the slant angle (\cref{sec:direct-measurement})
-%  pretend to be the most precise.  However\spacedemdash as the previous Note
-%  indicated\spacedemdash its accuracy is limited by the differing slant angles of the
-%  letterforms.  The visual comparison of shapes (\cref{sec:shape-comparison}) appeals to the
-%  user's judgment of matching angles for several letters, thus inherently incorporating some
-%  kind of averaging.  Two variants of this method are conceivable.  One is to overlay italic
-%  letters with appropriately slanted versions of the regular font's letters in a graphics
-%  program (\cref{sec:slanted-upright-plus-graphics-program}), another is to find upright italic
-%  (\cref{sec:upright-italic-plus-document-viewer}) and in that way determine the negative
+%  claim to be the most precise.  However, as the previous Note indicated, its accuracy is
+%  limited by the differing slant angles of the letterforms.  The visual comparison of shapes
+%  (\cref{sec:shape-comparison}) appeals to the user's judgment of matching angles for several
+%  letters, thus inherently incorporating some kind of averaging.  Two variants of this method
+%  are conceivable.  One is to overlay italic letters with appropriately slanted versions of the
+%  regular font's letters in a graphics program
+%  (\cref{sec:slanted-upright-plus-graphics-program}); another is to find upright italic
+%  (\cref{sec:upright-italic-plus-document-viewer}) and, in that way, determine the negative
 %  slant value, which is equally useful.  All \meta{slant} values of \Cref{tab:slant-values} on
 %  \cpageref{tab:slant-values} were determined with the former method.  The latter method is
-%  faster, does not require an extra application just a previewer, and it yields surprisingly
-%  accurate results.
+%  faster, does not require an extra application\spacedemdash just a previewer\spacedemdash and
+%  it yields surprisingly accurate results.
 %
 %
 %  \subsection{Direct Measurement}\label{sec:direct-measurement}
@@ -2158,15 +2203,15 @@ end
 %
 %  \item Render it as PostScript or in~\acronym{PDF}.
 %
-%  \item Load the file at a resolution of 1200\,dpi or higher into your favourite graphics
-%    editor that supports measuring angles.
+%  \item Load the file at a resolution of 1200\,dpi or higher into your favorite graphics editor
+%    that supports measuring angles.
 %
-%  \item In the graphics editor center the interesting letters and set the zoom to one hundred
-%    percent or more.
+%  \item In the graphics editor, center the interesting letters and set the zoom to 100~percent
+%  or more.
 %
 %  \item Measure some letters and write down the angles.
 %
-%  \item Convert the desired angle~\(\alpha\) to a \meta{slant} by calculating \(\sin \alpha\).
+%  \item Convert the angle~\(\alpha\) to a \meta{slant} by calculating \(\sin \alpha\).
 %
 %    If no computer is available, the following approximation might help:
 %    \begin{equation*}
@@ -2179,7 +2224,7 @@ end
 %
 %  \subsection{Comparison of Shapes}\label{sec:shape-comparison}
 %
-%  Compare some reference glyphs with a differently slanted or un-slanted versions.
+%  Compare some reference glyphs with a differently slanted or unslanted versions.
 %
 %
 %  \subsubsection{Slanted Upright \& Graphics Program}\label{sec:slanted-upright-plus-graphics-program}
@@ -2189,15 +2234,15 @@ end
 %
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item In file~\filesystem{synthslant-gauge.tex}\spacedemdash which comes with the
-%    \packagename{synthslant}~package\spacedemdash insert the code to load your
-%    font-of-interest.
+%    \packagename{synthslant}~package\spacedemdash insert the code to load your font of
+%    interest.
 %
 %  \item Render the document as PostScript or as~\acronym{PDF}.
 %
 %  \item Load the first page (\doublequotes{Slanted Samples}) at a resolution of 600\,dpi
 %    to~900\,dpi into your favourite graphics editor.
 %
-%  \item Cut the italic sample at the top allowing for generous white-space around it as a
+%  \item Cut the italic sample at the top allowing for generous white~space around it as a
 %    rectangle
 %
 %  \item Paste the rectangle in a new layer called e.\,g.~\singlequotes{sample}.
@@ -2206,7 +2251,7 @@ end
 %    values until it match best.
 %
 %  \item Switch the layer mode of \singlequotes{sample} to \singlequotes{difference} and
-%    fine-position the rectangle over the slanted sample.  Compare different letters in that
+%    fine~position the rectangle over the slanted sample.  Compare different letters in that
 %    way.  Change line until the best match is found.
 %
 %  \item Read the slant value at the left-hand side of the line.  See
@@ -2219,7 +2264,7 @@ end
 %                    {compare-with-the-gimp}
 %
 %    \caption[Compare slant angles]
-%            {Compare italic and slanted samples with \application{The Gimp}.~\visualpar{} For
+%            {Compare italic and slanted samples with \application{The Gimp}.\visualpar For
 %             this screendump we loaded the samples on the first page of
 %             \filesystem{synthslant-gauge.pdf} at a resolution of~600\,dpi into
 %             \application{The Gimp}.  The \singlequotes{sample}~layer is aligned to the
@@ -2236,7 +2281,7 @@ end
 %  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
 %  \item In file~\filesystem{synthslant-gauge.tex}\spacedemdash which comes with the
 %    \packagename{synthslant}~package\spacedemdash insert the code to load your
-%    font-of-interest.
+%    font of interest.
 %
 %  \item Render the document as PostScript or as~\acronym{PDF}.
 %
@@ -2252,16 +2297,16 @@ end
 %
 %  \subsection{Exploring Further}\label{sec:exploring-further}
 %
-%  Once a usable slant value has been found it can be fed into \filesystem{synthslant-gauge.tex}
-%  and\spacedemdash after recompiling with the appropriate \LaTeX-engine\spacedemdash used to
-%  examine the details of the slant operations.
+%  Once a usable slant value has been found, it can be fed into
+%  \filesystem{synthslant-gauge.tex} and\spacedemdash after recompiling with the appropriate
+%  \LaTeX~engine\spacedemdash used to examine the details of the slant operations.
 %
 %  Page~3, Sec.~2.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
 %  synthesized ones.  Here, the slanted glyphs as well as the upright italic should blend well
 %  with the native italic/obliques and with the normal font.
 %
-%  Page~4, Sec.~2.2 and following sub-sections, examine the coupling of \packagename{synthslant}
-%  with the \TeX{}~system and some of its extensions.  If a slant engine malfunctions, it will
+%  Page~4, Sec.~2.2 and following subsections, examine the coupling of \packagename{synthslant}
+%  with the \TeX~system and some of its extensions.  If a slant engine malfunctions, it will
 %  become evident on this page.
 %
 %
@@ -2274,24 +2319,24 @@ end
 %  be additional issues not listed here.
 %
 %  \begin{description}
-%  \item[All except \packagename{fontspec}.]
-%    \packagename{Syntslant}~manipulations may not survive
-%    (pre-)\discretionary{}{}{}processing by \MP.\index{MetaPost=\MP|userman}
+%  \item[All except \packagename{fontspec}:]
+%    \packagename{Syntslant}~manipulations may not survive preprocessing by
+%    \MP.\index{MetaPost=\MP|userman}
 %
-%  \item[\packagename{l3draw} engine.]\index{package>l3draw=\packagename{l3draw}|userman}\mbox{}
+%  \item[\packagename{l3draw} engine:]\index{package>l3draw=\packagename{l3draw}|userman}\mbox{}
 %    \begin{itemize}
-%    \item Depending of the shear direction the \packagename{l3draw} engine may generate some
+%    \item Depending of the shear, direction the \packagename{l3draw} engine may generate some
 %      extra positive or negative space at the ends of the text.
 %
-%    \item Any box sheared looses its depth; technically \cs{dp} becomes~0pt.
+%    \item Any box sheared looses its depth; technically, \cs{dp} becomes~0pt.
 %
-%    \item Markedly slower than the \acronym{PDF}-implementation!
+%    \item Markedly slower than the \acronym{PDF} implementation!
 %    \end{itemize}
 %
-%  \item[\pstrickslogo{} engine.]\index{package>pstricks=\packagename{pstricks}|userman}
+%  \item[\pstrickslogo{} engine:]\index{package>pstricks=\packagename{pstricks}|userman}
 %    The \pstrickslogo{} engine produces some extra space at the ends of the text.
 %
-%  \item[\tikzlogo{} engine.]\index{package>tikz=\packagename{tikz}|userman}
+%  \item[\tikzlogo{} engine:]\index{package>tikz=\packagename{tikz}|userman}
 %    The \tikzlogo{} engine produces some extra space at the ends of the text.
 %  \end{description}
 %
@@ -2306,9 +2351,9 @@ end
 %
 %  \subsection{Use \pdfTeX}\label{sec:alternative-pdftex}
 %
-%  In \pdfTeX{} fonts can be re-mapped in the document preamble with the
+%  In \pdfTeX, fonts can be remapped in the document preamble with the
 %  primitive~\cs{pdfmapline}; see the \pdfTeX{} Reference Manual~\cite[Sec.~6.1]{pdftex} for a
-%  description of the syntax.  This possibility renders possible to splice in a slanting
+%  description of the syntax.  This possibility makes it possible to splice in a slanting
 %  operation on the fly.
 %
 %  Here is a simplified syntax of a font map line, which does not indicate any of the optional
@@ -2344,7 +2389,7 @@ end
 %  font with a single instruction.
 %
 %  Let us to elaborate the example given in \cref{sec:usage-ideas},
-%  \cref{it:correct-italic-angle} and generate less-angled italic for
+%  \cref{it:correct-italic-angle} and generate a less-angled italic for
 %  Libre~Caslon.\index{font>typeface>Libre Caslon|userman} Here is a suitable map line taken
 %  from \filesystem{pdftex.map} on our system:
 %
@@ -2380,15 +2425,15 @@ end
 %  \end{codeexample}
 %
 %  \noindent
-%  Finally, we select the modified font e.\,g.~with macro
+%  Finally, we select the modified font, e.\,g., with macro
 %
 %  \begin{codeexample}
 %    \cs{usefont}\{\meta{encoding}\}\{\meta{family}\}\{\meta{series}\}\{\meta{shape}\}
 %  \end{codeexample}
 %
 %  \noindent
-%  See Ref.~\citenum{latex-unofficial-refman} for details.
-%  In our case the call to \cs{usefont} is
+%  See reference~\citenum{latex-unofficial-refman} for details.  In our case, the call to
+%  \cs{usefont} is
 %
 %  \begin{codeexample}
 %    \char`\\usefont\{T1\}\{LibreCsln-OsF\}\{regular\}\{it\}
@@ -2428,7 +2473,7 @@ end
 %  \end{codeexample}
 %
 %  \noindent
-%  that forwards the task of re-mapping the font, e.\,g.~to \command{dvipdfmx}.  Our running
+%  that forwards the task of remapping the font, e.\,g.~to \command{dvipdfmx}.  Our running
 %  example becomes
 %
 %  \begin{multilinecodeexample}
@@ -2442,11 +2487,11 @@ end
 %
 %  \noindent
 %  The mapline contains \command{dvips}~options for special font effects; see
-%  Ref.~\citenum{dvips}, Sec.~6.3.  Note that there is no \singlequotes{\code{=}}-sign at the
+%  reference~\citenum{dvips}, Sec.~6.3.  Note that there is no \singlequotes{\code{=}}-sign at the
 %  beginning of the \code{pdf:mapline} in contrast to \cs{pdfmapline}.
 %
-%  The font is activated in the same way as in the \acronym{PDF}-path
-%  (\cref{sec:alternative-pdftex}).  The further translation of the resulting \acronym{DVI}-file
+%  The font is activated in the same way as in the \acronym{PDF}~path
+%  (\cref{sec:alternative-pdftex}).  The further translation of the resulting \acronym{DVI}~file
 %  \emph{must} be performed with an application that is aware of the \cs{special}~primitive as
 %  for example~\command{dvipdfmx}~\cite{dvipdfmx} is.
 %
@@ -2475,16 +2520,16 @@ end
 %
 %  \subsection{Harness a Font Editor\label{sec:font-editor}}
 %
-%  An alternative outside of the typical \LaTeX{}~toolchain is to harness a font editor as, for
-%  example, \application{FontForge}~\cite{fontforge} to create a slanted version of an upright
+%  An alternative outside of the typical \LaTeX{}~toolchain is to harness a font editor, as, for
+%  example, \application{FontForge}~\cite{fontforge}, to create a slanted version of an upright
 %  font or upright italic.  Here, the first step is to check the font's license to see whether
-%  the generation of a variant is permitted, and what restrictions apply to its use.
+%  the generation of a variant is permitted and what restrictions apply to its use.
 %
 %  \detoxindex{FontForge=\application{FontForge}|userman}\application{FontForge} can generate
 %  slanted versions of a given set of glyphs with the \acronym{GUI}~sequence: Element~> Style~>
 %  Oblique and the desired slant angle in degrees (though with the opposite sign that
 %  \packagename{syntslant} uses).  In \application{FontForge}'s own extension language, the
-%  corresponding function is called~\code{Skew}, in the Python extension, use module
+%  corresponding function is called~\code{Skew}; in the Python extension, use module
 %  function~\code{psMat.skew} to generate the transformation matrix and apply
 %  method~\code{transform} to a glyph with this matrix as the method's argument.
 %
@@ -2496,10 +2541,10 @@ end
 %  \acronym{TTF}.  If you plan to use the new font with \MP,\index{MetaPost=\MP|userman} you
 %  must export it in \acronym{PFB}~format.
 %
-%  Finally, install the font e.\,g.~with \application{autoinst} which is part of
-%  fonttools~\cite{fonttools} or using package~\packagename{fontinst}~\cite{package:fontinst}.
+%  Finally, install the font, e.\,g., with \application{autoinst} which is part of
+%  fonttools~\cite{fonttools}, or using package~\packagename{fontinst}~\cite{package:fontinst}.
 %  If the slanted font is to integrate seamlessly with the existing fonts, usually some of the
-%  relevant font-description files (\filesystem{.fd}) have to be
+%  relevant font description files (\filesystem{.fd}) have to be
 %  modified.\label{secend:alternative}
 %
 %
@@ -2742,7 +2787,7 @@ end
 %    better.
 %
 %    Remember that the slant is not an angle (with respect to the \(y\)-axis), but the sine of
-%    it.  The value~\(.2\) approximately corresponds to a slant-angle of 12\textdegree\!.
+%    it.  The value~\(.2\) approximately corresponds to a slant angle of 12\textdegree\!.
 %
 %    \begin{macrocode}
 \providecommand*{\synthslant}{.2}
@@ -2761,10 +2806,10 @@ end
 %  \end{macro}
 %
 %
-%  \subsection{Selection of Slant-Engine}
+%  \subsection{Selection of Slant Engine}
 %
 %  We provide several methods to slant glyphs.  The actual slanting is delegated to a
-%  \singlequotes{slant-engine} which shears the glyphs.
+%  \singlequotes{slant engine} which shears the glyphs.
 %
 %  \begin{macro}{\synthslant@engine}
 %    Default to automatic selection of the slant engine.
@@ -2838,9 +2883,9 @@ end
 %
 %  \subsection{Slant Engines}
 %
-%  The auto-selection code is pretty trivial.  If we identify \pdfTeX{} running we select the
-%  \acronym{PDF}-engine, for \LuaLaTeX{} we select the \packagename{fontspec}-engine, and in all
-%  other cases we let the \packagename{l3draw}-layer handle the shearing.
+%  The auto selection code is pretty trivial.  If we identify \pdfTeX{} running we select the
+%  \acronym{PDF}~engine, for \LuaLaTeX{} we select the \packagename{fontspec}~engine, and in all
+%  other cases we let the \packagename{l3draw}~layer handle the shearing.
 %
 %    \begin{macrocode}
 \ifnum\synthslant@engine<0
@@ -2897,7 +2942,7 @@ end
 %
 %  \subsubsection{\texorpdfstring{\acronym{PDF}}{PDF} Slant Engine}
 %
-%  The \acronym{PDF}-engine works well and it is the best tested alternative.
+%  The \acronym{PDF} engine works well and it is the best tested alternative.
 %
 %    \begin{macrocode}
 \ifcase\synthslant@engine%  0: PDF
@@ -2927,7 +2972,7 @@ end
 %  \subsubsection{\packagename{l3draw} Slant Engine}
 %
 %  Using \LaTeXIII{} may be like cheating on a very high level as the draw subsystem may
-%  delegate to the \acronym{PDF}-engine itself.  \acronym{LOL!}
+%  delegate to the \acronym{PDF}~engine itself.  \acronym{LOL!}
 %
 %    \begin{macrocode}
 \or%  1: LaTeX3 draw subsystem
@@ -2964,9 +3009,9 @@ end
 %    \end{macrocode}
 %
 %   Here comes a fudge because the l3draw bounding boxes are way too loose.  For positive
-%   slants: shrink the box-width by the box-height times~\meta{slant}.  For negative slants:
-%   shrink the box-width as for positive slants and in addition shift the payload to the left by
-%   the box-height times~\meta{slant}.
+%   slants: shrink the box~width by the box~height times~\meta{slant}.  For negative slants:
+%   shrink the box~width as for positive slants and in addition shift the payload to the left by
+%   the box~height times~\meta{slant}.
 %
 %    \begin{macrocode}
       \fp_compare:nNnTF {#1} >= {.0}
@@ -3280,7 +3325,7 @@ end
 %    This is a simple yet surprisingly effective heuristic for slant correction on the
 %    right-hand side of the slanted text.  The value~\cs{synthslant} is \(\sin \alpha\), where
 %    \(\alpha\) is the slant angle; see \cref{equ:shear-transformation} on
-%    \cpageref{equ:shear-transformation}.  Multiplied with the ex-height of the current font,
+%    \cpageref{equ:shear-transformation}.  Multiplied with the ex~height of the current font,
 %    \cs{fontdimen5}, this is a good approximation of the necessary slant correction.
 %
 %    \begin{macrocode}
@@ -3361,10 +3406,10 @@ end
 %
 %  \begin{environment}{negslantenvironment}
 %    We use this environment as a pair of hooks that are called right before and right after the
-%    actual un-slanting code runs.
+%    actual unslanting code runs.
 %
-%    The default sets up an italic shape before un-slanting and adds some negative italic
-%    correction after un-slanting.
+%    The default sets up an italic shape before unslanting and adds some negative italic
+%    correction after unslanting.
 %
 %    \begin{macrocode}
 \NewDocumentEnvironment{negslantenvironment}{}
@@ -3382,7 +3427,7 @@ end
 %  \end{environment}
 %
 %  \begin{macro}{\textsynthuprightitalic}
-%    User-level macro to un-slant some italic or oblique text.
+%    User-level macro to unslant some italic or oblique text.
 %
 %    \begin{macrocode}
 \NewDocumentCommand{\textsynthuprightitalic}{m}
@@ -6047,16 +6092,16 @@ value of all deltas should be much less than 3pt.
 \end{center}
 
 
-\subsection{Line-Breaking}
+\subsection{Line Breaking}
 
 Left: plain text,  \\
-right: \code{\cs{textsynthslant}\{Show line-break\cs{-}ing with a sen\cs{-}tence.\}}
+right: \code{\cs{textsynthslant}\{Show line break\cs{-}ing with a sen\cs{-}tence.\}}
 
 \begin{center}
   \setlength{\overfullrule}{0pt}
-  \begin{minipage}[t]{0pt}Show line-breaking with a sentence.\end{minipage}%
+  \begin{minipage}[t]{0pt}Show line breaking with a sentence.\end{minipage}%
   \hspace*{100pt}%
-  \begin{minipage}[t]{0pt}\textsynthslant{Show line-break\-ing with a sen\-tence.}\end{minipage}
+  \begin{minipage}[t]{0pt}\textsynthslant{Show line break\-ing with a sen\-tence.}\end{minipage}
 \end{center}
 
 \noindent
