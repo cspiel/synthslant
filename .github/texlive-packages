@@ -8,6 +8,7 @@ bibtex
 ##  Collections
 collection-context
 collection-fontsrecommended
+collection-xetex
 ##  Packages
 amscls
 amsfonts
