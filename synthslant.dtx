@@ -1169,7 +1169,7 @@ end
 %
 %  \subsection{Some History}\label{sec:history}
 %
-%  Italic\index{italic|userman} accompanying a roman font date back to one of the earliest
+%  Italics\index{italic|userman} accompanying a roman font date back to one of the earliest
 %  print shops, namely that of
 %  \href{https://it.wikipedia.org/wiki/Aldo_Manuzio}{\propername{Aldo Manuzio}}\relax
 %  \index{Manuzio=\propername{Manuzio, Aldo}|userman} (lat.~\propername{Aldus Manutius}) around
@@ -1516,7 +1516,7 @@ end
 %
 %  \begin{enumerate}
 %  \item[\refstepcounter{enumi}\number\value{enumi}a.]\label{it:no-italic}
-%    Generate a slanted serif font when a serif font lacks italic\index{italic|userman}, such
+%    Generate a slanted serif font when a serif font lacks italics\index{italic|userman}, such
 %    as \doublequotes{\acronym{URW} Antiqua}\index{font>typeface>URW Antiqua=\acronym{URW}
 %    Antiqua|userman}.
 %
@@ -1525,14 +1525,14 @@ end
 %    point.
 %
 %  \item[\number\value{enumi}b.\refstepcounter{enumi}]\label{it:paired-with-no-italic}
-%    If a secondary serif font\spacedemdash again assumed to have no italic or
-%    obliques\spacedemdash is paired with a primary serif font which has italic, the slant
+%    If a secondary serif font\spacedemdash again assumed to have no italics or
+%    obliques\spacedemdash is paired with a primary serif font which has italics, the slant
 %    angle of the former can be matched to that of the primary font.  An example of such a
 %    constellation is \doublequotes{Gentium}\index{font>typeface>Gentium|userman} paired with
 %    \doublequotes{Eczar}\index{font>typeface>Eczar|userman}.
 %
 %  \item\label{it:upright-italic}
-%    Augment a serif font that features an italic shape with upright italic.
+%    Augment a serif font that features an italic shape with upright italics.
 %
 %    In nearly all cases, it is desirable to retain a slight forward slant of 1\textdegree{}
 %    to~2\textdegree\!.
@@ -1843,7 +1843,7 @@ end
 %  \noindent
 %  Both macros, \cs{textsynthslant} and \cs{textsynthuprightitalic} offer basic support for
 %  slanting explicitly hyphenatable words and space-separated phrases within a given
-%  \meta{text}.  The fundamental shear transformation produces an single unbreakable horizontal
+%  \meta{text}.  The fundamental shear transformation produces a single unbreakable horizontal
 %  box.  We have added some provisions to re-enable at least some breakability.
 %
 %  \begin{enumerate}
@@ -2159,8 +2159,8 @@ end
 %  \end{codeexample}
 %
 %  \begin{note}
-%    The tracking context~\code{synthslant} is \emph{not} defined by \packagename{synthslant}.
-%    And Microtype ignores undefined contexts.
+%    The tracking context~\code{synthslant} is \emph{not} defined by \packagename{synthslant}
+%    itself.  And Microtype ignores undefined contexts.
 %  \end{note}
 %
 %  \DescribeMacro{\negslantcontext}
@@ -2178,8 +2178,8 @@ end
 %  \end{codeexample}
 %
 %  \begin{note}
-%    The tracking context~\code{synthnegslant} is \emph{not} defined by
-%    \packagename{synthslant}.  And Microtype ignores undefined contexts.
+%    The tracking context~\code{synthnegslant} is \emph{not} defined by \packagename{synthslant}
+%    itself.  And Microtype ignores undefined contexts.
 %  \end{note}
 %
 %  \begin{example}
@@ -2310,7 +2310,7 @@ end
 %
 %    \caption[Compare slant angles]
 %            {Compare italic and slanted samples with \application{The Gimp}.\visualpar For
-%             this screendump we loaded the samples on the first page of
+%             this screenshot we loaded the samples on the first page of
 %             \filesystem{synthslant-gauge.pdf} at a resolution of~600\,dpi into
 %             \application{The Gimp}.  The \singlequotes{sample}~layer is aligned to the
 %             letter~\singlequotes{t} in the word~\singlequotes{White}.  Note that accidentally
@@ -2344,7 +2344,7 @@ end
 %
 %  Once a usable slant value has been found, it can be fed into
 %  \filesystem{synthslant-gauge.tex} and\spacedemdash after recompiling with the appropriate
-%  \LaTeX~engine\spacedemdash used to examine the details of the slant operations.
+%  \LaTeX~engine\spacedemdash be used to examine the details of the slant operations.
 %
 %  Page~3, Sec.~2.1, \singlequotes{Copy}, shows wild mixes of different font shapes, native and
 %  synthesized ones.  Here, the slanted glyphs as well as the upright italic should blend well
@@ -2360,12 +2360,12 @@ end
 %
 %  \index{limitations|userman}
 %  \index{known problems|userman}
-%  This section lists some known limitations and issues with \packagename{syntslant}.  There may
-%  be additional issues not listed here.
+%  This section lists some known limitations and issues with \packagename{synthslant}.  There
+%  may be additional issues not listed here.
 %
 %  \begin{description}
 %  \item[All except \packagename{fontspec}:]
-%    \packagename{Syntslant}~manipulations may not survive preprocessing by
+%    \packagename{Synthslant}~manipulations may not survive preprocessing by
 %    \MP.\index{MetaPost=\MP|userman}
 %
 %  \item[\packagename{l3draw} engine:]\index{package>l3draw=\packagename{l3draw}|userman}\mbox{}
@@ -2373,7 +2373,7 @@ end
 %    \item Depending of the shear, direction the \packagename{l3draw} engine may generate some
 %      extra positive or negative space at the ends of the text.
 %
-%    \item Any box sheared looses its depth; technically, \cs{dp} becomes~0pt.
+%    \item Any box sheared loses its depth; technically, \cs{dp} becomes~0pt.
 %
 %    \item Markedly slower than the \acronym{PDF} implementation!
 %    \end{itemize}
@@ -2573,7 +2573,7 @@ end
 %  \detoxindex{FontForge=\application{FontForge}|userman}\application{FontForge} can generate
 %  slanted versions of a given set of glyphs with the \acronym{GUI}~sequence: Element~> Style~>
 %  Oblique and the desired slant angle in degrees (though with the opposite sign that
-%  \packagename{syntslant} uses).  In \application{FontForge}'s own extension language, the
+%  \packagename{synthslant} uses).  In \application{FontForge}'s own extension language, the
 %  corresponding function is called~\code{Skew}; in the Python extension, use module
 %  function~\code{psMat.skew} to generate the transformation matrix and apply
 %  method~\code{transform} to a glyph with this matrix as the method's argument.
@@ -2825,7 +2825,7 @@ end
 %  \subsection{Declaration of Default Slants}
 %
 %  \begin{macro}{\synthslant}
-%    Introduce a reasonable default for the slant.  Let the user override it if she knows
+%    Introduce a reasonable default for the slant.  Let the users override it if they know
 %    better.
 %
 %    Remember that the slant is not an angle (with respect to the \(y\)-axis), but the sine of
@@ -3050,10 +3050,10 @@ end
       \box_set_dp:Nn \l_tmpa_box {\z@}
 %    \end{macrocode}
 %
-%   Here comes a fudge because the l3draw bounding boxes are way too loose.  For positive
-%   slants: shrink the box~width by the box~height times~\meta{slant}.  For negative slants:
-%   shrink the box~width as for positive slants and in addition shift the payload to the left by
-%   the box~height times~\meta{slant}.
+%   Here comes a fudge because the l3draw bounding boxes are way too lose.  For positive slants:
+%   shrink the box~width by the box~height times~\meta{slant}.  For negative slants: shrink the
+%   box~width as for positive slants and in addition shift the payload to the left by the
+%   box~height times~\meta{slant}.
 %
 %    \begin{macrocode}
       \fp_compare:nNnTF {#1} >= {.0}
@@ -5659,7 +5659,7 @@ KJ8AAAAASUVORK5CYII=
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  Setup SyntSlant and Load Font
+%%  Setup SynthSlant and Load Font
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -5791,7 +5791,7 @@ KJ8AAAAASUVORK5CYII=
 \begin{document}
 \begin{center}
   \sf
-  {\huge\bfseries SyntSlant Calibration Sheet}
+  {\huge\bfseries SynthSlant Calibration Sheet}
 
   for \packagename{synthslant} version~\getpackageversion{synthslant} as of
   \getpackagedate{synthslant}
