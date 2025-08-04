@@ -693,9 +693,18 @@
 \DeclareMathOperator*{\slantedsum}{\synthslantbox{.15}{$\displaystyle\sum$}}
 \DeclareMathOperator*{\uprightint}{\synthslantbox{-.15}{$\displaystyle\int\negthickspace$}}
 
+\newenvironment{mybibliography}
+               {\begin{RaggedRight}%
+                \def\MakeUppercase##1{\sf\letterspacedsmallcaps{##1}}%
+                \begin{thebibliography}{88}}
+               {\end{thebibliography}%
+                \end{RaggedRight}}
+
 
 \iffalse
   %%  Linearize document and make it more palpable for pdftotext(1).
+  \OnlyDescription
+
   \let\oldcode=\code
   \renewcommand*{\code}[1]{\mbox{\oldcode{#1}}}
   \let\oldcs=\cs
@@ -709,6 +718,7 @@
   \renewcommand*{\LuaTeX}{LUA~TeX}
   \renewcommand*{\MP}{Meta~Post}
   \renewcommand*{\marginpar}[1]{\space({#1})\space}
+  \renewcommand*{\moveleft}[2]{#2}
   \let\oldpagestyle=\pagestyle
   \renewcommand*{\pagestyle}[1]{\oldpagestyle{plain}}
   \renewcommand*{\pdfLaTeX}{PDF~LaTeX}
@@ -716,6 +726,7 @@
   \renewcommand*{\sample}[1]{\mbox{`#1'}}
   \let\scshape=\relax
   \let\sf=\relax
+  \let\sffamily=\relax
   \renewcommand*{\TeX}{TeX}
   \renewcommand*{\textsc}[1]{#1}
 
@@ -2613,9 +2624,7 @@ end
 %    \phantomsection
 %    \addtocontents{toc}{\medskip}
 %    \addcontentsline{toc}{section}{\protect\numberline{}References}
-%    \begin{RaggedRight}
-%      \def\MakeUppercase##1{\sf\letterspacedsmallcaps{##1}}
-%      \begin{thebibliography}{88}
+%    \begin{mybibliography}
 %      \bibitem{package:amsmath}
 %              \bibauthor{American Mathematical Society} and the
 %              \bibauthor{\LaTeXIII\ Project Team}.
@@ -2763,8 +2772,7 @@ end
 %              \bibauthor{Williams, George} et al.
 %              \bibtitle{FontForge}.
 %              \biburl{https://fontforge.org/en-US/}.
-%      \end{thebibliography}
-%    \end{RaggedRight}
+%    \end{mybibliography}
 %
 %
 %    \clearpage
