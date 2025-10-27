@@ -1122,6 +1122,7 @@ end
 %  \singlequotes{slanted} may be conflated.  We strive to be precise in this document, though.
 %
 %
+%  \newpagetofixtoc
 %  \subsection{Appeal for Slanted Type}\label{sec:appleal-for-slanted}
 %
 %  Artificially slanted typefaces have a poor reputation, much like artificial
@@ -1317,7 +1318,7 @@ end
 %  \propername{David Carlisle}\index{Carlisle=\propername{Carlisle, David}|userman}
 %  who suggested to use the \pdfTeX~primitive \cs{pdfliteral} for
 %  shearing~\cite{tex-stackexchange-2013-12-7}.  Shortly thereafter
-%  \propername{Bruno Le Floch}\index{Floch=\propername{Le Floch, Bruno}|userman}
+%  \propername{Bruno} \propername{Le Floch}\index{Floch=\propername{Le Floch, Bruno}|userman}
 %  pointed to another \pdfTeX~primitive, namely \cs{pdfsetmatrix}, available with (in 2013) more
 %  recent \pdfTeX~versions~\cite{pdftex}.\!\footnote{The user-level manipulation of the
 %  transformation matrix has been part of the \acronym{PDF}~standard since its initial
@@ -2821,7 +2822,7 @@ end
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{synthslant}
-                [2025/06/08  v0.2  Synthetically Slant glyphs]
+                [2025/10/27  v0.2  Synthetically Slant glyphs]
 
 \RequirePackage{etoolbox}
 \RequirePackage{iftex}
@@ -3291,7 +3292,7 @@ end
 %  \end{macro}
 %
 %  \begin{macro}{\synthslantbox@space@codesequence}
-%    This stage lets as cope with the macro~\cs{space} in contrast to
+%    This stage lets us cope with the macro~\cs{space} in contrast to
 %    \cs{synthslantbox@literalspace}, which handles literal
 %    spaces~\singlequotes{\textvisiblespace}.
 %
