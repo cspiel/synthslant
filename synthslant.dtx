@@ -545,7 +545,8 @@
                         \item
                         \nointerlineskip
                         \leavevmode\par
-                        \noindent}
+                        \noindent
+                        \ignorespaces}
                        {\iftoggle{printspecialsectionmarker}{\specialsectionend}{\relax}%
                         \end{list}}
 
@@ -2015,7 +2016,7 @@ end
 %    bring \cs{DeclareMathOperator} into scope.
 %  \end{example}
 %
-%  \begin{tip}[Display Style Math Operators]\label{tip:display-style-math-operators}
+%  \begin{tip}[Display Style Math Operators]\label{tip:display-style-math-operators}\relax
 %    Slanted or unslanted display style mathematical operators are best pre-defined with
 %    \cs{DeclareMathOperator}~\cite{package:amsmath}.
 %
