@@ -54,7 +54,6 @@
 \usepackage{ragged2e}
 \usepackage{setspace}
 \usepackage[slant=.18, negslant=-.16]{synthslant}
-\usepackage{titlesec}
 \usepackage[most]{tcolorbox}
 \usepackage{titlesec}
 \usepackage{xcolor}
@@ -2340,6 +2339,18 @@ end
 %
 %  \item Read the slant value at the left-hand side of the line.  The sought after \meta{slant}
 %  is the negative of this value.
+%  \end{enumerate}
+%
+%
+%  \subsection{Measure with \application{FontForge}}\label{sec:measure-with-fontforge}
+%
+%  \application{FontForge}~\cite{fontforge} can show and even guess the italic angle of a font.
+%
+%  \begin{enumerate}[itemsep=.5\itemsep, parsep=.5\parsep]
+%  \item Load the font into \application{FontForge}.
+%  \item In the \acronym{GUI} open the Font Information: Element~> Font~Info\dots.
+%  \item Select the \singlequotes{General} section.
+%  \item Read the Italic Angle or click Guess to recompute it.
 %  \end{enumerate}
 %
 %
